@@ -145,14 +145,16 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
 /* ---- Academic Publication Style ---- */
 .pub-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 8px 0;         
+  padding-left: 1.2rem;   
 }
 .pub-list li {
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px dashed var(--line);
+  text-indent: -1.2rem;   
 }
+
 .pub-authors {
   margin: 0;
   font-size: 15px;
