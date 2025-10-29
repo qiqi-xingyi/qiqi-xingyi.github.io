@@ -141,3 +141,43 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
   .avatar{ max-width:180px }
   .nav{ display:none }  /* simple mobile header; can replace with hamburger later */
 }
+
+/* ---- Academic Publication Style ---- */
+.pub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pub-list li {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line);
+}
+.pub-authors {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+.pub-title {
+  margin: 4px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.pub-meta {
+  margin: 2px 0;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+.pub-link {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+}
+.pub-link a.ext {
+  color: var(--link);
+  font-weight: 600;
+}
+.pub-link a.ext:hover {
+  text-decoration: underline;
+}
+
