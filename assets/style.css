@@ -50,3 +50,98 @@ body{background:var(--bg);color:var(--fg);font:16px/1.7 system-ui,-apple-system,
   .avatar{width:120px;height:120px}
   .nav{display:none}
 }
+
+
+/* ===== Gray–White Minimal Theme (override) ===== */
+
+/* Neutral gray palette (light only) */
+:root{
+  --bg:#f7f7f8;        /* page background: very light gray */
+  --fg:#222426;        /* primary text: near black */
+  --muted:#6b6f76;     /* secondary text */
+  --line:#e5e7eb;      /* separators/borders */
+  --card:#ffffff;      /* cards/panels */
+  --link:#3f4752;      /* links (neutral gray-blue) */
+  --accent:#7a838e;    /* subtle accent for hovers/markers */
+}
+
+/* Body & typography */
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-weight:400;
+  letter-spacing:.1px;
+}
+
+/* Header: solid light-gray bar */
+.site-header{
+  background: #fbfbfc;
+  border-bottom:1px solid var(--line);
+  backdrop-filter:none; /* remove glass effect */
+}
+.name{ font-size:32px; font-weight:700 }
+.tagline{ margin:4px 0; color:#2c2f33; }
+.tagline.light{ color:var(--muted); font-size:13.5px }
+.subtag{ color:#4c5056; margin-top:6px; }
+
+/* Nav: neutral underline hover */
+.nav a{
+  color:#2b2e31; text-decoration:none; margin-left:18px; padding-bottom:4px; position:relative;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
+  background:#9aa2ad; transition:width .2s ease;
+}
+.nav a:hover{ color:#16181a }
+.nav a:hover::after{ width:100% }
+
+/* Section blocks */
+.section .container{ padding-top:10px; border-top:1px solid var(--line); }
+.section h2{ font-size:22px; margin:0 0 14px 0; font-weight:700; color:#1f2327; }
+
+/* Hero */
+.hero{ gap:28px }
+.avatar{
+  border-radius:18px;
+  border:1px solid var(--line);
+  box-shadow: 0 3px 10px rgba(0,0,0,.04);
+}
+.intro p{ margin-top:6px }
+
+/* Cards */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,.03);
+  transition:transform .12s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.card:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.05);
+  border-color:#d9dde3;
+}
+
+/* Links */
+a.ext{ color:var(--link); font-weight:600; }
+a.ext:hover{ color:#23262a; text-decoration:none; }
+a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7; }
+
+/* Lists & text tones */
+.pub-list li{ margin:12px 0 }
+.scholar-note, #acknowledgements p{ color:var(--muted); }
+
+/* Contact list: neutral bullets */
+.contact li{ list-style:none; position:relative; padding-left:22px; }
+.contact li::before{ content:"•"; position:absolute; left:6px; top:0; color:#8d949c; font-weight:700; }
+
+/* Footer */
+.site-footer{ color:#8a9098; background:#fafafb; border-top:1px solid var(--line); }
+
+/* Optional: disable prefers-color-scheme dark auto switch */
+/* (保留灰白主题在系统深色模式下也不变) */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#f7f7f8; --fg:#222426; --muted:#6b6f76; --line:#e5e7eb; --card:#ffffff; --link:#3f4752; --accent:#7a838e;
+  }
+}
