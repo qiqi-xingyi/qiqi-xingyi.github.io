@@ -191,12 +191,12 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
 
 .card h3 {
   margin: 4px 0 10px 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.25;
 }
 
 .card p {
-  font-size: 12px;
+  font-size: 11px;
   margin: 6px 0 0 0;
   line-height: 1.7;
 }
