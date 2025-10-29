@@ -166,7 +166,7 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
 }
 
 /* === Card readability polish === */
-/* .cards {
+.cards {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   align-items: stretch;
@@ -192,7 +192,7 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
 .card p {
   margin: 8px 0 0 0;
   line-height: 1.7;
-} */
+}
 
 /* Mobile adjustments */
 @media (max-width: 640px) {
