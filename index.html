@@ -3,77 +3,129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Yuqi Zhang | Personal Page</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:920px;margin:40px auto;padding:0 16px;line-height:1.6}
-    header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
-    nav a{margin-right:12px;text-decoration:none;border-bottom:1px solid #ddd}
-    h1{margin:0 0 8px 0}
-    .muted{color:#666}
-    section{margin:32px 0}
-    .card{border:1px solid #eee;border-radius:12px;padding:16px}
-    ul{margin:8px 0 0 20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-    footer{margin:48px 0 12px 0;color:#777;font-size:14px}
-    .pill{display:inline-block;padding:2px 10px;border:1px solid #ddd;border-radius:999px;font-size:12px;margin-right:8px}
-    a:hover{opacity:.9}
-  </style>
+  <title>Yuqi Zhang | Quantum Computing for Protein Structures</title>
+  <meta name="description" content="Yuqi Zhang — PhD student focusing on quantum computing for protein active-site structure prediction and docking.">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="assets/img/me.jpeg">
 </head>
 <body>
-<header>
-  <div>
-    <h1>Yuqi Zhang</h1>
-    <div class="muted">PhD Student, Computer Science @ Kent State University · Quantum Computing × Protein Structures</div>
-    <div>
-      <span class="pill">VQE</span>
-      <span class="pill">Quantum Sampling</span>
-      <span class="pill">Protein Active Sites</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1 class="name">Yuqi Zhang</h1>
+        <p class="tagline">PhD Student · Computer Science @ Kent State University</p>
+        <p class="subtag">Quantum Computing × Protein Active-Site Structures</p>
+      </div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#pubs">Publications</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-  </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#pubs">Publications</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-    <a href="index_en.html">EN</a>
-  </nav>
-</header>
+  </header>
 
-<section id="about" class="card">
-  <h2>About</h2>
-  <p>My research focuses on real-processor quantum workflows for protein active-site structure prediction and docking.
-     I build practical, hardware-aware pipelines that run on IBM Quantum backends and classical HPC post-processing.</p>
-</section>
+  <main>
+    <!-- Hero / Basic Info -->
+    <section id="about" class="section">
+      <div class="container hero">
+        <img class="avatar" src="assets/img/portrait.jpg" alt="Portrait of Yuqi Zhang" width="200" height="200" />
+        <div class="intro">
+          <h2>About</h2>
+          <p>
+            I build <strong>hardware-aware quantum workflows</strong> for protein active-site structure prediction and docking.
+            My work emphasizes <strong>real quantum processors</strong> (IBM Quantum) with classical post-processing for
+            structure reconstruction and evaluation (e.g., RMSD, docking consistency).
+          </p>
+          <ul class="id-badges">
+            <li>Keywords: VQE, Quantum Sampling, Protein Active Sites</li>
+            <li>Interests: noise-robust sampling, energy-guided clustering, docking evaluation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<section id="pubs">
-  <h2>Selected Publications</h2>
-  <ul>
-    <li><strong>QDockBank</strong>: A Protein–Ligand Docking Benchmark for Utility-Level Quantum Computers (SC’25, Artifact Available). <em>Role: first author, experimental design</em>.</li>
-    <li><strong>Quantum Framework for Protein Binding-Site Structure Prediction</strong> (under review). </li>
-  </ul>
-</section>
+    <!-- Research Overview -->
+    <section id="research" class="section">
+      <div class="container">
+        <h2>Research Overview</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Real-Processor Quantum Workflows</h3>
+            <p>
+              End-to-end pipelines that encode amino-acid sequences, execute on utility-level quantum hardware,
+              and reconstruct 3D active-site conformations under physical constraints.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Sampling-Driven Reconstruction</h3>
+            <p>
+              Quantum sampling for diverse conformations, followed by classical clustering and energy-guided
+              refinement to recover stable structures and docking-consistent poses.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Evaluation & Benchmarks</h3>
+            <p>
+              Docking tests, RMSD analysis, and curated benchmark datasets to assess practicality and robustness
+              of quantum pipelines on real devices.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>QSAD</h3>
-      <p>Quantum sampling + classical reconstruction pipeline for protein conformations; noise-robust and scalable.</p>
-      <p><a href="https://github.com/qiqi-xingyi">GitHub</a></p>
+    <!-- Publications -->
+    <section id="pubs" class="section">
+      <div class="container">
+        <h2>Selected Publications</h2>
+        <ol class="pub-list">
+          <li>
+            <strong>QDockBank: A Protein–Ligand Docking Benchmark for Utility-Level Quantum Computers</strong>.
+            <em>SC 2025 (Artifact Available).</em>
+            [<a class="ext" href="https://scholar.google.com/scholar?q=QDockBank%3A+A+Protein%E2%80%93Ligand+Docking+Benchmark+for+Utility-Level+Quantum+Computers" target="_blank" rel="noopener">Google Scholar</a>]
+          </li>
+          <li>
+            <strong>A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Processors</strong>.
+            <em>under review.</em>
+            [<a class="ext" href="https://scholar.google.com/scholar?q=A+Quantum+Framework+for+Protein+Binding-Site+Structure+Prediction+on+Utility-Level+Processors" target="_blank" rel="noopener">Google Scholar</a>]
+          </li>
+          <li>
+            <strong>QSAD: Quantum Sampling with Classical Reconstruction for Protein Conformations</strong>.
+            <em>preprint / in preparation.</em>
+            [<a class="ext" href="https://scholar.google.com/scholar?q=QSAD%3A+Quantum+Sampling+with+Classical+Reconstruction+for+Protein+Conformations" target="_blank" rel="noopener">Google Scholar</a>]
+          </li>
+        </ol>
+        <p class="scholar-note">
+          更多论文请见我的
+          <a class="ext" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar 个人主页</a>。
+          （把链接替换为你的 Scholar Profile 或每篇论文的具体 Scholar 条目链接）
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <ul class="contact">
+          <li>Email: yzhan135 [at] kent.edu</li>
+          <li>GitHub: <a class="ext" href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener">qiqi-xingyi</a></li>
+          <li>ORCID: <a class="ext" href="https://orcid.org/" target="_blank" rel="noopener">ORCID Profile</a></li>
+          <li>Google Scholar: <a class="ext" href="https://scholar.google.com/" target="_blank" rel="noopener">Profile</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> Yuqi Zhang · Built on GitHub Pages
     </div>
-    <div class="card">
-      <h3>Qangle</h3>
-      <p>Continuous-angle encoding for end-to-end active-site prediction on real quantum processors.</p>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<section id="contact" class="card">
-  <h2>Contact</h2>
-  <p>Email: yzhan135 [at] kent.edu · GitHub: <a href="https://github.com/qiqi-xingyi">qiqi-xingyi</a></p>
-</section>
-
-<footer>© <span id="y"></span> Yuqi Zhang · Built with GitHub Pages</footer>
-<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
