@@ -144,8 +144,8 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7; }
 /* Footer */
 .site-footer{ color:#8a9098; background:#fafafb; border-top:1px solid var(--line); }
 
-/* Optional: disable prefers-color-scheme dark auto switch */
-/* (保留灰白主题在系统深色模式下也不变) */
+
+
 @media (prefers-color-scheme: dark){
   :root{
     --bg:#f7f7f8; --fg:#222426; --muted:#6b6f76; --line:#e5e7eb; --card:#ffffff; --link:#3f4752; --accent:#7a838e;
