@@ -167,6 +167,7 @@ a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
 
 /* === Card readability polish === */
 .cards {
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   align-items: stretch;
