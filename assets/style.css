@@ -87,24 +87,6 @@ body{
 /* ID badges / bullets near About */
 .id-badges{ margin:12px 0 0 0; padding-left:18px; color:var(--muted) }
 
-/* Cards */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px; margin-top:8px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:14px;
-  box-shadow:0 4px 12px rgba(0,0,0,.03);
-  transition:transform .12s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.card:hover{
-  transform:translateY(-1px);
-  box-shadow:0 8px 18px rgba(0,0,0,.05);
-  border-color:#d9dde3;
-}
 
 /* Publications */
 .pub-list{ margin:8px 0 0 1.2rem }
