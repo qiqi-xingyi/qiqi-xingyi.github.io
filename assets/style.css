@@ -89,12 +89,51 @@ body{
 
 
 /* Publications */
-.pub-list{ margin:8px 0 0 1.2rem }
-.pub-list li{ margin:12px 0 }
-a.ext{ color:var(--link); font-weight:600; text-decoration:none }
-a.ext:hover{ color:#23262a }
-a.ext::after{ content:"↗"; font-size:.85em; margin-left:6px; opacity:.7 }
-.scholar-note{ color:var(--muted); margin-top:8px }
+.pub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pub-item {
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--card);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.pub-item p {
+  margin: 0;
+  line-height: 1.6;
+  text-align: justify;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.pub-item strong {
+  font-weight: 600;
+}
+
+.pub-item em {
+  font-style: italic;
+}
+
+.pub-item a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.pub-item a:hover {
+  text-decoration: underline;
+}
+
+.status {
+  color: #2f855a;
+  font-weight: 500;
+}
+
 
 /* Acknowledgements */
 #acknowledgements p{
