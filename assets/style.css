@@ -42,9 +42,9 @@ body {
   */
   background-image: 
     /* Large Blue Glow (Top Left) */
-    radial-gradient(circle at 15% 20%, var(--orb-blue), transparent 60%),
+    radial-gradient(circle at 15% 20%, var(--orb-blue), transparent 46%),
     /* Large Purple Glow (Bottom Right/Center) */
-    radial-gradient(circle at 85% 60%, var(--orb-purple), transparent 60%);
+    radial-gradient(circle at 85% 60%, var(--orb-purple), transparent 41%);
     
   background-attachment: fixed;
   background-size: cover;
