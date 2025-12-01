@@ -13,7 +13,7 @@
   --accent: #2563eb;       /* Tech Blue */
   --accent-hover: #1d4ed8;
   
-  --border: rgba(255, 255, 255, 0.8); /* High transparency for glass edges */
+  --border: rgba(255, 255, 255, 0.8);
   
   /* --- Layout & Spacing --- */
   --container-width: 900px;
@@ -31,19 +31,19 @@
 body {
   background-color: var(--bg-main);
   
-  /* Ethereal Quantum Gradient
-     Using very low opacity (0.5) to create a natural, airy feel 
-     that mimics light refraction rather than heavy solid colors.
+  /* Ethereal Quantum Gradient - Adjusted +10% Depth
+     Slightly deeper RGB values and increased opacity (0.6 - 0.65)
+     to ensure the gradient is clearly visible but still natural.
   */
   background-image: 
-    /* Top-Left: Subtle Tech Blue */
-    radial-gradient(circle at 0% 0%, rgba(219, 234, 254, 0.5) 0%, transparent 60%),
-    /* Top-Right: Faint Quantum Purple */
-    radial-gradient(circle at 100% 0%, rgba(243, 232, 255, 0.5) 0%, transparent 60%),
-    /* Bottom-Center: Soft Teal/Cyan to bridge the colors */
-    radial-gradient(circle at 50% 100%, rgba(224, 242, 254, 0.5) 0%, transparent 50%);
+    /* Top-Left: Distinct Tech Blue */
+    radial-gradient(circle at 0% 0%, rgba(191, 219, 254, 0.65) 0%, transparent 60%),
+    /* Top-Right: Distinct Quantum Purple */
+    radial-gradient(circle at 100% 0%, rgba(233, 213, 255, 0.65) 0%, transparent 60%),
+    /* Bottom-Center: Soft Cyan/Teal Support */
+    radial-gradient(circle at 50% 100%, rgba(186, 230, 253, 0.55) 0%, transparent 50%);
     
-  background-attachment: fixed; /* Fixed background for parallax effect */
+  background-attachment: fixed;
   background-size: cover;
   
   color: var(--text-main);
@@ -68,8 +68,8 @@ a:hover { color: var(--accent-hover); }
   position: sticky;
   top: 0;
   z-index: 100;
-  /* High transparency + Blur */
-  background: rgba(255, 255, 255, 0.75); 
+  /* Increased glass opacity to contrast with deeper background */
+  background: rgba(255, 255, 255, 0.7); 
   backdrop-filter: blur(20px);           
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
@@ -134,7 +134,6 @@ h2 {
 .avatar {
   width: 100%;
   border-radius: 16px;
-  /* Natural shadow for depth */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 4px solid rgba(255, 255, 255, 0.8);
   transition: transform 0.3s ease;
@@ -190,15 +189,15 @@ h2 {
 }
 
 .card {
-  /* High blur + white tint for clean glass effect */
+  /* Clear glass effect */
   background: rgba(255, 255, 255, 0.6); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
-  border: 1px solid rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 
               0 2px 4px -1px rgba(0, 0, 0, 0.01),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Inner highlight */
+              inset 0 0 0 1px rgba(255, 255, 255, 0.5);
               
   padding: 24px;
   border-radius: 16px;
