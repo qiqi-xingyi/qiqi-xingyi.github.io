@@ -1,20 +1,23 @@
 /* =========================================
-   Modern Academic Theme - Yuqi Zhang
+   Yuqi Zhang - Modern Academic Theme
    ========================================= */
 
 :root {
   /* --- Color Palette --- */
   --bg-main: #ffffff;
-  --bg-alt: #f8f9fa;       /* 浅灰色背景，用于区分板块 */
+  --bg-alt: rgba(255, 255, 255, 0.5); /* Semi-transparent for glass effect */
   
-  --text-main: #1f2937;    /* 正文深色 */
-  --text-muted: #6b7280;   /* 次级文本颜色 */
+  --text-main: #1f2937;    /* Primary dark text */
+  --text-muted: #6b7280;   /* Secondary muted text */
   
-  --accent: #2563eb;       /* 强调色（科技蓝） */
+  --accent: #2563eb;       /* Tech Blue */
   --accent-hover: #1d4ed8;
   
-  --border: #e5e7eb;
-  --card-bg: #ffffff;
+  --border: rgba(255, 255, 255, 0.65); /* Glass border */
+  
+  /* --- Quantum Aurora Gradients (Background) --- */
+  --orb-1: #e0e7ff; /* Faint Blue */
+  --orb-2: #f3e8ff; /* Faint Purple */
   
   /* --- Layout & Spacing --- */
   --container-width: 900px;
@@ -30,7 +33,13 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--bg-main);
+  /* Radial gradients create the "Quantum Aurora" effect */
+  background-color: #fdfdfd;
+  background-image: 
+    radial-gradient(circle at 15% 50%, var(--orb-1), transparent 25%),
+    radial-gradient(circle at 85% 30%, var(--orb-2), transparent 25%);
+  background-attachment: fixed; /* Fixed background for parallax feel */
+  
   color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.7;
@@ -53,10 +62,11 @@ a:hover { color: var(--accent-hover); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.85); /* 半透明背景 */
-  backdrop-filter: blur(12px);           /* 毛玻璃模糊效果 */
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  /* High transparency + blur */
+  background: rgba(255, 255, 255, 0.7); 
+  backdrop-filter: blur(16px);           
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   padding: 14px 0;
 }
 
@@ -91,7 +101,7 @@ a:hover { color: var(--accent-hover); }
 }
 .section:last-child { border-bottom: none; }
 
-.bg-alt { background: var(--bg-alt); } /* 用于 Acknowledgements */
+.bg-alt { background: var(--bg-alt); } 
 
 h2 {
   font-size: 1.75rem;
@@ -118,7 +128,9 @@ h2 {
 .avatar {
   width: 100%;
   border-radius: 16px;
-  box-shadow: var(--shadow-md);
+  /* Blue glow effect */
+  box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.5);
   transition: transform 0.3s ease;
   display: block;
 }
@@ -152,12 +164,19 @@ h2 {
 .affiliation-item {
   display: flex;
   gap: 10px;
-  margin-bottom: 8px;
-  align-items: center;
+  margin-bottom: 10px;
+  align-items: start;
 }
-.affiliation-item .icon { opacity: 0.7; }
+.affiliation-item .icon { opacity: 0.8; margin-top: 2px; }
 
-/* --- Research Cards --- */
+.sub-text {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+/* --- Research Cards (Glassmorphism) --- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -165,20 +184,30 @@ h2 {
 }
 
 .card {
-  background: var(--bg-alt);
+  /* Semi-transparent background + blur */
+  background: rgba(255, 255, 255, 0.65); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Glass border and inner highlight */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.03),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+              
   padding: 24px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
 }
 
 .card:hover {
-  background: var(--card-bg);
-  border-color: var(--border);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(255, 255, 255, 1);
 }
 
 .card h3 {
@@ -219,7 +248,7 @@ h2 {
   margin-bottom: 6px;
 }
 
-/* 高亮显示名字 */
+/* Highlight Name */
 .pub-authors strong {
   color: var(--text-main);
   font-weight: 600;
@@ -240,7 +269,7 @@ h2 {
   flex-wrap: wrap;
 }
 
-/* 胶囊按钮样式 */
+/* Badge / Pill Buttons */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -307,7 +336,7 @@ h2 {
   text-align: center;
   color: #9ca3af;
   font-size: 0.9rem;
-  background: var(--bg-alt);
+  background: rgba(255, 255, 255, 0.5); /* Transparent footer */
   border-top: 1px solid var(--border);
 }
 
