@@ -1,23 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta name="keywords" content="Yuqi Zhang, quantum computing, quantum bioinformatics, protein folding, quantum biology, Kent State University, QDockbank">
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Yuqi Zhang | Quantum Computing & Quantum Bioinformatics</title>
-  <meta name="description" content="Yuqi Zhang — PhD student at Kent State University focusing on Quantum Computing and Quantum Bioinformatics.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="keywords" content="Yuqi Zhang, Quantum Computing, Bioinformatics, Kent State University, PhD, SC25">
+  <meta name="description" content="Yuqi Zhang — PhD student in Quantum Computing & Bioinformatics at Kent State University.">
+  <title>Yuqi Zhang | Quantum Computing & Bioinformatics</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/style.css">
+  
   <link rel="icon" href="assets/img/icon.png">
 </head>
+
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <h1 class="name">Yuqi Zhang(张钰奇)</h1>
-        <p class="tagline">PhD Student · Computer Science @ Kent State University · Advisor: Dr. Qiang Guan</p>
-        <p class="tagline">Visiting Researcher @ Cleveland Clinic · PI: Dr. Feixiong Cheng</p>
-        <p class="tagline light">Quantum Talents Climbing Program 2023 · SZIQA · Advisor: Dr. Juan Yao</p>
-        <p class="subtag">Quantum Computing × Drug Discovery</p>
+        <a href="#" class="brand-name">Yuqi Zhang</a>
       </div>
       <nav class="nav">
         <a href="#about">About</a>
@@ -30,169 +35,168 @@
 
   <main>
     <section id="about" class="section">
-      <div class="container hero">
-        <img class="avatar" src="assets/img/me.jpeg" alt="Portrait of Yuqi Zhang" />
-         <div class="intro">
-        <h2>About</h2>
-        <p>
-            I am a PhD student in Computer Science, focusing on <strong>quantum computing</strong>.  
-            Previously, I worked as a Research Assistant at the <strong>University of Technology Sydney (UTS)</strong> and  
-            the <strong>Shenzhen International Quantum Academy (SZIQA)</strong>, and also participated in a summer research program at  
-            the <strong>University of Science and Technology of China (USTC)</strong>.
-        </p>
-
-        <p>
-            My research focuses on applying <strong>quantum computing to drug discovery</strong> and developing corresponding
-            <strong>quantum algorithms and engineering frameworks</strong>.  
-        </p>
-
-        <p>
-            My hardware platform primarily involves IBM's superconducting quantum computers,
-            including <strong>Eagle r3 (127 qubits)</strong> and <strong>Heron r3 (156 qubits)</strong>.
-        </p>
-
-        <ul class="id-badges">
-            <li>Research Interests: Quantum Computing, Quantum Bioinformatics, Quantum Chemistry</li>
-        </ul>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="avatar-wrapper">
+            <img class="avatar" src="assets/img/me.jpeg" alt="Portrait of Yuqi Zhang">
+          </div>
+          
+          <div class="hero-text">
+            <h1>Yuqi Zhang (张钰奇)</h1>
+            <p class="subtitle">PhD Student in Computer Science @ Kent State University</p>
+            
+            <p>
+              I am a PhD student focusing on <strong>Quantum Computing</strong>. Previously, I worked as a Research Assistant at the <strong>University of Technology Sydney (UTS)</strong> and the <strong>Shenzhen International Quantum Academy (SZIQA)</strong>.
+            </p>
+            
+            <p>
+              My research bridges the gap between quantum algorithms and real-world drug discovery challenges, utilizing both utility-level quantum processors (IBM Eagle/Heron) and HPC systems.
+            </p>
+            
+            <div class="affiliations">
+              <div class="affiliation-item">
+                <span class="icon">🎓</span> <span>Advisor: <strong>Dr. Qiang Guan</strong></span>
+              </div>
+              <div class="affiliation-item">
+                <span class="icon">🔬</span> <span>Visiting Researcher @ Cleveland Clinic (PI: Dr. Feixiong Cheng)</span>
+              </div>
+              <div class="affiliation-item">
+                <span class="icon">💻</span> <span>Interests: Quantum Bioinformatics, Quantum Chemistry</span>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
     </section>
 
     <section id="research" class="section">
       <div class="container">
-        <h2>Research Overview</h2>
-        <p>
-            Current methodologies include <strong>Variational Quantum Algorithms (VQA)</strong>, <strong>SQD</strong>,
-            <strong>Quantum-HPC hybrid frameworks</strong>, and <strong>Quantum-AI hybrid algorithms</strong>.  
-            The current research scope spans <strong>protein-level structure prediction</strong>,
-            <strong>energy surface reconstruction</strong>, <strong>molecular-level ground-state energy estimation</strong>,
-            <strong>drug usability analysis</strong>, and <strong>DNA/RNA sequence prediction</strong>.
+        <h2>Research Focus</h2>
+        <p class="section-intro">
+          My work involves Variational Quantum Algorithms (VQA), Quantum-HPC hybrid frameworks, and Quantum-AI integration. I specifically target protein structure prediction, energy surface reconstruction, and molecular docking.
         </p>
-
-        <div class="cards">
-        <article class="card">
-        <h3>End-to-End Quantum Frameworks on Utility-Level Hardware</h3>
-        <p>
-            Building practical quantum frameworks on utility-level quantum processors.  
-            Starting from amino acid sequences, algorithms such as <strong>VQE</strong>  
-            are employed to identify low-energy conformations corresponding to stable protein structures.
-        </p>
-        </article>
-
-        <article class="card">
-        <h3>Hybrid Quantum Algorithms</h3>
-        <p>
-            Integrating <strong>AI models</strong> and <strong>classical algorithms</strong> to expand the system’s  
-            information capacity, enabling quantum algorithms to surpass intrinsic QPU limitations. 
-            under current hardware constraints.
-        </p>
-        </article>
-
-        <article class="card">
-        <h3>Cross-Scale Integration in Drug Discovery</h3>
-        <p>
-            Designing quantum algorithms and frameworks that bridge hierarchical levels—  
-            from protein structures to molecular interactions—across different physical and  
-            chemical scales to advance quantum-enabled drug discovery.
-        </p>
-        </article>
+        
+        <div class="cards-grid">
+          <article class="card">
+            <h3>End-to-End Quantum Frameworks</h3>
+            <p>Building practical frameworks on utility-level hardware. Utilizing algorithms like VQE on IBM Eagle (127q) and Heron (156q) processors to identify low-energy conformations for stable protein structures.</p>
+          </article>
+          
+          <article class="card">
+            <h3>Hybrid Quantum-AI Algorithms</h3>
+            <p>Integrating Generative AI and classical optimization to expand system information capacity. This approach allows quantum algorithms to transcend intrinsic QPU limitations and noise constraints.</p>
+          </article>
+          
+          <article class="card">
+            <h3>Cross-Scale Drug Discovery</h3>
+            <p>Designing algorithms that bridge hierarchical levels—from protein folding to ligand docking—across physical and chemical scales to advance the era of quantum-enabled drug design.</p>
+          </article>
         </div>
       </div>
     </section>
 
- <section id="pubs" class="section">
-  <div class="container">
-    <h2>Selected Publications</h2>
-    <ul class="pub-list">
+    <section id="pubs" class="section">
+      <div class="container">
+        <h2>Selected Publications</h2>
+        <ul class="pub-list">
+          
+          <li class="pub-item">
+            <span class="pub-title">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</span>
+            <div class="pub-authors">
+              <strong>Yuqi Zhang</strong>, Yuxin Yang, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*, <em>et al.</em>
+            </div>
+            <div class="pub-venue">
+              <strong>Advanced Science</strong> (IF = 14.3), 2025. Accepted.
+            </div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1002/advs.202513641" target="_blank" class="badge badge-blue">DOI</a>
+              <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:IjCSPb-OGe4C" target="_blank" class="badge badge-gray">Google Scholar</a>
+            </div>
+          </li>
 
-      <li>
-        <p>
-          <strong>Yuqi Zhang</strong>, Yuxin Yang, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*, <em>et al.</em> 
-          <em>“A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors.”</em> 
-          <em><strong>Advanced Science</strong></em> (<strong>IF = 14.3</strong>, 2025), Accepted. 
-          DOI: <a href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">10.1002/advs.202513641</a>. 
-          [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:IjCSPb-OGe4C" target="_blank" rel="noopener">Google Scholar</a>]
-        </p>
-      </li>
+          <li class="pub-item">
+            <span class="pub-title">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</span>
+            <div class="pub-authors">
+              <strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*.
+            </div>
+            <div class="pub-venue">
+              <strong>SC ’25</strong>: The International Conference for High Performance Computing, Networking, Storage and Analysis, Nov 2025.
+            </div>
+            <div class="pub-links">
+              <a href="#" class="badge badge-blue">PDF</a>
+              <a href="https://github.com/qiqi-xingyi" target="_blank" class="badge badge-gray">Code & Artifacts</a>
+              <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" class="badge badge-gray">Google Scholar</a>
+            </div>
+          </li>
 
-      <li class="pub-item">
-        <p>
-          <strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*. 
-          <em>“QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers.”</em> 
-          In <em><strong>SC’25 </strong>: The International Conference for High Performance Computing, Networking, Storage and Analysis</em>, St. Louis, MO, USA, Nov 2025. 
-          <span class="status">Artifact Available.</span>
-          [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">Google Scholar</a>]
-        </p>
-      </li>
+          <li class="pub-item">
+            <span class="pub-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span>
+            <div class="pub-authors">
+              <strong>Yuqi Zhang</strong>, Yuxin Yang, Feixiong Cheng, Nima Saeidi, Samuel L. Volchenboum, Junhan Zhao, Siwei Chen, Qiang Guan*, <em>et al.</em>
+            </div>
+            <div class="pub-venue">
+              Under Review, 2025.
+            </div>
+            <div class="pub-links">
+               <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" class="badge badge-gray">Google Scholar</a>
+            </div>
+          </li>
 
-      <li class="pub-item">
-        <p>
-          <strong>Yuqi Zhang</strong>, Yuxin Yang, Feixiong Cheng, Nima Saeidi, Samuel L. Volchenboum, Junhan Zhao, Siwei Chen, Qiang Guan*, <em>et al.</em> 
-          <em>“A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices.”</em> 
-          <em>Under review, 2025.</em> 
-          [<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">Google Scholar</a>]
-        </p>
-      </li>
-
-    </ul>
-  </div>
-</section>
-
-
-    <section id="acknowledgements" class="section">
-    <div class="container">
-    <h2>Acknowledgements</h2>
-        <p>
-        I would like to express my deepest gratitude to all the mentors and colleagues who have guided and supported me:  
-        my advisor <strong>Dr. Qiang Guan</strong>, and those who have supervised or inspired my research, including  
-        <strong>Dr. Juan Yao</strong> @ SZIQA,  
-        <strong>Dr. Zhaofeng Su</strong> @ USTC,  
-        <strong>Dr. Sanjiang Li</strong> @ UTS, and  
-        <strong>Dr. Yuan Feng</strong> @ THU.
-        </p>
-
-        <p>
-        I also sincerely thank my teammates and friends in the 419 Lab —  
-        <strong>Hang Yu</strong> (余航),  
-        <strong>Yiyan Cheng</strong> (程义艳),  
-        <strong>Rongqi Lu</strong> (陆荣琦),  
-        <strong>Zhuoqing Xiao</strong> (肖卓青), 
-        <strong>Yongzhi Li</strong> (李勇志),and  
-        <strong>Yao Xiao</strong> (肖耀) —  
-        for their collaboration, encouragement, and shared pursuit of scientific discovery.
-        </p>
-
-        <p>
-          I am especially grateful to my friend <strong>Haojie Zhang</strong> (张豪杰),  
-          who first guided me into the world of quantum computing.
-        </p>
-    </div>
+        </ul>
+      </div>
     </section>
 
+    <section id="acknowledgements" class="section bg-alt">
+      <div class="container">
+        <h2>Acknowledgements</h2>
+        <p class="ack-text">
+          I am deeply grateful to my advisor <strong>Dr. Qiang Guan</strong>, and mentors <strong>Dr. Juan Yao</strong> (SZIQA), <strong>Dr. Zhaofeng Su</strong> (USTC), <strong>Dr. Sanjiang Li</strong> (UTS), and <strong>Dr. Yuan Feng</strong> (THU).
+        </p>
+        <p class="ack-text">
+           Special thanks to the 419 Lab team (Hang Yu, Yiyan Cheng, Rongqi Lu, Zhuoqing Xiao, Yongzhi Li, Yao Xiao) and my friend <strong>Haojie Zhang</strong> for guiding me into the quantum world.
+        </p>
+      </div>
+    </section>
 
     <section id="contact" class="section">
       <div class="container">
         <h2>Contact</h2>
-        <ul class="contact">
-          <li>Email: yzhan135 [at] kent.edu</li>
-          <li>GitHub: <a class="ext" href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener">qiqi-xingyi</a></li>
-          <li>ORCID: <a class="ext" href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener">0009-0005-9026-6906</a></li>
-          <li>Google Scholar: <a class="ext" href="https://scholar.google.com/citations?user=Q7Ybs-gAAAAJ&hl=en" target="_blank" rel="noopener">Profile</a></li>
-          <li>Lab: <a class="ext" href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Guan’s Research Lab @ Kent State University</a></li>
-        </ul>
+        <div class="contact-grid">
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="mailto:yzhan135@kent.edu">yzhan135 [at] kent.edu</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Lab</span>
+              <a href="https://www.guans.cs.kent.edu/" target="_blank">Guan’s Research Lab</a>
+            </li>
+          </ul>
+          
+          <ul class="contact-list">
+             <li class="contact-item">
+              <span class="contact-label">GitHub</span>
+              <a href="https://github.com/qiqi-xingyi" target="_blank">github.com/qiqi-xingyi</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">ORCID</span>
+              <a href="https://orcid.org/0009-0005-9026-6906" target="_blank">0009-0005-9026-6906</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      © <span id="y"></span> Yuqi Zhang · Built with GitHub Pages
+      <p>© <span id="year"></span> Yuqi Zhang. Built with GitHub Pages.</p>
     </div>
   </footer>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
