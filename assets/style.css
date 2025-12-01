@@ -4,22 +4,16 @@
 
 :root {
   /* --- Color Palette --- */
-  --bg-main: #f8fafc;      /* Slightly cooler off-white base */
-  --bg-alt: rgba(255, 255, 255, 0.5);
+  --bg-main: #ffffff;      /* Pure white base */
+  --bg-alt: rgba(255, 255, 255, 0.6);
   
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
+  --text-main: #1f2937;    /* Primary dark text */
+  --text-muted: #6b7280;   /* Secondary muted text */
   
   --accent: #2563eb;       /* Tech Blue */
   --accent-hover: #1d4ed8;
   
-  --border: rgba(255, 255, 255, 0.65);
-  
-  /* --- Enhanced Quantum Nebula Gradients --- */
-  /* Using RGBA for richer blending while maintaining readability */
-  --orb-blue: rgba(165, 180, 252, 0.5);  /* Deep Indigo-Blue */
-  --orb-purple: rgba(244, 114, 182, 0.4); /* Warmer Magenta-Pink */
-  --orb-cyan: rgba(34, 211, 238, 0.35);   /* Bright Cyan-Teal */
+  --border: rgba(255, 255, 255, 0.8); /* High transparency for glass edges */
   
   /* --- Layout & Spacing --- */
   --container-width: 900px;
@@ -27,8 +21,8 @@
   
   /* --- Shadows --- */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
 }
 
 /* --- Base Reset --- */
@@ -36,13 +30,20 @@
 
 body {
   background-color: var(--bg-main);
-  /* Richer, three-color blending nebula effect with larger spread */
+  
+  /* Ethereal Quantum Gradient
+     Using very low opacity (0.5) to create a natural, airy feel 
+     that mimics light refraction rather than heavy solid colors.
+  */
   background-image: 
-    radial-gradient(at 20% 30%, var(--orb-blue) 0px, transparent 55%),
-    radial-gradient(at 80% 70%, var(--orb-purple) 0px, transparent 55%),
-    radial-gradient(at 60% 20%, var(--orb-cyan) 0px, transparent 50%);
+    /* Top-Left: Subtle Tech Blue */
+    radial-gradient(circle at 0% 0%, rgba(219, 234, 254, 0.5) 0%, transparent 60%),
+    /* Top-Right: Faint Quantum Purple */
+    radial-gradient(circle at 100% 0%, rgba(243, 232, 255, 0.5) 0%, transparent 60%),
+    /* Bottom-Center: Soft Teal/Cyan to bridge the colors */
+    radial-gradient(circle at 50% 100%, rgba(224, 242, 254, 0.5) 0%, transparent 50%);
     
-  background-attachment: fixed; /* Fixed background for parallax feel */
+  background-attachment: fixed; /* Fixed background for parallax effect */
   background-size: cover;
   
   color: var(--text-main);
@@ -67,11 +68,11 @@ a:hover { color: var(--accent-hover); }
   position: sticky;
   top: 0;
   z-index: 100;
-  /* Increased transparency to show the new vibrant background */
-  background: rgba(255, 255, 255, 0.65); 
-  backdrop-filter: blur(16px);           
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  /* High transparency + Blur */
+  background: rgba(255, 255, 255, 0.75); 
+  backdrop-filter: blur(20px);           
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   padding: 14px 0;
 }
 
@@ -106,7 +107,7 @@ a:hover { color: var(--accent-hover); }
 }
 .section:last-child { border-bottom: none; }
 
-.bg-alt { background: var(--bg-alt); } 
+.bg-alt { background: rgba(250, 250, 250, 0.5); } 
 
 h2 {
   font-size: 1.75rem;
@@ -133,9 +134,9 @@ h2 {
 .avatar {
   width: 100%;
   border-radius: 16px;
-  /* Subtle blue glow matching the theme */
-  box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.25);
-  border: 3px solid rgba(255, 255, 255, 0.6);
+  /* Natural shadow for depth */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 4px solid rgba(255, 255, 255, 0.8);
   transition: transform 0.3s ease;
   display: block;
 }
@@ -181,7 +182,7 @@ h2 {
   margin-top: 2px;
 }
 
-/* --- Research Cards (Glassmorphism) --- */
+/* --- Research Cards (Refined Glass) --- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -189,15 +190,15 @@ h2 {
 }
 
 .card {
-  /* Glass effect background */
+  /* High blur + white tint for clean glass effect */
   background: rgba(255, 255, 255, 0.6); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 
-              0 2px 4px -1px rgba(0, 0, 0, 0.02),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.01),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Inner highlight */
               
   padding: 24px;
   border-radius: 16px;
@@ -207,11 +208,10 @@ h2 {
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 
-              0 10px 10px -5px rgba(0, 0, 0, 0.03);
-  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08); 
+  border-color: #ffffff;
 }
 
 .card h3 {
@@ -340,7 +340,7 @@ h2 {
   text-align: center;
   color: #9ca3af;
   font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.3);
   border-top: 1px solid var(--border);
 }
 
