@@ -1,252 +1,327 @@
-/* =========================
-   Gray–White Minimal Theme
-   ========================= */
+/* =========================================
+   Modern Academic Theme - Yuqi Zhang
+   ========================================= */
 
-/* Color tokens */
-:root{
-  --bg:#f7f7f8;      /* page background */
-  --fg:#222426;      /* primary text */
-  --muted:#6b6f76;   /* secondary text */
-  --line:#e5e7eb;    /* borders/dividers */
-  --card:#ffffff;    /* card background */
-  --link:#3f4752;    /* links */
-  --accent:#7a838e;  /* subtle accent */
+:root {
+  /* --- Color Palette --- */
+  --bg-main: #ffffff;
+  --bg-alt: #f8f9fa;       /* 浅灰色背景，用于区分板块 */
+  
+  --text-main: #1f2937;    /* 正文深色 */
+  --text-muted: #6b7280;   /* 次级文本颜色 */
+  
+  --accent: #2563eb;       /* 强调色（科技蓝） */
+  --accent-hover: #1d4ed8;
+  
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
+  
+  /* --- Layout & Spacing --- */
+  --container-width: 900px;
+  --header-height: 70px;
+  
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-/* Keep light theme even in system dark mode */
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#f7f7f8; --fg:#222426; --muted:#6b6f76; --line:#e5e7eb; --card:#ffffff; --link:#3f4752; --accent:#7a838e;
-  }
-}
+/* --- Base Reset --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Base reset */
-*{ box-sizing:border-box }
-html,body{ margin:0; padding:0 }
-body{
-  background:var(--bg);
-  color:var(--fg);
-  font:16px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  letter-spacing:.1px;
-}
-
-/* Layout */
-.container{ max-width:980px; margin:0 auto; padding:0 16px }
-.section{ padding:40px 0 }
-.section .container{ padding-top:10px; border-top:1px solid var(--line) }
-.section h2{ font-size:22px; margin:0 0 14px 0; font-weight:700; color:#1f2327 }
-
-/* Header */
-.site-header{
-  position:sticky; top:0; z-index:10;
-  background:#fbfbfc;
-  border-bottom:1px solid var(--line);
-}
-.header-inner{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px; padding:16px 0;
-}
-.name{ margin:0; font-size:32px; font-weight:700 }
-.tagline{ margin:4px 0; color:#2c2f33 }
-.tagline.light{ color:var(--muted); font-size:13.5px }
-.subtag{ color:#4c5056; margin-top:6px }
-
-/* Nav */
-.nav a{
-  color:#2b2e31; text-decoration:none;
-  margin-left:18px; padding-bottom:4px; position:relative;
-}
-.nav a::after{
-  content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
-  background:#9aa2ad; transition:width .2s ease;
-}
-.nav a:hover{ color:#16181a }
-.nav a:hover::after{ width:100% }
-/* Keyboard focus */
-.nav a:focus{ outline:2px solid var(--accent); outline-offset:2px }
-
-/* Hero */
-.hero{
-  display:grid; grid-template-columns:160px 1fr;
-  gap:28px; align-items:center;
-}
-.avatar{
-  display:block;
-  width:100%;
-  max-width:260px;         /* desktop max */
-  height:auto;             /* keep aspect */
-  border-radius:18px;
-  border:1px solid var(--line);
-  box-shadow:0 3px 10px rgba(0,0,0,.04);
-  object-fit:contain;      /* show full image */
-  object-position:center;
-  margin:0 auto;           /* center on small screens */
-}
-.intro p{ margin-top:6px }
-
-/* ID badges / bullets near About */
-.id-badges{ margin:12px 0 0 0; padding-left:18px; color:var(--muted) }
-
-
-/* Publications */
-.pub-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.pub-list li {
-  margin-bottom: 1rem;
-}
-
-.pub-list p {
-  margin: 0;
-  line-height: 1.6;
-  text-align: justify;
-  font-size: 0.95rem;
-  color: var(--fg);
-}
-
-.pub-list strong {
-  font-weight: 600;
-}
-
-.pub-list em {
-  font-style: italic;
-}
-
-.pub-list a {
-  color: var(--link);
-  text-decoration: none;
-}
-
-.pub-list a:hover {
-  text-decoration: underline;
-}
-
-.status {
-  color: #2f855a;
-  font-weight: 500;
-}
-
-
-
-/* Acknowledgements */
-#acknowledgements p{
-  color:var(--muted);
-  line-height:1.8;
-}
-
-/* Contact */
-.contact{ margin:8px 0 0 1.2rem }
-.contact li{ list-style:none; position:relative; padding-left:22px; margin:6px 0 }
-.contact li::before{
-  content:"•"; position:absolute; left:6px; top:0;
-  color:#8d949c; font-weight:700;
-}
-
-/* Footer */
-.site-footer{
-  border-top:1px solid var(--line);
-  padding:20px 0; color:#8a9098;
-  background:#fafafb; font-size:14px;
-}
-
-/* Responsive */
-@media (max-width:640px){
-  .hero{ grid-template-columns:1fr }
-  .avatar{ max-width:180px }
-  .nav{ display:none }  /* simple mobile header; can replace with hamburger later */
-}
-
-/* ---- Academic Publication Style ---- */
-.pub-list {
-  list-style: none;
-  margin: 8px 0;         
-  padding-left: 1.2rem;   
-}
-.pub-list li {
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px dashed var(--line);
-  text-indent: -1.2rem;   
-}
-
-.pub-authors {
-  margin: 0;
-  font-size: 15px;
-  color: var(--muted);
-}
-.pub-title {
-  margin: 4px 0;
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
   font-size: 16px;
-  line-height: 1.5;
-}
-.pub-meta {
-  margin: 2px 0;
-  font-size: 14px;
-  color: var(--muted);
-  font-style: italic;
-}
-.pub-link {
-  margin: 4px 0 0 0;
-  font-size: 14px;
-}
-.pub-link a.ext {
-  color: var(--link);
-  font-weight: 600;
-}
-.pub-link a.ext:hover {
-  text-decoration: underline;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* === Card readability polish === */
-.cards {
+a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--accent-hover); }
+
+/* --- Layout Utility --- */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Header (Glassmorphism) --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85); /* 半透明背景 */
+  backdrop-filter: blur(12px);           /* 毛玻璃模糊效果 */
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+.brand-name:hover { color: var(--accent); }
+
+.nav { display: flex; gap: 28px; }
+
+.nav a {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+}
+.nav a:hover { color: var(--text-main); }
+
+/* --- Sections General --- */
+.section {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+
+.bg-alt { background: var(--bg-alt); } /* 用于 Acknowledgements */
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.section-intro {
+  margin-bottom: 32px;
+  max-width: 700px;
+  color: var(--text-muted);
+}
+
+/* --- Hero Section (About) --- */
+.hero-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  align-items: stretch;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.avatar {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+  display: block;
+}
+.avatar:hover { transform: scale(1.02); }
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.hero-text .subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.hero-text p { margin-bottom: 16px; }
+
+.affiliations {
+  margin-top: 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.affiliation-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.affiliation-item .icon { opacity: 0.7; }
+
+/* --- Research Cards --- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .card {
-  padding: 22px 24px;
-  border-radius: 18px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .03);
-  height: 100%;
+  background: var(--bg-alt);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
 }
+
 .card:hover {
-  transform: translateY(-4px);              
-  box-shadow: 0 10px 24px rgba(0,0,0,.08);  
-  border-color: #d9dde3;
+  background: var(--card-bg);
+  border-color: var(--border);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
 }
 
 .card h3 {
-  margin: 4px 0 10px 0;
-  font-size: 14px;
-  line-height: 1.25;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
 }
 
 .card p {
-  font-size: 11px;
-  margin: 6px 0 0 0;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
 }
 
-/* Mobile adjustments */
-@media (max-width: 640px) {
-  .cards { 
-    grid-template-columns: 1fr; 
-    gap: 16px; 
-  }
-  .card { 
-    padding: 18px; 
-  }
-  .card h3 { 
-    font-size: 20px; 
-    margin-bottom: 10px; 
-  }
+/* --- Publications List --- */
+.pub-list { list-style: none; }
+
+.pub-item {
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.pub-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.pub-authors {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* 高亮显示名字 */
+.pub-authors strong {
+  color: var(--text-main);
+  font-weight: 600;
+  border-bottom: 2px solid rgba(37, 99, 235, 0.2); 
+}
+
+.pub-venue {
+  font-style: italic;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+.pub-venue strong { color: var(--text-main); font-weight: 600; font-style: normal; }
+
+.pub-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* 胶囊按钮样式 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.badge-gray {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+.badge-gray:hover { background: #e5e7eb; color: #1f2937; border-color: #d1d5db; }
+
+.badge-blue {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+}
+.badge-blue:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+
+/* --- Acknowledgements --- */
+.ack-text {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* --- Contact & Footer --- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.contact-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.contact-label {
+  font-weight: 600;
+  color: var(--text-main);
+  min-width: 60px;
+}
+
+.site-footer {
+  padding: 40px 0;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .nav { gap: 16px; flex-wrap: wrap; }
+  
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .avatar { max-width: 220px; margin: 0 auto; }
+  .hero-text { text-align: center; }
+  .affiliation-item { justify-content: center; }
+  
+  .contact-grid { grid-template-columns: 1fr; }
+  
+  h1 { font-size: 2rem; }
 }
