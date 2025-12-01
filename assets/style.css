@@ -4,8 +4,8 @@
 
 :root {
   /* --- Color Palette --- */
-  --bg-main: #ffffff;      /* Pure white base */
-  --bg-alt: rgba(255, 255, 255, 0.6);
+  --bg-main: #ffffff;
+  --bg-alt: rgba(255, 255, 255, 0.5); /* Semi-transparent for glass effect */
   
   --text-main: #1f2937;    /* Primary dark text */
   --text-muted: #6b7280;   /* Secondary muted text */
@@ -13,12 +13,11 @@
   --accent: #2563eb;       /* Tech Blue */
   --accent-hover: #1d4ed8;
   
-  --border: rgba(255, 255, 255, 0.8);
+  --border: rgba(255, 255, 255, 0.65); /* Glass border */
   
-  /* --- Original Pale Quantum Colors --- */
-  /* These are the very faint, natural colors from the first version */
-  --orb-blue: #e0e7ff;   /* Pale Indigo */
-  --orb-purple: #f3e8ff; /* Pale Violet */
+  /* --- Quantum Aurora Gradients (Background) --- */
+  --orb-1: #e0e7ff; /* Faint Blue */
+  --orb-2: #f3e8ff; /* Faint Purple */
   
   /* --- Layout & Spacing --- */
   --container-width: 900px;
@@ -26,28 +25,20 @@
   
   /* --- Shadows --- */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 /* --- Base Reset --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: var(--bg-main);
-  
-  /* Large-Scale Diffusion
-     Increased spread from 25% to 60% so the colors blend seamlessly 
-     across the whole screen, creating a soft atmosphere rather than spots.
-  */
+  /* Radial gradients create the "Quantum Aurora" effect */
+  background-color: #fdfdfd;
   background-image: 
-    /* Large Blue Glow (Top Left) */
-    radial-gradient(circle at 17% 20%, var(--orb-blue), transparent 26%),
-    /* Large Purple Glow (Bottom Right/Center) */
-    radial-gradient(circle at 83% 60%, var(--orb-purple), transparent 21%);
-    
-  background-attachment: fixed;
-  background-size: cover;
+    radial-gradient(circle at 15% 50%, var(--orb-1), transparent 25%),
+    radial-gradient(circle at 85% 30%, var(--orb-2), transparent 25%);
+  background-attachment: fixed; /* Fixed background for parallax feel */
   
   color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -71,11 +62,11 @@ a:hover { color: var(--accent-hover); }
   position: sticky;
   top: 0;
   z-index: 100;
-  /* Clean Glass Effect */
+  /* High transparency + blur */
   background: rgba(255, 255, 255, 0.7); 
-  backdrop-filter: blur(20px);           
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);           
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   padding: 14px 0;
 }
 
@@ -110,7 +101,7 @@ a:hover { color: var(--accent-hover); }
 }
 .section:last-child { border-bottom: none; }
 
-.bg-alt { background: rgba(250, 250, 250, 0.5); } 
+.bg-alt { background: var(--bg-alt); } 
 
 h2 {
   font-size: 1.75rem;
@@ -137,9 +128,9 @@ h2 {
 .avatar {
   width: 100%;
   border-radius: 16px;
-  /* Natural depth shadow */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 4px solid rgba(255, 255, 255, 0.8);
+  /* Blue glow effect */
+  box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.5);
   transition: transform 0.3s ease;
   display: block;
 }
@@ -193,14 +184,15 @@ h2 {
 }
 
 .card {
-  /* White glass with high blur */
-  background: rgba(255, 255, 255, 0.6); 
+  /* Semi-transparent background + blur */
+  background: rgba(255, 255, 255, 0.65); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
-  border: 1px solid rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 
-              0 2px 4px -1px rgba(0, 0, 0, 0.01),
+  /* Glass border and inner highlight */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.03),
               inset 0 0 0 1px rgba(255, 255, 255, 0.5);
               
   padding: 24px;
@@ -212,9 +204,10 @@ h2 {
 
 .card:hover {
   background: rgba(255, 255, 255, 0.85);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08); 
-  border-color: #ffffff;
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(255, 255, 255, 1);
 }
 
 .card h3 {
@@ -343,7 +336,7 @@ h2 {
   text-align: center;
   color: #9ca3af;
   font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.5); /* Transparent footer */
   border-top: 1px solid var(--border);
 }
 
