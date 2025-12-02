@@ -36,8 +36,8 @@ body {
   /* Radial gradients create the "Quantum Aurora" effect */
   background-color: #fdfdfd;
   background-image: 
-    radial-gradient(circle at 15% 50%, var(--orb-1), transparent 25%),
-    radial-gradient(circle at 85% 30%, var(--orb-2), transparent 25%);
+    radial-gradient(circle at 15% 50%, var(--orb-1), transparent 32%),
+    radial-gradient(circle at 85% 30%, var(--orb-2), transparent 35%);
   background-attachment: fixed; /* Fixed background for parallax feel */
   
   color: var(--text-main);
