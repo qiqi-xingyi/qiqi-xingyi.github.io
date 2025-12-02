@@ -269,6 +269,59 @@ h2 {
   flex-wrap: wrap;
 }
 
+/* --- Glassmorphism Venue Tags --- */
+.venue-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-right: 8px;
+  border-radius: 6px;
+  
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  vertical-align: text-bottom;
+  
+  /* Core Glass Effect */
+  background: rgba(255, 255, 255, 0.3); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  
+  transition: all 0.2s ease;
+}
+
+/* Hover Effect */
+.pub-item:hover .venue-tag {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+/* --- Tag Color Variants --- */
+
+/* Journal (Purple Theme) */
+.tag-journal {
+  color: #9333ea; /* Purple-600 */
+  border-color: rgba(216, 180, 254, 0.5);
+  background: rgba(243, 232, 255, 0.4);
+}
+
+/* Conference (Blue Theme) */
+.tag-conf {
+  color: #2563eb; /* Blue-600 */
+  border-color: rgba(147, 197, 253, 0.5);
+  background: rgba(219, 234, 254, 0.4);
+}
+
+/* Work In Progress / Preprint (Gray Theme) */
+.tag-wip {
+  color: #4b5563; /* Gray-600 */
+  border-color: rgba(209, 213, 219, 0.5);
+  background: rgba(243, 244, 246, 0.4);
+}
+
 /* Badge / Pill Buttons */
 .badge {
   display: inline-flex;
