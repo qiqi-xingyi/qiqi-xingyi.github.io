@@ -42,13 +42,20 @@
     }
   }
 
-  /* ---- Cursor spotlight that follows the mouse across the glass cards ---- */
+  /* ---- 3D tilt + diagonal gloss reacting to the cursor on the cards ---- */
   if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
     Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
       card.addEventListener('mousemove', function (e) {
         var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--ry', ((px - 0.5) * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - py) * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--gloss', (px * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
       });
     });
   }
