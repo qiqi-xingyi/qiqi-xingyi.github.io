@@ -42,6 +42,17 @@
     }
   }
 
+  /* ---- Cursor spotlight that follows the mouse across the glass cards ---- */
+  if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    Array.prototype.forEach.call(document.querySelectorAll('.card'), function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
   /* ---- Active nav highlight: the last section whose top has passed the
           header line. Reliable at the very top and bottom of the page. ---- */
   (function () {
