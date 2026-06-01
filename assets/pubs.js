@@ -27,18 +27,34 @@
     return typeof url === 'string' && /^(https?:|mailto:)/i.test(url);
   }
 
-  function renderTitle(pub) {
-    var span = document.createElement('span');
-    span.className = 'pub-title';
+  function renderHead(pub) {
+    var head = document.createElement('div');
+    head.className = 'pub-head';
+
     if (pub.venue_tag) {
       var tag = document.createElement('span');
       tag.className = 'venue-tag ' + tagClass(pub.venue_type);
       tag.textContent = pub.venue_tag;
-      span.appendChild(tag);
-      span.appendChild(document.createTextNode(' '));
+      head.appendChild(tag);
     }
-    span.appendChild(document.createTextNode(pub.title || ''));
-    return span;
+
+    var meta = document.createElement('span');
+    meta.className = 'pub-meta';
+    var bits = [];
+    if (pub.year) bits.push(String(pub.year));
+    if (pub.cited_by && pub.cited_by > 0) {
+      bits.push(pub.cited_by + ' ' + (pub.cited_by === 1 ? 'citation' : 'citations'));
+    }
+    meta.textContent = bits.join(' · ');
+    head.appendChild(meta);
+    return head;
+  }
+
+  function renderTitle(pub) {
+    var h = document.createElement('h3');
+    h.className = 'pub-title';
+    h.textContent = pub.title || '';
+    return h;
   }
 
   function renderAuthors(pub) {
@@ -69,10 +85,7 @@
   function renderVenue(pub) {
     var div = document.createElement('div');
     div.className = 'pub-venue';
-    // venue_html is a trusted snippet (authored by you in overrides.json or
-    // assembled by the fetch script, allowing <strong>/<em>), never raw
-    // visitor input — so innerHTML is safe here.
-    div.innerHTML = pub.venue_html || '';
+    div.textContent = pub.venue_short || '';
     return div;
   }
 
@@ -89,24 +102,18 @@
       a.textContent = l.label || 'Link';
       div.appendChild(a);
     });
-    // Citation count auto-synced from Scholar; hidden while 0 so the seed
-    // data looks identical to the original hand-written page.
-    if (pub.cited_by && pub.cited_by > 0) {
-      var cite = document.createElement('span');
-      cite.className = 'badge badge-gray pub-cited';
-      cite.textContent = 'Cited by ' + pub.cited_by;
-      div.appendChild(cite);
-    }
     return div;
   }
 
   function renderItem(pub) {
     var li = document.createElement('li');
     li.className = 'pub-item';
+    li.appendChild(renderHead(pub));
     li.appendChild(renderTitle(pub));
     li.appendChild(renderAuthors(pub));
     li.appendChild(renderVenue(pub));
-    li.appendChild(renderLinks(pub));
+    var links = renderLinks(pub);
+    if (links.childNodes.length) li.appendChild(links);
     return li;
   }
 

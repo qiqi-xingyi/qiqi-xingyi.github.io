@@ -108,15 +108,29 @@ def guess_venue_type(publication):
     return "journal"
 
 
-def auto_venue_html(publication, impact_factor, year):
-    """Best-effort venue line for papers that have no override yet."""
+def auto_venue_short(publication):
+    """Short, plain venue name for the compact card layout (no IF, no pages, no long titles)."""
     name = (publication or "").split(",")[0].strip()
-    html = "<strong>" + escape_html(name) + "</strong>"
-    if impact_factor:
-        html += " (IF = " + str(impact_factor) + ")"
-    if year:
-        html += ", " + str(year)
-    return html + "."
+    return name or "—"
+
+
+# Common conferences whose Scholar `publication` strings are long Proceedings names;
+# map them to a short canonical acronym for the compact card.
+CONFERENCE_ALIASES = (
+    ("supercomputing", "Supercomputing"),
+    ("high performance computing", "SC"),
+    ("neurips", "NeurIPS"),
+    ("icml", "ICML"),
+    ("iclr", "ICLR"),
+)
+
+
+def shorten_conference(publication):
+    p = (publication or "").lower()
+    for needle, short in CONFERENCE_ALIASES:
+        if needle in p:
+            return short
+    return None
 
 
 # --------------------------------------------------------------------------- #
@@ -200,12 +214,17 @@ def transform(articles, overrides, author_id):
         publication = art.get("publication") or ""
         year = parse_year(art)
         jmeta = journals.get(publication.split(",")[0].strip().lower()) if publication else None
-        impact_factor = jmeta.get("impact_factor") if jmeta else None
 
         venue_type = ov.get("venue_type") or (jmeta.get("type") if jmeta else None) \
             or guess_venue_type(publication)
-        venue_tag = ov.get("venue_tag") or (publication.split(",")[0].strip() if publication else "")
-        venue_html = ov.get("venue_html") or auto_venue_html(publication, impact_factor, year)
+        # Big category label on the card (Journal / Conference / Preprint / Under Review)
+        venue_tag = ov.get("venue_tag") or {
+            "journal": "Journal", "conf": "Conference", "wip": "Preprint"
+        }.get(venue_type, "Article")
+        # Short venue name shown under the title (no IF, no pages, no long titles)
+        venue_short = ov.get("venue_short") \
+            or shorten_conference(publication) \
+            or auto_venue_short(publication)
 
         # links: your override extras first, then the auto Scholar link
         links = [dict(l) for l in ov.get("links", [])]
@@ -221,7 +240,7 @@ def transform(articles, overrides, author_id):
             "et_al": bool(ov.get("et_al", False)),
             "venue_tag": venue_tag,
             "venue_type": venue_type,
-            "venue_html": venue_html,
+            "venue_short": venue_short,
             "year": year,
             "cited_by": cited_by_count(art),
             "links": links,

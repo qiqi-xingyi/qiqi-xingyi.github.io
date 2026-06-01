@@ -7,7 +7,7 @@
       "citation_id": "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
       "authors": "Y Zhang, Y Yang, W Jiang, R Nussinov, J Loscalzo, Q Guan, F Cheng",
       "publication": "Advanced Science, 2025",
-      "cited_by": { "value": 3 },
+      "cited_by": { "value": 9 },
       "year": "2025"
     },
     {
@@ -16,7 +16,7 @@
       "citation_id": "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
       "authors": "Y Zhang, Y Yang, CC Lu, W Jiang, F Cheng, B Fang, Q Guan",
       "publication": "Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis, 2025",
-      "cited_by": { "value": 1 },
+      "cited_by": { "value": 3 },
       "year": "2025"
     },
     {
@@ -27,6 +27,15 @@
       "publication": "",
       "cited_by": { "value": 0 },
       "year": "2025"
+    },
+    {
+      "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC",
+      "citation_id": "Q7Ybs-gAAAAJ:Se3iqnhoufwC",
+      "authors": "Y Zhang, S Chen, F Cheng, Q Guan",
+      "publication": "arXiv preprint arXiv:2603.06963",
+      "cited_by": { "value": 0 },
+      "year": "2026"
     }
   ]
 }
