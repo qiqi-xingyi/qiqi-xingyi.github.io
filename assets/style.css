@@ -167,7 +167,7 @@ body {
   inset: -55%;
   border-radius: 45%;
   mix-blend-mode: var(--aurora-blend);
-  filter: blur(72px);
+  filter: blur(56px);
   will-change: transform;
 }
 .aurora::before {
@@ -181,7 +181,7 @@ body {
     transparent 310deg,
     var(--av4) 345deg,
     transparent 360deg);
-  animation: aurora-spin 40s linear infinite;
+  animation: aurora-spin 26s linear infinite;
 }
 .aurora::after {
   background: conic-gradient(from 215deg at 50% 50%,
@@ -192,7 +192,7 @@ body {
     transparent 235deg,
     var(--av1) 300deg,
     transparent 360deg);
-  animation: aurora-spin 58s linear infinite reverse;
+  animation: aurora-spin 40s linear infinite reverse;
 }
 
 /* Faint grid + starfield */
@@ -447,10 +447,13 @@ h2 {
 .block > h2::after {
   content: "";
   display: block;
-  width: 50px; height: 3px;
-  margin-top: 12px;
-  border-radius: 3px;
-  background: var(--energy);
+  width: 66px; height: 4px;
+  margin-top: 14px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent-2), var(--accent));
+  background-size: 200% 100%;
+  box-shadow: 0 2px 16px -2px var(--ring);
+  animation: bar-flow 5s ease-in-out infinite alternate;
 }
 .block > p { color: var(--text); margin-bottom: 14px; }
 .block strong { color: var(--text-strong); font-weight: 700; }
@@ -664,7 +667,12 @@ h2 {
 }
 
 /* ---------- Motion ---------- */
-@keyframes aurora-spin { to { transform: rotate(360deg); } }
+@keyframes aurora-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.22); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes bar-flow { to { background-position: 200% 50%; } }
 @keyframes name-flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes reveal-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -696,7 +704,8 @@ h2 {
   .aurora::before,
   .aurora::after,
   .profile-name,
-  .card-icon { animation: none; }
+  .card-icon,
+  .block > h2::after { animation: none; }
 }
 
 /* ---------- Responsive ---------- */
