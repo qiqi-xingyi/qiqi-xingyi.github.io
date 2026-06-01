@@ -3,17 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
+  <!-- Set theme before paint to avoid a flash; mark JS on for progressive motion -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try { var t = localStorage.getItem('theme'); if (t) d.setAttribute('data-theme', t); } catch (e) {}
+    })();
+  </script>
+
   <meta name="keywords" content="Yuqi Zhang, Quantum Computing, Bioinformatics, Kent State University, PhD, SC25, Drug Discovery">
   <meta name="description" content="Yuqi Zhang — PhD student in Quantum Computing & Bioinformatics at Kent State University.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yuqi Zhang | Quantum Computing & Bioinformatics">
+  <meta property="og:description" content="PhD student bridging quantum algorithms and real-world drug discovery on utility-level quantum processors.">
+  <meta property="og:url" content="https://yuqizhang.me/">
+  <meta name="twitter:card" content="summary">
+
+  <meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#070b16" media="(prefers-color-scheme: dark)">
+
   <title>Yuqi Zhang | Quantum Computing & Bioinformatics</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/style.css">
-  
+
   <link rel="icon" href="assets/img/icon.png">
 </head>
 
@@ -24,12 +43,18 @@
       <div class="brand">
         <a href="#" class="brand-name">Yuqi Zhang</a>
       </div>
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#pubs">Publications</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="header-actions">
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#pubs">Publications</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -40,31 +65,53 @@
           <div class="avatar-wrapper">
             <img class="avatar" src="assets/img/me.jpeg" alt="Portrait of Yuqi Zhang">
           </div>
-          
+
           <div class="hero-text">
             <h1>Yuqi Zhang (张钰奇)</h1>
             <p class="subtitle">PhD Student in Computer Science @ Kent State University</p>
-            
+
+            <div class="hero-keywords">
+              <span class="chip">Quantum Computing</span>
+              <span class="chip">Variational Quantum Algorithms</span>
+              <span class="chip">Quantum-HPC</span>
+              <span class="chip">Drug Discovery</span>
+            </div>
+
             <p>
-              I am a PhD student focusing on <strong>Quantum Computing</strong>. 
+              I am a PhD student focusing on <strong>Quantum Computing</strong>.
               My research bridges the gap between quantum algorithms and real-world drug discovery challenges, utilizing both utility-level quantum processors (IBM Eagle/Heron) and HPC systems.
             </p>
-            
+
+            <div class="hero-social">
+              <a href="https://scholar.google.com/citations?user=Q7Ybs-gAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.547 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+              </a>
+              <a href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </a>
+              <a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.516.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.588-1.444 3.588-3.722 0-2.016-1.091-3.722-3.588-3.722h-2.297z"/></svg>
+              </a>
+              <a href="mailto:yzhan135@kent.edu" aria-label="Email" title="Email">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </a>
+            </div>
+
             <div class="affiliations">
               <div class="affiliation-item">
-                <span class="icon">🎓</span> 
+                <span class="icon">🎓</span>
                 <span>PhD Advisor: <strong>Dr. Qiang Guan</strong></span>
               </div>
-              
+
               <div class="affiliation-item">
-                <span class="icon">🔬</span> 
+                <span class="icon">🔬</span>
                 <span>Visiting Researcher @ Cleveland Clinic (PI: Dr. Feixiong Cheng)</span>
               </div>
 
               <div class="affiliation-item">
-                <span class="icon">🏔️</span> 
+                <span class="icon">🏔️</span>
                 <span>
-                  <strong>2023-Quantum Talents Climbing Program</strong> @ SZIQA 
+                  <strong>2023-Quantum Talents Climbing Program</strong> @ SZIQA
                   <br><span class="sub-text">(Advisor: <strong>Dr. Juan Yao</strong>)</span>
                 </span>
               </div>
@@ -80,28 +127,38 @@
         <p class="section-intro">
           My work involves Variational Quantum Algorithms (VQA), Quantum-HPC hybrid frameworks, and Quantum-AI integration. I specifically target protein structure prediction, energy surface reconstruction, and molecular docking.
         </p>
-        
+
         <div class="cards-grid">
           <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+            </div>
             <h3>End-to-End Quantum Frameworks</h3>
             <p>Building practical frameworks on utility-level hardware. Utilizing algorithms like VQE on IBM Eagle (127q) and Heron (156q) processors to identify low-energy conformations for stable protein structures.</p>
           </article>
-          
+
           <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+            </div>
             <h3>Hybrid Quantum-AI Algorithms</h3>
             <p>Integrating Generative AI and classical optimization to expand system information capacity. This approach allows quantum algorithms to transcend intrinsic QPU limitations and noise constraints.</p>
           </article>
-          
+
           <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
             <h3>Cross-Scale Drug Discovery</h3>
             <p>Designing algorithms that bridge hierarchical levels—from protein folding to ligand docking—across physical and chemical scales to advance the era of quantum-enabled drug design.</p>
           </article>
 
           <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
             <h3>Hyper-Scale Fusion</h3>
-            <p>
-              Developing high-throughput fusion protocols that integrate massive-scale classical datasets with quantum feature spaces. This approach leverages HPC clusters to process "super-volume" biological data, enhancing the scalability of quantum simulations.
-            </p>
+            <p>Developing high-throughput fusion protocols that integrate massive-scale classical datasets with quantum feature spaces. This approach leverages HPC clusters to process "super-volume" biological data, enhancing the scalability of quantum simulations.</p>
           </article>
         </div>
       </div>
@@ -113,7 +170,7 @@
         <!-- Rendered from data/publications.json by assets/pubs.js (Google Scholar sync).
              The static items below are the no-JS / fallback snapshot. -->
         <ul class="pub-list" id="pub-list">
-          
+
           <li class="pub-item">
             <span class="pub-title">
               <span class="venue-tag tag-journal">Advanced Science</span>
@@ -187,23 +244,35 @@
         <div class="contact-grid">
           <ul class="contact-list">
             <li class="contact-item">
+              <span class="contact-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </span>
               <span class="contact-label">Email</span>
               <a href="mailto:yzhan135@kent.edu">yzhan135 [at] kent.edu</a>
             </li>
             <li class="contact-item">
+              <span class="contact-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+              </span>
               <span class="contact-label">Lab</span>
-              <a href="https://www.guans.cs.kent.edu/" target="_blank">Guan’s Research Lab</a>
+              <a href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Guan’s Research Lab</a>
             </li>
           </ul>
-          
+
           <ul class="contact-list">
              <li class="contact-item">
+              <span class="contact-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </span>
               <span class="contact-label">GitHub</span>
-              <a href="https://github.com/qiqi-xingyi" target="_blank">github.com/qiqi-xingyi</a>
+              <a href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener">github.com/qiqi-xingyi</a>
             </li>
             <li class="contact-item">
+              <span class="contact-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.516.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.588-1.444 3.588-3.722 0-2.016-1.091-3.722-3.588-3.722h-2.297z"/></svg>
+              </span>
               <span class="contact-label">ORCID</span>
-              <a href="https://orcid.org/0009-0005-9026-6906" target="_blank">0009-0005-9026-6906</a>
+              <a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener">0009-0005-9026-6906</a>
             </li>
           </ul>
         </div>
@@ -224,5 +293,7 @@
 
   <!-- Auto-renders #pub-list from data/publications.json (Google Scholar sync) -->
   <script src="assets/pubs.js" defer></script>
+  <!-- Theme toggle, scroll-reveal, active-nav -->
+  <script src="assets/site.js" defer></script>
 </body>
 </html>
