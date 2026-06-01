@@ -105,16 +105,45 @@
     return div;
   }
 
+  // Prefer the Google Scholar link for the whole-card click target; fall back
+  // to the first http(s) link in the publication's links list.
+  function pickTarget(pub) {
+    var links = (pub.links || []).filter(function (l) { return safeUrl(l.url); });
+    var scholar = links.filter(function (l) {
+      return /scholar\.google\./i.test(l.url) || /scholar/i.test(l.label || '');
+    })[0];
+    return (scholar || links[0] || {}).url || null;
+  }
+
+  function renderArrow() {
+    var span = document.createElement('span');
+    span.className = 'pub-arrow';
+    span.setAttribute('aria-hidden', 'true');
+    span.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+    return span;
+  }
+
   function renderItem(pub) {
-    var li = document.createElement('li');
-    li.className = 'pub-item';
-    li.appendChild(renderHead(pub));
-    li.appendChild(renderTitle(pub));
-    li.appendChild(renderAuthors(pub));
-    li.appendChild(renderVenue(pub));
-    var links = renderLinks(pub);
-    if (links.childNodes.length) li.appendChild(links);
-    return li;
+    var url = pickTarget(pub);
+    var el = document.createElement(url ? 'a' : 'li');
+    if (url) {
+      el.href = url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+    }
+    el.className = 'pub-item';
+    el.appendChild(renderHead(pub));
+    el.appendChild(renderTitle(pub));
+    el.appendChild(renderAuthors(pub));
+    el.appendChild(renderVenue(pub));
+    if (url) el.appendChild(renderArrow());
+    // Wrap <a> in <li> so the surrounding <ul> stays valid HTML.
+    if (url) {
+      var li = document.createElement('li');
+      li.appendChild(el);
+      return li;
+    }
+    return el;
   }
 
   function render(listEl, publications, source) {
