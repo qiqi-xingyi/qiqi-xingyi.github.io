@@ -145,7 +145,14 @@
 /* ---------- Base ---------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+  /* Guard against any decorative layer (aurora, glow) accidentally widening
+     the page on narrow viewports. `clip` keeps sticky working; `hidden` doesn't. */
+  overflow-x: clip;
+}
+body { overflow-x: clip; }
 
 body {
   position: relative;
@@ -252,7 +259,7 @@ a:hover { color: var(--accent-2); }
   align-items: center;
   padding: 12px 0;
 }
-.brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--heading); }
+.brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--heading); white-space: nowrap; flex-shrink: 0; }
 .brand-name:hover { color: var(--accent); }
 
 .header-actions { display: flex; align-items: center; gap: 22px; }
@@ -793,16 +800,90 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
 }
 
 /* ---------- Responsive ---------- */
+/* ===== Mobile / tablet: stack to one column ===== */
 @media (max-width: 900px) {
-  .page-layout { grid-template-columns: 1fr; gap: 8px; margin: 32px auto 64px; }
-  .profile { position: static; margin-bottom: 36px; }
-  .profile-card { max-width: 520px; margin: 0 auto; }
+  .page-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 16px auto 56px;
+  }
+  /* Important: drop sticky + max-height so profile flows naturally and the
+     page scrolls as one piece, instead of trapping users in a nested scroll. */
+  .profile {
+    position: static;
+    margin-bottom: 28px;
+  }
+  .profile-card {
+    max-width: 520px;
+    margin: 0 auto;
+    max-height: none;
+    overflow-y: visible;
+    padding: 22px 22px 18px;
+  }
+  /* On a phone the avatar should be a fixed, readable size, not vh-driven */
+  .avatar { width: 120px; }
+  .profile-name { font-size: 1.3rem; }
+  .profile-role { font-size: 0.9rem; }
+  .profile-affil li { font-size: 0.9rem; }
+  .profile-advisors li { font-size: 0.88rem; }
+  .chip { font-size: 0.78rem; padding: 4px 11px; }
+  .profile-social a { width: 40px; height: 40px; }
+  .profile-social svg { width: 17px; height: 17px; }
 }
+
+/* ===== Phone: tighten header, single-column contact, smaller hero ===== */
 @media (max-width: 680px) {
-  .header-inner { flex-wrap: wrap; gap: 10px 16px; }
-  .header-actions { gap: 14px; }
-  .nav { gap: 14px; flex-wrap: wrap; }
-  .profile-card { max-width: none; }
+  :root { --header-h: 56px; }
+  .container { padding: 0 18px; }
+  .site-header { padding: 0; }
+  .header-inner { padding: 10px 0; gap: 10px; }
+  /* On phones the name is the centerpiece of the profile card right below;
+     hide it in the header to give the nav full width. */
+  .brand-name { display: none; }
+  .header-inner { justify-content: space-between; }
+  .header-actions { gap: 12px; flex: 1; justify-content: space-between; }
+  /* Nav stays one line; let it scroll horizontally if it really won't fit */
+  .nav {
+    gap: 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 0.88rem; padding: 4px 1px; white-space: nowrap; }
+  .theme-toggle { width: 36px; height: 36px; border-radius: 10px; }
+  .theme-toggle svg { width: 17px; height: 17px; }
+
+  .profile-card { max-width: none; padding: 20px 18px 16px; }
+  .avatar { width: 108px; }
+  .profile-name { font-size: 1.22rem; }
   .profile-advisors { padding-top: 12px; }
+
+  /* Section blocks breathe less on phones */
+  .block { margin-bottom: 36px; scroll-margin-top: var(--header-h); }
+  h2 { font-size: 1.4rem; }
+
+  /* Research cards: one column, less internal padding */
+  .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+  .card { padding: 20px; transform: none !important; }
+
+  /* Publications: smaller padding, less side affordance */
+  .pub-item { padding: 18px 18px; }
+  .pub-title { font-size: 1rem; }
+  .pub-head { gap: 8px; margin-bottom: 8px; }
+  .pub-arrow { top: 16px; right: 16px; width: 26px; height: 26px; }
+  .pub-arrow svg { width: 12px; height: 12px; }
+
+  /* Contact stacks */
   .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Tiny phones (iPhone SE) ===== */
+@media (max-width: 380px) {
+  .container { padding: 0 14px; }
+  .profile-name { font-size: 1.12rem; }
+  .avatar { width: 96px; }
+  h2 { font-size: 1.26rem; }
+  .pub-item { padding: 16px 16px; }
 }
