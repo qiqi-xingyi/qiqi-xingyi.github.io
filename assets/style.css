@@ -8,7 +8,7 @@
 /* ---------- Theme tokens ---------- */
 :root {
   /* Light — cool white */
-  --bg: #eaeef6;
+  --bg: #e6eaf2;
   --bg-elevated: #ffffff;
   --surface: rgba(255, 255, 255, 0.72);
   --surface-solid: #ffffff;
@@ -28,18 +28,18 @@
   --text: #3a4a5e;
   --text-muted: #64748b;
 
-  --accent: #0284c7;     /* sky-600  */
-  --accent-2: #0891b2;   /* cyan-600 */
-  --accent-3: #2563eb;   /* blue-600 */
-  --accent-soft: rgba(2, 132, 199, 0.10);
+  --accent: #1d4ed8;     /* blue-700 */
+  --accent-2: #2563eb;   /* blue-600 */
+  --accent-3: #1e3a8a;   /* blue-900 */
+  --accent-soft: rgba(29, 78, 216, 0.10);
   --on-accent: #ffffff;
-  --ring: rgba(2, 132, 199, 0.34);
+  --ring: rgba(29, 78, 216, 0.32);
 
   /* Aurora veil colors (R,G,B) + behaviour */
-  --c1: 14, 165, 233;    /* sky    */
-  --c2: 6, 182, 212;     /* cyan   */
-  --c3: 45, 212, 191;    /* teal   */
-  --aurora-opacity: 0.42;
+  --c1: 37, 99, 235;     /* blue-600 */
+  --c2: 29, 78, 216;     /* blue-700 */
+  --c3: 30, 58, 138;     /* blue-900 */
+  --aurora-opacity: 0.40;
   --aurora-blend: normal;
 
   --grid-line: rgba(30, 58, 95, 0.05);
@@ -56,7 +56,7 @@
 
 :root[data-theme="dark"] {
   /* Dark — deep blue-black */
-  --bg: #060b15;
+  --bg: #04060e;
   --bg-elevated: #0b1322;
   --surface: rgba(255, 255, 255, 0.05);
   --surface-solid: #0c1426;
@@ -76,17 +76,17 @@
   --text: #b8c5d8;
   --text-muted: #7e8ca5;
 
-  --accent: #38bdf8;     /* sky-400  */
-  --accent-2: #22d3ee;   /* cyan-400 */
-  --accent-3: #60a5fa;   /* blue-400 */
-  --accent-soft: rgba(56, 189, 248, 0.16);
-  --on-accent: #04121a;
-  --ring: rgba(56, 189, 248, 0.55);
+  --accent: #60a5fa;     /* blue-400 */
+  --accent-2: #3b82f6;   /* blue-500 */
+  --accent-3: #2563eb;   /* blue-600 */
+  --accent-soft: rgba(96, 165, 250, 0.15);
+  --on-accent: #050b18;
+  --ring: rgba(96, 165, 250, 0.48);
 
-  --c1: 56, 189, 248;    /* sky      */
-  --c2: 34, 211, 238;    /* cyan     */
-  --c3: 96, 165, 250;    /* blue     */
-  --aurora-opacity: 0.65;
+  --c1: 37, 99, 235;     /* blue-600 */
+  --c2: 29, 78, 216;     /* blue-700 */
+  --c3: 59, 130, 246;    /* blue-500 */
+  --aurora-opacity: 0.55;
   --aurora-blend: screen;
 
   --grid-line: rgba(255, 255, 255, 0.05);
@@ -98,7 +98,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #060b15;
+    --bg: #04060e;
     --bg-elevated: #0b1322;
     --surface: rgba(255, 255, 255, 0.05);
     --surface-solid: #0c1426;
@@ -118,17 +118,17 @@
     --text: #b8c5d8;
     --text-muted: #7e8ca5;
 
-    --accent: #38bdf8;
-    --accent-2: #22d3ee;
-    --accent-3: #60a5fa;
-    --accent-soft: rgba(56, 189, 248, 0.16);
-    --on-accent: #04121a;
-    --ring: rgba(56, 189, 248, 0.55);
+    --accent: #60a5fa;
+    --accent-2: #3b82f6;
+    --accent-3: #2563eb;
+    --accent-soft: rgba(96, 165, 250, 0.15);
+    --on-accent: #050b18;
+    --ring: rgba(96, 165, 250, 0.48);
 
-    --c1: 56, 189, 248;
-    --c2: 34, 211, 238;
-    --c3: 96, 165, 250;
-    --aurora-opacity: 0.65;
+    --c1: 37, 99, 235;
+    --c2: 29, 78, 216;
+    --c3: 59, 130, 246;
+    --aurora-opacity: 0.55;
     --aurora-blend: screen;
 
     --grid-line: rgba(255, 255, 255, 0.05);
@@ -553,15 +553,15 @@ h2 {
   transition: transform 0.2s;
 }
 .pub-item:hover .venue-tag { transform: translateY(-1px); }
-.tag-journal { color: #0369a1; background: rgba(2, 132, 199, 0.12); border-color: rgba(2, 132, 199, 0.30); }
-.tag-conf    { color: #0e7490; background: rgba(8, 145, 178, 0.12); border-color: rgba(8, 145, 178, 0.30); }
+.tag-journal { color: #1e40af; background: rgba(29, 78, 216, 0.12); border-color: rgba(29, 78, 216, 0.30); }
+.tag-conf    { color: #475569; background: rgba(71, 85, 105, 0.12); border-color: rgba(71, 85, 105, 0.30); }
 .tag-wip     { color: #475569; background: rgba(100, 116, 139, 0.12); border-color: rgba(100, 116, 139, 0.30); }
-:root[data-theme="dark"] .tag-journal { color: #7dd3fc; background: rgba(56, 189, 248, 0.16); border-color: rgba(56, 189, 248, 0.42); }
-:root[data-theme="dark"] .tag-conf    { color: #67e8f9; background: rgba(34, 211, 238, 0.16); border-color: rgba(34, 211, 238, 0.42); }
+:root[data-theme="dark"] .tag-journal { color: #93c5fd; background: rgba(59, 130, 246, 0.18); border-color: rgba(59, 130, 246, 0.42); }
+:root[data-theme="dark"] .tag-conf    { color: #cbd5e1; background: rgba(100, 116, 139, 0.20); border-color: rgba(100, 116, 139, 0.42); }
 :root[data-theme="dark"] .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .tag-journal { color: #7dd3fc; background: rgba(56, 189, 248, 0.16); border-color: rgba(56, 189, 248, 0.42); }
-  :root:not([data-theme="light"]) .tag-conf    { color: #67e8f9; background: rgba(34, 211, 238, 0.16); border-color: rgba(34, 211, 238, 0.42); }
+  :root:not([data-theme="light"]) .tag-journal { color: #93c5fd; background: rgba(59, 130, 246, 0.18); border-color: rgba(59, 130, 246, 0.42); }
+  :root:not([data-theme="light"]) .tag-conf    { color: #cbd5e1; background: rgba(100, 116, 139, 0.20); border-color: rgba(100, 116, 139, 0.42); }
   :root:not([data-theme="light"]) .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 }
 
