@@ -42,25 +42,34 @@
     }
   }
 
-  /* ---- Active nav highlight while scrolling ---- */
-  if ('IntersectionObserver' in window) {
+  /* ---- Active nav highlight: the last section whose top has passed the
+          header line. Reliable at the very top and bottom of the page. ---- */
+  (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
-    var byId = {};
+    var byId = {}, sections = [];
     links.forEach(function (a) {
       var sec = document.getElementById(a.getAttribute('href').slice(1));
-      if (sec) byId[sec.id] = a;
+      if (sec) { byId[sec.id] = a; sections.push(sec); }
     });
-    var ids = Object.keys(byId);
-    if (ids.length) {
-      var navIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) {
-            links.forEach(function (a) { a.classList.remove('active'); });
-            if (byId[en.target.id]) byId[en.target.id].classList.add('active');
-          }
-        });
-      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-      ids.forEach(function (id) { navIO.observe(document.getElementById(id)); });
+    if (!sections.length) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top <= 90) current = sec;
+      });
+      // Near the bottom the last short section can't reach the top line,
+      // so pin the final section once the page is scrolled to the end.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections[sections.length - 1];
+      }
+      links.forEach(function (a) { a.classList.remove('active'); });
+      if (byId[current.id]) byId[current.id].classList.add('active');
     }
-  }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
 })();
