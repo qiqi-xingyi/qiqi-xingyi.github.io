@@ -29,16 +29,16 @@
   --text: #494661;
   --text-muted: #6d6a80;
 
-  --accent: #6d28d9;     /* deep purple (violet-700) */
-  --accent-2: #4338ca;   /* indigo-700              */
-  --accent-3: #1e40af;   /* deep blue (blue-800)    */
-  --accent-soft: rgba(109, 40, 217, 0.10);
+  --accent: #8b5cf6;     /* deep purple (violet-700) */
+  --accent-2: #6366f1;   /* indigo-700              */
+  --accent-3: #3b82f6;   /* deep blue (blue-800)    */
+  --accent-soft: rgba(139, 92, 246, 0.10);
   --on-accent: #ffffff;
-  --ring: rgba(109, 40, 217, 0.30);
+  --ring: rgba(139, 92, 246, 0.32);
 
   /* Aurora veils */
-  --av1: rgba(109, 40, 217, 0.13);  /* deep purple */
-  --av2: rgba(30, 64, 175, 0.10);   /* deep blue   */
+  --av1: rgba(139, 92, 246, 0.13);  /* soft violet */
+  --av2: rgba(59, 130, 246, 0.10);  /* soft blue   */
   --av3: rgba(100, 116, 139, 0.06); /* slate grey  */
   --av4: rgba(203, 213, 225, 0.12); /* light grey  */
   --aurora-blend: normal;
@@ -78,7 +78,7 @@
   --text-muted: #868ea0;
 
   --accent: #b4a7f5;     /* light violet */
-  --accent-2: #34d3ee;   /* cyan         */
+  --accent-2: #22d3ee;   /* cyan         */
   --accent-3: #818cf8;   /* periwinkle   */
   --accent-soft: rgba(180, 167, 245, 0.16);
   --on-accent: #0a0a16;
@@ -120,7 +120,7 @@
     --text-muted: #868ea0;
 
     --accent: #b4a7f5;
-    --accent-2: #34d3ee;
+    --accent-2: #22d3ee;
     --accent-3: #818cf8;
     --accent-soft: rgba(180, 167, 245, 0.16);
     --on-accent: #0a0a16;
@@ -590,8 +590,8 @@ h2 {
   transition: transform 0.2s;
 }
 .pub-item:hover .venue-tag { transform: translateY(-1px); }
-.tag-journal { color: #6d28d9; background: rgba(109, 40, 217, 0.12); border-color: rgba(109, 40, 217, 0.30); }
-.tag-conf    { color: #1e40af; background: rgba(30, 64, 175, 0.12); border-color: rgba(30, 64, 175, 0.30); }
+.tag-journal { color: #7c3aed; background: rgba(139, 92, 246, 0.12); border-color: rgba(139, 92, 246, 0.32); }
+.tag-conf    { color: #2563eb; background: rgba(59, 130, 246, 0.12); border-color: rgba(59, 130, 246, 0.30); }
 .tag-wip     { color: #64748b; background: rgba(100, 116, 139, 0.12); border-color: rgba(100, 116, 139, 0.30); }
 :root[data-theme="dark"] .tag-journal { color: #c4b5fd; background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.42); }
 :root[data-theme="dark"] .tag-conf    { color: #67e8f9; background: rgba(34, 211, 238, 0.16); border-color: rgba(34, 211, 238, 0.42); }
