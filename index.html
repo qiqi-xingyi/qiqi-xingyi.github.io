@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/style.css?v=15">
+  <link rel="stylesheet" href="assets/style.css?v=16">
 
   <link rel="icon" href="assets/img/icon.png">
 </head>
@@ -55,13 +55,15 @@
           <a href="#pubs" data-i18n="nav.publications">Publications</a>
           <a href="#contact" data-i18n="nav.contact">Contact</a>
         </nav>
-        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to Chinese" title="Switch to Chinese">
-          <span id="lang-toggle-label">中文</span>
-        </button>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        </button>
+        <div class="header-controls" aria-label="Page preferences">
+          <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to Chinese" title="Switch to Chinese">
+            <span id="lang-toggle-label">中文</span>
+          </button>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -127,6 +129,9 @@
 
       <section id="about" class="block">
         <h2 data-i18n="about.title">About</h2>
+        <p class="about-lede" data-i18n="about.lede">
+          I build quantum computing workflows for biological structure and drug discovery problems.
+        </p>
         <p data-i18n-html="about.p1">
           I am a PhD student in <strong>Quantum Computational Biology</strong>, working at the intersection of quantum computing and the life sciences. My research bridges quantum algorithms and real-world drug discovery.
         </p>
@@ -148,7 +153,7 @@
             </div>
             <span class="card-num" aria-hidden="true">01</span>
             <h3 data-i18n="research.card1.title">Hardware-Executed Quantum Biocomputing</h3>
-            <p data-i18n="research.card1.body">Developing quantum computing workflows for biological problems that are executed on real quantum processors, with emphasis on molecular representations, physical constraints, and experimentally validated computational outputs.</p>
+            <p data-i18n="research.card1.body">Run biological structure workflows on real quantum processors, with molecular representations and physical constraints kept in the loop.</p>
           </article>
 
           <article class="card">
@@ -157,7 +162,7 @@
             </div>
             <span class="card-num" aria-hidden="true">02</span>
             <h3 data-i18n="research.card2.title">Quantum Bioinformatics</h3>
-            <p data-i18n="research.card2.body">Exploring how quantum computational models can represent, process, and analyze biological information, including sequence, structure, conformational states, and molecular interaction patterns.</p>
+            <p data-i18n="research.card2.body">Represent sequence, structure, conformational states, and interaction patterns in quantum-aware computational models.</p>
           </article>
 
           <article class="card">
@@ -166,7 +171,7 @@
             </div>
             <span class="card-num" aria-hidden="true">03</span>
             <h3 data-i18n="research.card3.title">Quantum-HPC Co-design</h3>
-            <p data-i18n="research.card3.body">Designing hybrid quantum-classical systems that combine quantum execution, high-performance computing, optimization, post-processing, and data pipelines into scalable scientific workflows.</p>
+            <p data-i18n="research.card3.body">Connect quantum execution, HPC, optimization, post-processing, and data pipelines into scalable scientific systems.</p>
           </article>
 
           <article class="card">
@@ -175,7 +180,7 @@
             </div>
             <span class="card-num" aria-hidden="true">04</span>
             <h3 data-i18n="research.card4.title">Quantum Drug Discovery</h3>
-            <p data-i18n="research.card4.body">Formulating and evaluating quantum computing approaches for drug discovery tasks, including molecular modeling, protein conformational analysis, binding-pocket characterization, docking, and ligand-response prediction.</p>
+            <p data-i18n="research.card4.body">Apply quantum methods to molecular modeling, protein conformations, binding pockets, docking, and ligand response.</p>
           </article>
         </div>
       </section>
@@ -234,7 +239,7 @@
         </ul>
       </section>
 
-      <section id="acknowledgements" class="block">
+      <section id="acknowledgements" class="block ack-block">
         <h2 data-i18n="ack.title">Acknowledgements</h2>
         <p class="ack-text" data-i18n-html="ack.p1">
           I am deeply grateful to my advisor <strong>Dr. Qiang Guan</strong>, my co-advisor <strong>Dr. Feixiong Cheng</strong>, and mentors <strong>Dr. Juan Yao</strong> (SZIQA), <strong>Dr. Zhaofeng Su</strong> (USTC), <strong>Dr. Sanjiang Li</strong> (UTS), and <strong>Dr. Yuan Feng</strong> (THU).
@@ -299,6 +304,6 @@
   <!-- Auto-renders #pub-list from data/publications.json (Google Scholar sync) -->
   <script src="assets/pubs.js?v=12" defer></script>
   <!-- Theme toggle, scroll-reveal, active-nav -->
-  <script src="assets/site.js?v=12" defer></script>
+  <script src="assets/site.js?v=13" defer></script>
 </body>
 </html>
