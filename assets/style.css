@@ -53,6 +53,12 @@
   --energy: linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3));
 
   --container-width: 1080px;
+  /* Fluid sidebar so the two-column layout scales instead of staying a fixed
+     280px slab; caps so it never gets too thin or too wide. */
+  --sidebar-w: clamp(240px, 23vw, 288px);
+  /* Single-column reading width below the two-column breakpoint. Profile card
+     AND content share this, so they line up as one tidy centered column. */
+  --flow-max: 600px;
   --radius: 18px;
   --header-h: 64px;
 }
@@ -321,8 +327,8 @@ a:hover { color: var(--accent-2); }
 /* ---------- Two-column page layout ---------- */
 .page-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 48px;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  gap: clamp(32px, 4.5vw, 56px);
   align-items: start;
   /* Top margin shrinks on short viewports (laptops) and breathes on tall ones */
   margin: clamp(8px, 2vh, 32px) auto 64px;
@@ -800,49 +806,58 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
 }
 
 /* ---------- Responsive ---------- */
-/* ===== Mobile / tablet: stack to one column ===== */
+/* Two regimes, one source of truth for width:
+   • ≥901px  two-column  — fluid sticky profile (--sidebar-w) + content
+   • ≤900px  one column  — the WHOLE stack becomes a single centered reading
+                           column (--flow-max), so the profile card and the
+                           content below share the exact same width and edges.
+   The content width barely changes across the breakpoint (~565px → ~552px),
+   so the collapse is smooth rather than a jump. */
+
+/* ===== Tablet & below: collapse to one centered column ===== */
 @media (max-width: 900px) {
-  .page-layout {
-    grid-template-columns: 1fr;
+  /* `.container.page-layout` (0,2,0) beats the base `.container` max-width. */
+  .container.page-layout {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: var(--flow-max);
     gap: 0;
-    margin: 16px auto 56px;
+    margin-top: clamp(16px, 3vh, 28px);
   }
-  /* Important: drop sticky + max-height so profile flows naturally and the
-     page scrolls as one piece, instead of trapping users in a nested scroll. */
-  .profile {
-    position: static;
-    margin-bottom: 28px;
-  }
+  /* Drop sticky + nested scroll: the page now scrolls as one piece. */
+  .profile { position: static; margin-bottom: 26px; }
   .profile-card {
-    max-width: 520px;
-    margin: 0 auto;
+    max-width: none;
     max-height: none;
     overflow-y: visible;
-    padding: 22px 22px 18px;
+    padding: clamp(20px, 3.4vw, 26px) clamp(18px, 3vw, 24px) clamp(16px, 2.6vw, 20px);
   }
-  /* On a phone the avatar should be a fixed, readable size, not vh-driven */
-  .avatar { width: 120px; }
-  .profile-name { font-size: 1.3rem; }
-  .profile-role { font-size: 0.9rem; }
+  /* Avatar: fixed, readable size (no longer viewport-height driven) */
+  .avatar { width: 124px; }
+  .profile-name { font-size: 1.34rem; }
+  .profile-role { font-size: 0.92rem; }
   .profile-affil li { font-size: 0.9rem; }
   .profile-advisors li { font-size: 0.88rem; }
   .chip { font-size: 0.78rem; padding: 4px 11px; }
-  .profile-social a { width: 40px; height: 40px; }
-  .profile-social svg { width: 17px; height: 17px; }
+  .profile-social a { width: 38px; height: 38px; }
+  .profile-social svg { width: 16px; height: 16px; }
+
+  /* Tighter section rhythm in the narrower column */
+  .block { margin-bottom: 44px; }
 }
 
-/* ===== Phone: tighten header, single-column contact, smaller hero ===== */
-@media (max-width: 680px) {
+/* ===== Phone: tighten header, column fills the viewport, single-col everything ===== */
+@media (max-width: 620px) {
   :root { --header-h: 56px; }
   .container { padding: 0 18px; }
-  .site-header { padding: 0; }
-  .header-inner { padding: 10px 0; gap: 10px; }
-  /* On phones the name is the centerpiece of the profile card right below;
-     hide it in the header to give the nav full width. */
+  /* Below the reading width, let the column fill the viewport. */
+  .container.page-layout { max-width: none; margin-top: 14px; }
+
+  .header-inner { padding: 10px 0; gap: 10px; justify-content: space-between; }
+  /* The name headlines the profile card right below; hide it in the header so
+     the nav gets the full width. */
   .brand-name { display: none; }
-  .header-inner { justify-content: space-between; }
   .header-actions { gap: 12px; flex: 1; justify-content: space-between; }
-  /* Nav stays one line; let it scroll horizontally if it really won't fit */
+  /* Nav stays one line; scroll horizontally if it truly won't fit. */
   .nav {
     gap: 16px;
     flex-wrap: nowrap;
@@ -855,12 +870,11 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
   .theme-toggle { width: 36px; height: 36px; border-radius: 10px; }
   .theme-toggle svg { width: 17px; height: 17px; }
 
-  .profile-card { max-width: none; padding: 20px 18px 16px; }
-  .avatar { width: 108px; }
-  .profile-name { font-size: 1.22rem; }
+  .profile-card { padding: 20px 18px 16px; }
+  .avatar { width: 112px; }
+  .profile-name { font-size: 1.24rem; }
   .profile-advisors { padding-top: 12px; }
 
-  /* Section blocks breathe less on phones */
   .block { margin-bottom: 36px; scroll-margin-top: var(--header-h); }
   h2 { font-size: 1.4rem; }
 
@@ -882,8 +896,8 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
 /* ===== Tiny phones (iPhone SE) ===== */
 @media (max-width: 380px) {
   .container { padding: 0 14px; }
-  .profile-name { font-size: 1.12rem; }
-  .avatar { width: 96px; }
+  .profile-name { font-size: 1.14rem; }
+  .avatar { width: 100px; }
   h2 { font-size: 1.26rem; }
   .pub-item { padding: 16px 16px; }
 }
