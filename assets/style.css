@@ -1,20 +1,20 @@
 /* =========================================================
-   Yuqi Zhang — Quantum Aurora (violet / orchid / rose)
-   Light = warm ivory-white with soft violet→orchid→rose aurora
-   Dark  = #09090D with muted violet→orchid→rose aurora
+   Yuqi Zhang — Quantum Aurora (ultraviolet / graphite / silver)
+   Light = cool grey-white with muted ultraviolet + slate aurora
+   Dark  = #07080C with ultraviolet + graphite-mist aurora
    Glass surfaces, rotating aurora veils, 3D-tilt cards,
    pulsing icon glow, milestone timeline, numbered research.
    ========================================================= */
 
 /* ---------- Theme tokens ---------- */
 :root {
-  /* Light — warm ivory */
-  --bg: #faf8f5;
+  /* Light — cool grey-white */
+  --bg: #f5f6f8;
   --bg-elevated: #ffffff;
-  --surface: rgba(255, 255, 255, 0.70);
+  --surface: rgba(255, 255, 255, 0.72);
   --surface-solid: #ffffff;
-  --surface-border: rgba(74, 44, 90, 0.10);
-  --surface-border-strong: rgba(74, 44, 90, 0.16);
+  --surface-border: rgba(30, 41, 59, 0.10);
+  --surface-border-strong: rgba(30, 41, 59, 0.16);
 
   --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-top: rgba(255, 255, 255, 0.90);
@@ -24,30 +24,30 @@
 
   --avatar-ring: #ffffff;
 
-  --heading: #241826;
-  --text-strong: #36283f;
-  --text: #524559;
-  --text-muted: #7c7184;
+  --heading: #14171f;
+  --text-strong: #232b3a;
+  --text: #46505f;
+  --text-muted: #6b7383;
 
-  --accent: #7c3aed;     /* violet-600 */
-  --accent-2: #be58ff;   /* orchid     */
-  --accent-3: #db2777;   /* rose-600   */
-  --accent-soft: rgba(124, 58, 237, 0.10);
+  --accent: #5850ec;     /* ultraviolet */
+  --accent-2: #7048e8;   /* deep violet */
+  --accent-3: #4f46e5;   /* indigo      */
+  --accent-soft: rgba(88, 80, 236, 0.10);
   --on-accent: #ffffff;
-  --ring: rgba(124, 58, 237, 0.32);
+  --ring: rgba(88, 80, 236, 0.32);
 
   /* Aurora veil colors (full rgba, as provided) */
-  --av1: rgba(139, 92, 246, 0.12);   /* soft violet */
-  --av2: rgba(190, 88, 255, 0.075);  /* pale orchid */
-  --av3: rgba(244, 114, 182, 0.06);  /* soft rose   */
-  --av4: rgba(255, 214, 165, 0.08);  /* warm ivory  */
+  --av1: rgba(88, 80, 236, 0.095);  /* muted ultraviolet */
+  --av2: rgba(112, 72, 232, 0.065); /* muted violet      */
+  --av3: rgba(30, 41, 59, 0.045);   /* slate shadow      */
+  --av4: rgba(180, 188, 210, 0.10); /* cold silver       */
   --aurora-blend: normal;
 
-  --grid-line: rgba(74, 44, 90, 0.045);
-  --star: rgba(74, 44, 90, 0.00);
+  --grid-line: rgba(30, 41, 59, 0.05);
+  --star: rgba(30, 41, 59, 0.00);
 
-  --shadow-card: 0 16px 38px -18px rgba(60, 30, 78, 0.22);
-  --shadow-pop: 0 30px 62px -26px rgba(60, 30, 78, 0.30);
+  --shadow-card: 0 16px 38px -18px rgba(20, 26, 48, 0.24);
+  --shadow-pop: 0 30px 62px -26px rgba(20, 26, 48, 0.32);
   --energy: linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3));
 
   --container-width: 1080px;
@@ -57,10 +57,10 @@
 
 :root[data-theme="dark"] {
   /* Dark */
-  --bg: #09090d;
-  --bg-elevated: #121019;
+  --bg: #07080c;
+  --bg-elevated: #0e0f17;
   --surface: rgba(255, 255, 255, 0.05);
-  --surface-solid: #15121f;
+  --surface-solid: #12131d;
   --surface-border: rgba(255, 255, 255, 0.10);
   --surface-border-strong: rgba(255, 255, 255, 0.20);
 
@@ -72,22 +72,22 @@
 
   --avatar-ring: rgba(255, 255, 255, 0.12);
 
-  --heading: #f3eef9;
-  --text-strong: #e7dff2;
-  --text: #c6bcd4;
-  --text-muted: #918699;
+  --heading: #eef0f6;
+  --text-strong: #e1e5ee;
+  --text: #bdc3d2;
+  --text-muted: #868ea0;
 
-  --accent: #c084fc;     /* purple-400 */
-  --accent-2: #be58ff;   /* orchid     */
-  --accent-3: #f472b6;   /* rose-400   */
-  --accent-soft: rgba(192, 132, 252, 0.16);
-  --on-accent: #190a20;
-  --ring: rgba(192, 132, 252, 0.50);
+  --accent: #8d88f8;     /* ultraviolet (light) */
+  --accent-2: #a78bfa;   /* violet (light)      */
+  --accent-3: #818cf8;   /* indigo (light)      */
+  --accent-soft: rgba(141, 136, 248, 0.16);
+  --on-accent: #0a0a16;
+  --ring: rgba(141, 136, 248, 0.50);
 
-  --av1: rgba(124, 58, 237, 0.18);   /* muted violet */
-  --av2: rgba(190, 88, 255, 0.10);   /* soft orchid  */
-  --av3: rgba(244, 114, 182, 0.075); /* rose         */
-  --av4: rgba(255, 214, 165, 0.045); /* warm ivory   */
+  --av1: rgba(88, 80, 236, 0.18);    /* ultraviolet   */
+  --av2: rgba(112, 72, 232, 0.12);   /* deep violet   */
+  --av3: rgba(38, 43, 62, 0.42);     /* graphite mist */
+  --av4: rgba(180, 188, 210, 0.045); /* cold silver   */
   --aurora-blend: screen;
 
   --grid-line: rgba(255, 255, 255, 0.05);
@@ -99,10 +99,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #09090d;
-    --bg-elevated: #121019;
+    --bg: #07080c;
+    --bg-elevated: #0e0f17;
     --surface: rgba(255, 255, 255, 0.05);
-    --surface-solid: #15121f;
+    --surface-solid: #12131d;
     --surface-border: rgba(255, 255, 255, 0.10);
     --surface-border-strong: rgba(255, 255, 255, 0.20);
 
@@ -114,22 +114,22 @@
 
     --avatar-ring: rgba(255, 255, 255, 0.12);
 
-    --heading: #f3eef9;
-    --text-strong: #e7dff2;
-    --text: #c6bcd4;
-    --text-muted: #918699;
+    --heading: #eef0f6;
+    --text-strong: #e1e5ee;
+    --text: #bdc3d2;
+    --text-muted: #868ea0;
 
-    --accent: #c084fc;
-    --accent-2: #be58ff;
-    --accent-3: #f472b6;
-    --accent-soft: rgba(192, 132, 252, 0.16);
-    --on-accent: #190a20;
-    --ring: rgba(192, 132, 252, 0.50);
+    --accent: #8d88f8;
+    --accent-2: #a78bfa;
+    --accent-3: #818cf8;
+    --accent-soft: rgba(141, 136, 248, 0.16);
+    --on-accent: #0a0a16;
+    --ring: rgba(141, 136, 248, 0.50);
 
-    --av1: rgba(124, 58, 237, 0.18);
-    --av2: rgba(190, 88, 255, 0.10);
-    --av3: rgba(244, 114, 182, 0.075);
-    --av4: rgba(255, 214, 165, 0.045);
+    --av1: rgba(88, 80, 236, 0.18);
+    --av2: rgba(112, 72, 232, 0.12);
+    --av3: rgba(38, 43, 62, 0.42);
+    --av4: rgba(180, 188, 210, 0.045);
     --aurora-blend: screen;
 
     --grid-line: rgba(255, 255, 255, 0.05);
@@ -157,7 +157,7 @@ body {
   transition: background-color 0.5s ease, color 0.4s ease;
 }
 
-/* Aurora veils: two large conic gradients (violet/orchid/rose/ivory)
+/* Aurora veils: two large conic gradients (ultraviolet/violet/graphite/silver)
    slowly counter-rotating under blur. */
 .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .aurora::before,
@@ -597,15 +597,15 @@ h2 {
   transition: transform 0.2s;
 }
 .pub-item:hover .venue-tag { transform: translateY(-1px); }
-.tag-journal { color: #7c3aed; background: rgba(124, 58, 237, 0.12); border-color: rgba(124, 58, 237, 0.30); }
-.tag-conf    { color: #be185d; background: rgba(219, 39, 119, 0.12); border-color: rgba(219, 39, 119, 0.30); }
-.tag-wip     { color: #6b6470; background: rgba(120, 113, 124, 0.12); border-color: rgba(120, 113, 124, 0.30); }
-:root[data-theme="dark"] .tag-journal { color: #d8b4fe; background: rgba(192, 132, 252, 0.16); border-color: rgba(192, 132, 252, 0.42); }
-:root[data-theme="dark"] .tag-conf    { color: #f9a8d4; background: rgba(244, 114, 182, 0.16); border-color: rgba(244, 114, 182, 0.42); }
+.tag-journal { color: #5850ec; background: rgba(88, 80, 236, 0.12); border-color: rgba(88, 80, 236, 0.30); }
+.tag-conf    { color: #6d28d9; background: rgba(112, 72, 232, 0.12); border-color: rgba(112, 72, 232, 0.30); }
+.tag-wip     { color: #64748b; background: rgba(100, 116, 139, 0.12); border-color: rgba(100, 116, 139, 0.30); }
+:root[data-theme="dark"] .tag-journal { color: #c7c4fb; background: rgba(141, 136, 248, 0.16); border-color: rgba(141, 136, 248, 0.42); }
+:root[data-theme="dark"] .tag-conf    { color: #c4b5fd; background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.42); }
 :root[data-theme="dark"] .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .tag-journal { color: #d8b4fe; background: rgba(192, 132, 252, 0.16); border-color: rgba(192, 132, 252, 0.42); }
-  :root:not([data-theme="light"]) .tag-conf    { color: #f9a8d4; background: rgba(244, 114, 182, 0.16); border-color: rgba(244, 114, 182, 0.42); }
+  :root:not([data-theme="light"]) .tag-journal { color: #c7c4fb; background: rgba(141, 136, 248, 0.16); border-color: rgba(141, 136, 248, 0.42); }
+  :root:not([data-theme="light"]) .tag-conf    { color: #c4b5fd; background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.42); }
   :root:not([data-theme="light"]) .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 }
 
