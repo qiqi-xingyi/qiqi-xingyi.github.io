@@ -143,6 +143,7 @@
     --av3: rgba(38, 43, 62, 0.42);
     --av4: rgba(180, 188, 210, 0.045);
     --aurora-blend: screen;
+    --bloom-opacity: 0;
 
     --grid-line: rgba(255, 255, 255, 0.05);
     --star: rgba(255, 255, 255, 0.70);
