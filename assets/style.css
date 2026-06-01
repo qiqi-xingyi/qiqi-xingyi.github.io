@@ -8,21 +8,22 @@
 
 /* ---------- Theme tokens ---------- */
 :root {
-  /* Light — "quantum aurora at dawn": deep blue → indigo → deep violet ribbons
-     surging over a cool periwinkle-white sky, crowned by an about-to-erupt core
-     bloom. Academic blue/purple identity; sibling to the dark "midnight" theme. */
-  --bg: #eaedf7;
+  /* Light — white-grey academic base with FAINT deep-blue/purple aurora accents
+     and a contained about-to-erupt glow crowning the hero. Energy comes from the
+     accent gradients + hero bloom, not from tinting the whole page blue. Sibling
+     to the dark "midnight" theme. */
+  --bg: #f3f4f7;
   --bg-elevated: #ffffff;
   --surface: rgba(255, 255, 255, 0.72);
   --surface-solid: #ffffff;
   --surface-border: rgba(48, 38, 92, 0.12);
   --surface-border-strong: rgba(48, 38, 92, 0.20);
 
-  --glass-bg: rgba(255, 255, 255, 0.60);
+  --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-top: rgba(255, 255, 255, 0.90);
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-highlight: rgba(255, 255, 255, 0.96);
-  --glass-soft: rgba(255, 255, 255, 0.70);
+  --glass-soft: rgba(255, 255, 255, 0.50);
 
   --avatar-ring: #ffffff;
 
@@ -38,11 +39,12 @@
   --on-accent: #ffffff;
   --ring: rgba(29, 78, 216, 0.36);
 
-  /* Aurora veils — deep blue & deep purple only (no cyan / magenta) */
-  --av1: rgba(37, 99, 235, 0.26);    /* blue (dominant)   */
-  --av2: rgba(79, 70, 229, 0.22);    /* indigo            */
-  --av3: rgba(109, 40, 217, 0.22);   /* deep violet       */
-  --av4: rgba(67, 56, 202, 0.20);    /* deep indigo edge  */
+  /* Aurora veils — FAINT deep-blue/purple accents only (kept subtle so the page
+     reads white-grey and text stays readable; no cyan / magenta). */
+  --av1: rgba(37, 99, 235, 0.13);    /* blue              */
+  --av2: rgba(79, 70, 229, 0.10);    /* indigo            */
+  --av3: rgba(109, 40, 217, 0.12);   /* deep violet       */
+  --av4: rgba(67, 56, 202, 0.10);    /* deep indigo edge  */
   --aurora-blend: normal;
 
   --grid-line: rgba(79, 70, 229, 0.06);
@@ -229,16 +231,16 @@ body::before {
   pointer-events: none;
   opacity: var(--bloom-opacity, 0);
   background:
-    radial-gradient(118% 88% at 50% -2%,
-      rgba(109, 40, 217, 0.34) 0%,
-      rgba(79, 70, 229, 0.27) 24%,
-      rgba(37, 99, 235, 0.16) 48%,
-      transparent 72%),
-    radial-gradient(80% 60% at 92% 2%,
-      rgba(37, 99, 235, 0.30) 0%,
+    radial-gradient(118% 84% at 50% -4%,
+      rgba(109, 40, 217, 0.22) 0%,
+      rgba(79, 70, 229, 0.16) 26%,
+      rgba(37, 99, 235, 0.10) 50%,
+      transparent 70%),
+    radial-gradient(78% 56% at 92% 0%,
+      rgba(37, 99, 235, 0.18) 0%,
       transparent 56%),
-    radial-gradient(76% 60% at 6% 0%,
-      rgba(124, 58, 237, 0.24) 0%,
+    radial-gradient(74% 56% at 6% 0%,
+      rgba(124, 58, 237, 0.16) 0%,
       transparent 56%);
   transform-origin: 50% 0%;
   animation: bloom-pulse 9s ease-in-out infinite;
