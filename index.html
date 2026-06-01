@@ -110,7 +110,9 @@
     <section id="pubs" class="section">
       <div class="container">
         <h2>Selected Publications</h2>
-        <ul class="pub-list">
+        <!-- Rendered from data/publications.json by assets/pubs.js (Google Scholar sync).
+             The static items below are the no-JS / fallback snapshot. -->
+        <ul class="pub-list" id="pub-list">
           
           <li class="pub-item">
             <span class="pub-title">
@@ -219,5 +221,8 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <!-- Auto-renders #pub-list from data/publications.json (Google Scholar sync) -->
+  <script src="assets/pubs.js" defer></script>
 </body>
 </html>

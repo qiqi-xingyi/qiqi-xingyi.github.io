@@ -1,0 +1,32 @@
+{
+  "_comment": "Mock SerpApi google_scholar_author response for offline testing of fetch_scholar.py. Authors are deliberately in Scholar's abbreviated form to verify full-name expansion. Run: python scripts/fetch_scholar.py --input-json tests/sample_serpapi.json --dry-run",
+  "articles": [
+    {
+      "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
+      "citation_id": "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
+      "authors": "Y Zhang, Y Yang, W Jiang, R Nussinov, J Loscalzo, Q Guan, F Cheng",
+      "publication": "Advanced Science, 2025",
+      "cited_by": { "value": 3 },
+      "year": "2025"
+    },
+    {
+      "title": "QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
+      "citation_id": "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
+      "authors": "Y Zhang, Y Yang, CC Lu, W Jiang, F Cheng, B Fang, Q Guan",
+      "publication": "Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis, 2025",
+      "cited_by": { "value": 1 },
+      "year": "2025"
+    },
+    {
+      "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
+      "citation_id": "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
+      "authors": "Y Zhang, Y Yang, F Cheng, N Saeidi, SL Volchenboum, J Zhao, S Chen, Q Guan",
+      "publication": "",
+      "cited_by": { "value": 0 },
+      "year": "2025"
+    }
+  ]
+}

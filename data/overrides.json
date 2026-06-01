@@ -1,0 +1,73 @@
+{
+  "_README": [
+    "This file supplies the things Google Scholar does NOT expose, so the auto-fetcher can rebuild a fully-formatted publication list.",
+    "scripts/fetch_scholar.py scrapes Scholar, then merges this file on top, keyed by citation_id.",
+    "A paper's citation_id is the string after 'citation_for_view=' in its Google Scholar link,",
+    "e.g. .../citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC  ->  citation_id = 'Q7Ybs-gAAAAJ:LkGwnXOMwfcC'.",
+    "Day to day you only touch: 'journals' (impact factors), 'author_full_names' (a new collaborator), and 'publications' (per-paper venue text / links / corresponding marks). Everything else is automatic."
+  ],
+
+  "author_aliases": ["Yuqi Zhang", "Yuqi Zhang (张钰奇)", "Y Zhang"],
+
+  "default_corresponding_authors": ["Qiang Guan", "Feixiong Cheng"],
+
+  "author_full_names": {
+    "Yuqi Zhang": "Yuqi Zhang",
+    "Yuxin Yang": "Yuxin Yang",
+    "Weiwen Jiang": "Weiwen Jiang",
+    "Ruth Nussinov": "Ruth Nussinov",
+    "Joseph Loscalzo": "Joseph Loscalzo",
+    "Qiang Guan": "Qiang Guan",
+    "Feixiong Cheng": "Feixiong Cheng",
+    "Cheng-Chang Lu": "Cheng-Chang Lu",
+    "Bo Fang": "Bo Fang",
+    "Nima Saeidi": "Nima Saeidi",
+    "Samuel L. Volchenboum": "Samuel L. Volchenboum",
+    "Junhan Zhao": "Junhan Zhao",
+    "Siwei Chen": "Siwei Chen"
+  },
+
+  "journals": {
+    "advanced science": { "type": "journal", "impact_factor": 14.3 }
+  },
+
+  "order": [
+    "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
+    "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
+    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC"
+  ],
+
+  "publications": {
+    "Q7Ybs-gAAAAJ:LkGwnXOMwfcC": {
+      "venue_tag": "Advanced Science",
+      "venue_type": "journal",
+      "venue_html": "<strong>Advanced Science</strong> (IF = 14.3), 2025, e13641.",
+      "corresponding": ["Qiang Guan", "Feixiong Cheng"],
+      "et_al": true,
+      "links": [
+        { "label": "DOI", "url": "https://doi.org/10.1002/advs.202513641", "style": "blue" }
+      ]
+    },
+
+    "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC": {
+      "venue_tag": "SC '25",
+      "venue_type": "conf",
+      "venue_html": "In <em>Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis</em> (<strong>SC '25</strong>), St. Louis, MO, USA, Nov 2025, pp 746–761.",
+      "corresponding": ["Qiang Guan"],
+      "et_al": false,
+      "links": [
+        { "label": "ACM DL", "url": "https://dl.acm.org/doi/full/10.1145/3712285.3759799", "style": "blue" },
+        { "label": "Artifacts", "url": "https://github.com/qiqi-xingyi/QDockBank_", "style": "gray" }
+      ]
+    },
+
+    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
+      "venue_tag": "Under Review",
+      "venue_type": "wip",
+      "venue_html": "Under Review, 2025.",
+      "status": "Under Review",
+      "corresponding": ["Qiang Guan"],
+      "et_al": true
+    }
+  }
+}
