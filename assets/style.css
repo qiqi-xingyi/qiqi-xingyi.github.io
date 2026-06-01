@@ -1,20 +1,20 @@
 /* =========================================================
-   Yuqi Zhang — Quantum Aurora (restrained multicolor)
-   Light = cool white with soft cyan/violet/teal/gold aurora
-   Dark  = #070A12 with flowing cyan/violet/teal/gold aurora
+   Yuqi Zhang — Quantum Aurora (violet / orchid / rose)
+   Light = warm ivory-white with soft violet→orchid→rose aurora
+   Dark  = #09090D with muted violet→orchid→rose aurora
    Glass surfaces, rotating aurora veils, 3D-tilt cards,
-   pulsing (heartbeat) glow on the research-card icons.
+   pulsing icon glow, milestone timeline, numbered research.
    ========================================================= */
 
 /* ---------- Theme tokens ---------- */
 :root {
-  /* Light */
-  --bg: #f7f9fc;
+  /* Light — warm ivory */
+  --bg: #faf8f5;
   --bg-elevated: #ffffff;
-  --surface: rgba(255, 255, 255, 0.72);
+  --surface: rgba(255, 255, 255, 0.70);
   --surface-solid: #ffffff;
-  --surface-border: rgba(28, 44, 74, 0.10);
-  --surface-border-strong: rgba(28, 44, 74, 0.16);
+  --surface-border: rgba(74, 44, 90, 0.10);
+  --surface-border-strong: rgba(74, 44, 90, 0.16);
 
   --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-top: rgba(255, 255, 255, 0.90);
@@ -24,30 +24,30 @@
 
   --avatar-ring: #ffffff;
 
-  --heading: #0c1626;
-  --text-strong: #1a2a40;
-  --text: #3a4a5e;
-  --text-muted: #647082;
+  --heading: #241826;
+  --text-strong: #36283f;
+  --text: #524559;
+  --text-muted: #7c7184;
 
-  --accent: #2563eb;     /* blue-600   */
-  --accent-2: #7c3aed;   /* violet-600 */
-  --accent-3: #0d9488;   /* teal-700   */
-  --accent-soft: rgba(37, 99, 235, 0.10);
+  --accent: #7c3aed;     /* violet-600 */
+  --accent-2: #be58ff;   /* orchid     */
+  --accent-3: #db2777;   /* rose-600   */
+  --accent-soft: rgba(124, 58, 237, 0.10);
   --on-accent: #ffffff;
-  --ring: rgba(37, 99, 235, 0.32);
+  --ring: rgba(124, 58, 237, 0.32);
 
   /* Aurora veil colors (full rgba, as provided) */
-  --av1: rgba(59, 130, 246, 0.15);   /* soft deep blue  */
-  --av2: rgba(124, 58, 237, 0.10);   /* soft violet     */
-  --av3: rgba(20, 184, 166, 0.07);   /* restrained teal */
-  --av4: rgba(246, 193, 119, 0.07);  /* warm highlight  */
+  --av1: rgba(139, 92, 246, 0.12);   /* soft violet */
+  --av2: rgba(190, 88, 255, 0.075);  /* pale orchid */
+  --av3: rgba(244, 114, 182, 0.06);  /* soft rose   */
+  --av4: rgba(255, 214, 165, 0.08);  /* warm ivory  */
   --aurora-blend: normal;
 
-  --grid-line: rgba(28, 44, 74, 0.05);
-  --star: rgba(28, 44, 74, 0.00);
+  --grid-line: rgba(74, 44, 90, 0.045);
+  --star: rgba(74, 44, 90, 0.00);
 
-  --shadow-card: 0 16px 38px -18px rgba(20, 40, 75, 0.24);
-  --shadow-pop: 0 30px 62px -26px rgba(20, 40, 75, 0.32);
+  --shadow-card: 0 16px 38px -18px rgba(60, 30, 78, 0.22);
+  --shadow-pop: 0 30px 62px -26px rgba(60, 30, 78, 0.30);
   --energy: linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3));
 
   --container-width: 1080px;
@@ -57,10 +57,10 @@
 
 :root[data-theme="dark"] {
   /* Dark */
-  --bg: #070a12;
-  --bg-elevated: #0c1120;
+  --bg: #09090d;
+  --bg-elevated: #121019;
   --surface: rgba(255, 255, 255, 0.05);
-  --surface-solid: #0d1426;
+  --surface-solid: #15121f;
   --surface-border: rgba(255, 255, 255, 0.10);
   --surface-border-strong: rgba(255, 255, 255, 0.20);
 
@@ -72,22 +72,22 @@
 
   --avatar-ring: rgba(255, 255, 255, 0.12);
 
-  --heading: #eaf2fb;
-  --text-strong: #dde7f4;
-  --text: #bcc8db;
-  --text-muted: #828fa6;
+  --heading: #f3eef9;
+  --text-strong: #e7dff2;
+  --text: #c6bcd4;
+  --text-muted: #918699;
 
-  --accent: #60a5fa;     /* blue-400   */
-  --accent-2: #a78bfa;   /* violet-400 */
-  --accent-3: #5eead4;   /* teal-300   */
-  --accent-soft: rgba(96, 165, 250, 0.16);
-  --on-accent: #061018;
-  --ring: rgba(96, 165, 250, 0.50);
+  --accent: #c084fc;     /* purple-400 */
+  --accent-2: #be58ff;   /* orchid     */
+  --accent-3: #f472b6;   /* rose-400   */
+  --accent-soft: rgba(192, 132, 252, 0.16);
+  --on-accent: #190a20;
+  --ring: rgba(192, 132, 252, 0.50);
 
-  --av1: rgba(37, 99, 235, 0.22);    /* deep blue glow  */
-  --av2: rgba(139, 92, 246, 0.16);   /* violet glow     */
-  --av3: rgba(20, 184, 166, 0.09);   /* restrained teal */
-  --av4: rgba(246, 193, 119, 0.05);  /* subtle gold     */
+  --av1: rgba(124, 58, 237, 0.18);   /* muted violet */
+  --av2: rgba(190, 88, 255, 0.10);   /* soft orchid  */
+  --av3: rgba(244, 114, 182, 0.075); /* rose         */
+  --av4: rgba(255, 214, 165, 0.045); /* warm ivory   */
   --aurora-blend: screen;
 
   --grid-line: rgba(255, 255, 255, 0.05);
@@ -99,10 +99,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #070a12;
-    --bg-elevated: #0c1120;
+    --bg: #09090d;
+    --bg-elevated: #121019;
     --surface: rgba(255, 255, 255, 0.05);
-    --surface-solid: #0d1426;
+    --surface-solid: #15121f;
     --surface-border: rgba(255, 255, 255, 0.10);
     --surface-border-strong: rgba(255, 255, 255, 0.20);
 
@@ -114,22 +114,22 @@
 
     --avatar-ring: rgba(255, 255, 255, 0.12);
 
-    --heading: #eaf2fb;
-    --text-strong: #dde7f4;
-    --text: #bcc8db;
-    --text-muted: #828fa6;
+    --heading: #f3eef9;
+    --text-strong: #e7dff2;
+    --text: #c6bcd4;
+    --text-muted: #918699;
 
-    --accent: #60a5fa;
-    --accent-2: #a78bfa;
-    --accent-3: #5eead4;
-    --accent-soft: rgba(96, 165, 250, 0.16);
-    --on-accent: #061018;
-    --ring: rgba(96, 165, 250, 0.50);
+    --accent: #c084fc;
+    --accent-2: #be58ff;
+    --accent-3: #f472b6;
+    --accent-soft: rgba(192, 132, 252, 0.16);
+    --on-accent: #190a20;
+    --ring: rgba(192, 132, 252, 0.50);
 
-    --av1: rgba(37, 99, 235, 0.22);
-    --av2: rgba(139, 92, 246, 0.16);
-    --av3: rgba(20, 184, 166, 0.09);
-    --av4: rgba(246, 193, 119, 0.05);
+    --av1: rgba(124, 58, 237, 0.18);
+    --av2: rgba(190, 88, 255, 0.10);
+    --av3: rgba(244, 114, 182, 0.075);
+    --av4: rgba(255, 214, 165, 0.045);
     --aurora-blend: screen;
 
     --grid-line: rgba(255, 255, 255, 0.05);
@@ -157,8 +157,8 @@ body {
   transition: background-color 0.5s ease, color 0.4s ease;
 }
 
-/* Aurora veils: two large conic gradients (cyan/violet/teal/gold)
-   slowly counter-rotating under blur — a flowing curtain. */
+/* Aurora veils: two large conic gradients (violet/orchid/rose/ivory)
+   slowly counter-rotating under blur. */
 .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .aurora::before,
 .aurora::after {
@@ -195,7 +195,7 @@ body {
   animation: aurora-spin 58s linear infinite reverse;
 }
 
-/* Faint tech grid + starfield */
+/* Faint grid + starfield */
 body::after {
   content: "";
   position: fixed;
@@ -453,11 +453,44 @@ h2 {
   background: var(--energy);
 }
 .block > p { color: var(--text); margin-bottom: 14px; }
-.block > p:last-child { margin-bottom: 0; }
 .block strong { color: var(--text-strong); font-weight: 700; }
 .section-intro { margin: 18px 0 26px; color: var(--text-muted); }
 
-/* ---------- Research cards (glass + 3D tilt + gloss + pulsing icon) ---------- */
+/* Sub-heading inside a block (e.g. Highlights) */
+.block-sub {
+  margin: 28px 0 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* Milestone timeline */
+.timeline {
+  list-style: none;
+  margin-left: 6px;
+  border-left: 2px solid var(--surface-border);
+}
+.timeline li {
+  position: relative;
+  padding: 0 0 18px 22px;
+}
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6px; top: 5px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--energy);
+  box-shadow: 0 0 0 3px var(--bg), 0 0 10px var(--ring);
+}
+.tl-year { display: block; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 2px; }
+.tl-text { color: var(--text); font-size: 0.95rem; line-height: 1.55; }
+.tl-text em { color: var(--text-strong); font-style: italic; }
+
+/* ---------- Research cards (glass + tilt + gloss + numbered + pulsing icon) ---------- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -512,8 +545,17 @@ h2 {
   z-index: 0;
 }
 .card:hover::after { opacity: 0.6; }
-.card-icon, .card h3, .card p { position: relative; z-index: 1; }
+.card-icon, .card h3, .card p, .card-num { position: relative; z-index: 1; }
 
+.card-num {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  opacity: 0.16;
+}
 .card-icon {
   width: 44px; height: 44px;
   display: grid; place-items: center;
@@ -529,6 +571,7 @@ h2 {
 .card p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
 
 /* ---------- Publications ---------- */
+.pub-overview { margin-bottom: 24px; color: var(--text-muted); font-size: 0.92rem; }
 .pub-list { list-style: none; }
 .pub-item { position: relative; margin-bottom: 30px; }
 .pub-item:last-child { margin-bottom: 0; }
@@ -554,15 +597,15 @@ h2 {
   transition: transform 0.2s;
 }
 .pub-item:hover .venue-tag { transform: translateY(-1px); }
-.tag-journal { color: #1d4ed8; background: rgba(37, 99, 235, 0.12); border-color: rgba(37, 99, 235, 0.30); }
-.tag-conf    { color: #6d28d9; background: rgba(124, 58, 237, 0.12); border-color: rgba(124, 58, 237, 0.30); }
-.tag-wip     { color: #475569; background: rgba(100, 116, 139, 0.12); border-color: rgba(100, 116, 139, 0.30); }
-:root[data-theme="dark"] .tag-journal { color: #93c5fd; background: rgba(96, 165, 250, 0.18); border-color: rgba(96, 165, 250, 0.42); }
-:root[data-theme="dark"] .tag-conf    { color: #c4b5fd; background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.42); }
+.tag-journal { color: #7c3aed; background: rgba(124, 58, 237, 0.12); border-color: rgba(124, 58, 237, 0.30); }
+.tag-conf    { color: #be185d; background: rgba(219, 39, 119, 0.12); border-color: rgba(219, 39, 119, 0.30); }
+.tag-wip     { color: #6b6470; background: rgba(120, 113, 124, 0.12); border-color: rgba(120, 113, 124, 0.30); }
+:root[data-theme="dark"] .tag-journal { color: #d8b4fe; background: rgba(192, 132, 252, 0.16); border-color: rgba(192, 132, 252, 0.42); }
+:root[data-theme="dark"] .tag-conf    { color: #f9a8d4; background: rgba(244, 114, 182, 0.16); border-color: rgba(244, 114, 182, 0.42); }
 :root[data-theme="dark"] .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .tag-journal { color: #93c5fd; background: rgba(96, 165, 250, 0.18); border-color: rgba(96, 165, 250, 0.42); }
-  :root:not([data-theme="light"]) .tag-conf    { color: #c4b5fd; background: rgba(167, 139, 250, 0.16); border-color: rgba(167, 139, 250, 0.42); }
+  :root:not([data-theme="light"]) .tag-journal { color: #d8b4fe; background: rgba(192, 132, 252, 0.16); border-color: rgba(192, 132, 252, 0.42); }
+  :root:not([data-theme="light"]) .tag-conf    { color: #f9a8d4; background: rgba(244, 114, 182, 0.16); border-color: rgba(244, 114, 182, 0.42); }
   :root:not([data-theme="light"]) .tag-wip     { color: #cbd5e1; background: rgba(148, 163, 184, 0.14); border-color: rgba(148, 163, 184, 0.40); }
 }
 
@@ -625,8 +668,6 @@ h2 {
 @keyframes name-flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes reveal-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-
-/* Heartbeat glow: a fast bright onset, then a slow fade, then again. */
 @keyframes icon-pulse {
   0%   { box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 0 var(--ring); }
   3%   { box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 20px 5px var(--ring); }
@@ -645,7 +686,6 @@ h2 {
   html.js .pub-list > .pub-item.is-visible:nth-child(3) { animation-delay: 0.16s; }
   html.js .pub-list > .pub-item.is-visible:nth-child(4) { animation-delay: 0.24s; }
 
-  /* Pulsing heartbeat glow on the research-card icons, staggered like a wave */
   .card-icon { animation: icon-pulse 13s ease-out infinite; }
   .cards-grid > .card:nth-child(2) .card-icon { animation-delay: 2.75s; }
   .cards-grid > .card:nth-child(3) .card-icon { animation-delay: 5.5s; }
