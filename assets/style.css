@@ -317,13 +317,20 @@ a:hover { color: var(--accent-2); }
   grid-template-columns: 280px 1fr;
   gap: 48px;
   align-items: start;
-  margin: 20px auto 64px;
+  /* Top margin shrinks on short viewports (laptops) and breathes on tall ones */
+  margin: clamp(8px, 2vh, 32px) auto 64px;
 }
 
 .profile { position: sticky; top: calc(var(--header-h) + 12px); }
 .profile-card {
   position: relative;
-  padding: 18px 18px 14px;
+  /* Padding scales with viewport height: 14px on tiny screens -> 24px on tall ones */
+  padding: clamp(14px, 2.2vh, 24px) clamp(16px, 2vh, 22px) clamp(12px, 1.8vh, 20px);
+  /* Never let the sticky card exceed the visible viewport, even at scrollTop=0
+     before sticky engages. Reserves header + page-layout top margin + buffer. */
+  max-height: calc(100svh - var(--header-h) - 40px);
+  overflow-y: auto;
+  scrollbar-width: thin;
   border-radius: var(--radius);
   background:
     linear-gradient(160deg, var(--glass-top), transparent 42%),
@@ -333,9 +340,11 @@ a:hover { color: var(--accent-2); }
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-card), inset 0 1px 0 var(--glass-highlight);
 }
-/* Compact centered header */
-.profile-top { text-align: center; margin-bottom: 12px; }
-.avatar-wrapper { position: relative; display: inline-block; margin-bottom: 8px; }
+.profile-card::-webkit-scrollbar { width: 4px; }
+.profile-card::-webkit-scrollbar-thumb { background: var(--surface-border-strong); border-radius: 2px; }
+/* Compact centered header. Spacing & avatar size scale with viewport height. */
+.profile-top { text-align: center; margin-bottom: clamp(10px, 1.6vh, 16px); }
+.avatar-wrapper { position: relative; display: inline-block; margin-bottom: clamp(6px, 1.2vh, 12px); }
 .avatar-wrapper::before {
   content: "";
   position: absolute;
@@ -351,7 +360,8 @@ a:hover { color: var(--accent-2); }
 .avatar {
   position: relative;
   z-index: 1;
-  width: 92px;
+  /* Avatar scales with viewport height: 80px on tiny screens -> 132px on tall ones */
+  width: clamp(80px, 14vh, 132px);
   height: auto;
   border-radius: 11px;
   border: 3px solid var(--avatar-ring);
@@ -389,8 +399,8 @@ a:hover { color: var(--accent-2); }
 }
 .profile-role { font-size: 0.8rem; font-weight: 600; color: var(--text-strong); line-height: 1.35; }
 
-.profile-affil { list-style: none; margin-bottom: 10px; }
-.profile-affil li { display: flex; align-items: center; gap: 9px; font-size: 0.83rem; color: var(--text); margin-bottom: 6px; }
+.profile-affil { list-style: none; margin-bottom: clamp(8px, 1.4vh, 14px); }
+.profile-affil li { display: flex; align-items: center; gap: 9px; font-size: 0.83rem; color: var(--text); margin-bottom: clamp(5px, 0.9vh, 8px); }
 .affil-ico {
   flex: none;
   display: inline-flex;
@@ -406,18 +416,18 @@ a:hover { color: var(--accent-2); }
 
 .profile-advisors {
   list-style: none;
-  margin-bottom: 12px;
-  padding-top: 12px;
+  margin-bottom: clamp(10px, 1.6vh, 16px);
+  padding-top: clamp(10px, 1.4vh, 14px);
   border-top: 1px solid var(--surface-border);
 }
-.profile-advisors li { display: flex; gap: 8px; font-size: 0.8rem; margin-bottom: 5px; }
+.profile-advisors li { display: flex; gap: 8px; font-size: 0.8rem; margin-bottom: clamp(4px, 0.7vh, 7px); }
 .profile-advisors .lbl { flex: none; min-width: 66px; color: var(--text-muted); font-weight: 600; }
 .profile-advisors li span:last-child { color: var(--text-strong); font-weight: 600; }
 
 .profile-keywords {
   display: flex; flex-wrap: wrap; gap: 6px;
-  margin-bottom: 12px;
-  padding-top: 12px;
+  margin-bottom: clamp(10px, 1.6vh, 16px);
+  padding-top: clamp(10px, 1.4vh, 14px);
   border-top: 1px solid var(--surface-border);
 }
 .chip {
@@ -434,7 +444,7 @@ a:hover { color: var(--accent-2); }
 }
 .chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--energy); }
 
-.profile-social { display: flex; gap: 7px; padding-top: 12px; border-top: 1px solid var(--surface-border); justify-content: center; }
+.profile-social { display: flex; gap: 7px; padding-top: clamp(10px, 1.4vh, 14px); border-top: 1px solid var(--surface-border); justify-content: center; }
 .profile-social a {
   width: 34px; height: 34px;
   display: grid; place-items: center;
