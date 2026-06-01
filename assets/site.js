@@ -22,6 +22,23 @@
     });
   }
 
+  /* ---- Scroll progress bar ---- */
+  var progress = document.getElementById('scroll-progress');
+  if (progress) {
+    var pTick = false;
+    function updateProgress() {
+      pTick = false;
+      var de = document.documentElement;
+      var max = de.scrollHeight - de.clientHeight;
+      progress.style.width = (max > 0 ? (de.scrollTop / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', function () {
+      if (!pTick) { pTick = true; requestAnimationFrame(updateProgress); }
+    }, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+    updateProgress();
+  }
+
   /* ---- Scroll-reveal (skipped entirely if IntersectionObserver missing,
           so content never gets stuck hidden) ---- */
   if ('IntersectionObserver' in window) {
