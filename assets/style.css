@@ -8,46 +8,51 @@
 
 /* ---------- Theme tokens ---------- */
 :root {
-  /* Light — deep purple / deep blue / light grey */
-  --bg: #f3f4f7;
+  /* Light — "quantum aurora at dawn": deep blue → indigo → deep violet ribbons
+     surging over a cool periwinkle-white sky, crowned by an about-to-erupt core
+     bloom. Academic blue/purple identity; sibling to the dark "midnight" theme. */
+  --bg: #eaedf7;
   --bg-elevated: #ffffff;
   --surface: rgba(255, 255, 255, 0.72);
   --surface-solid: #ffffff;
-  --surface-border: rgba(40, 34, 70, 0.10);
-  --surface-border-strong: rgba(40, 34, 70, 0.16);
+  --surface-border: rgba(48, 38, 92, 0.12);
+  --surface-border-strong: rgba(48, 38, 92, 0.20);
 
-  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg: rgba(255, 255, 255, 0.60);
   --glass-top: rgba(255, 255, 255, 0.90);
-  --glass-border: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.85);
   --glass-highlight: rgba(255, 255, 255, 0.96);
-  --glass-soft: rgba(255, 255, 255, 0.45);
+  --glass-soft: rgba(255, 255, 255, 0.70);
 
   --avatar-ring: #ffffff;
 
-  --heading: #18142c;
-  --text-strong: #2a2546;
-  --text: #494661;
-  --text-muted: #6d6a80;
+  --heading: #161232;
+  --text-strong: #292350;
+  --text: #403d5c;
+  --text-muted: #4f4b6a;
 
-  --accent: #1d4ed8;     /* blue-700 — primary: solid icons, text, links  */
-  --accent-2: #4f46e5;   /* indigo-600 — gradient bridge blue→violet       */
-  --accent-3: #7c3aed;   /* violet-600 — light-purple end of gradients     */
+  --accent: #1d4ed8;     /* deep blue (blue-700) — solid icons, text, links */
+  --accent-2: #4f46e5;   /* indigo-600 — link hover + gradient bridge       */
+  --accent-3: #7c3aed;   /* deep violet (violet-600) — end of gradients     */
   --accent-soft: rgba(29, 78, 216, 0.12);
   --on-accent: #ffffff;
   --ring: rgba(29, 78, 216, 0.36);
 
-  /* Aurora veils — blue dominant, fading through indigo into light violet */
-  --av1: rgba(37, 99, 235, 0.18);   /* blue (dominant) */
-  --av2: rgba(99, 102, 241, 0.13);  /* indigo          */
-  --av3: rgba(139, 92, 246, 0.10);  /* soft violet     */
-  --av4: rgba(167, 139, 250, 0.16); /* light violet    */
+  /* Aurora veils — deep blue & deep purple only (no cyan / magenta) */
+  --av1: rgba(37, 99, 235, 0.26);    /* blue (dominant)   */
+  --av2: rgba(79, 70, 229, 0.22);    /* indigo            */
+  --av3: rgba(109, 40, 217, 0.22);   /* deep violet       */
+  --av4: rgba(67, 56, 202, 0.20);    /* deep indigo edge  */
   --aurora-blend: normal;
 
-  --grid-line: rgba(40, 34, 70, 0.05);
-  --star: rgba(40, 34, 70, 0.00);
+  --grid-line: rgba(79, 70, 229, 0.06);
+  --star: rgba(79, 70, 229, 0.24);
 
-  --shadow-card: 0 16px 38px -18px rgba(30, 24, 64, 0.24);
-  --shadow-pop: 0 30px 62px -26px rgba(30, 24, 64, 0.32);
+  /* Eruption core bloom: on in light, off in dark (keeps dark untouched). */
+  --bloom-opacity: 1;
+
+  --shadow-card: 0 16px 40px -18px rgba(57, 44, 130, 0.30);
+  --shadow-pop: 0 30px 64px -26px rgba(57, 44, 130, 0.38);
   --energy: linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3));
 
   --container-width: 1080px;
@@ -95,6 +100,7 @@
   --av3: rgba(38, 43, 62, 0.42);     /* deep graphite */
   --av4: rgba(180, 188, 210, 0.045); /* cold silver   */
   --aurora-blend: screen;
+  --bloom-opacity: 0;
 
   --grid-line: rgba(255, 255, 255, 0.05);
   --star: rgba(255, 255, 255, 0.70);
@@ -205,6 +211,36 @@ body {
     var(--av1) 300deg,
     transparent 360deg);
   animation: aurora-spin 40s linear infinite reverse;
+}
+
+/* Eruption core: a hot fuchsia→violet→indigo bloom with side cyan/violet
+   flares, anchored at the top so it crowns the hero without washing out body
+   text. Light only (--bloom-opacity is 0 in dark). Slow breath = "about to
+   erupt". */
+body::before {
+  content: "";
+  /* Absolute (not fixed) so the eruption crowns the hero and then scrolls
+     away — reading content below sits over the calmer veils, not the bloom. */
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 130vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--bloom-opacity, 0);
+  background:
+    radial-gradient(118% 88% at 50% -2%,
+      rgba(109, 40, 217, 0.34) 0%,
+      rgba(79, 70, 229, 0.27) 24%,
+      rgba(37, 99, 235, 0.16) 48%,
+      transparent 72%),
+    radial-gradient(80% 60% at 92% 2%,
+      rgba(37, 99, 235, 0.30) 0%,
+      transparent 56%),
+    radial-gradient(76% 60% at 6% 0%,
+      rgba(124, 58, 237, 0.24) 0%,
+      transparent 56%);
+  transform-origin: 50% 0%;
+  animation: bloom-pulse 9s ease-in-out infinite;
 }
 
 /* Faint grid + starfield */
@@ -796,6 +832,12 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
 }
 @keyframes bar-flow { to { background-position: 200% 50%; } }
 @keyframes name-flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+/* Eruption bloom breathing — opacity folded through --bloom-opacity so it
+   stays fully off (×0) in dark mode even while animating. */
+@keyframes bloom-pulse {
+  0%, 100% { opacity: calc(var(--bloom-opacity, 0) * 0.72); transform: scale(1); }
+  50%      { opacity: calc(var(--bloom-opacity, 0) * 1);    transform: scale(1.1); }
+}
 @keyframes reveal-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes icon-pulse {
@@ -822,6 +864,7 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
   html { scroll-behavior: auto; }
   .aurora::before,
   .aurora::after,
+  body::before,
   .profile-name,
   .card-icon,
   .block > h2::after { animation: none; }
