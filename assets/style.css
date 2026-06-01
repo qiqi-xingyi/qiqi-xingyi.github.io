@@ -55,7 +55,7 @@
   --container-width: 1080px;
   /* Fluid sidebar so the two-column layout scales instead of staying a fixed
      280px slab; caps so it never gets too thin or too wide. */
-  --sidebar-w: clamp(240px, 23vw, 288px);
+  --sidebar-w: clamp(244px, 21vw, 300px);
   /* Single-column reading width below the two-column breakpoint. Profile card
      AND content share this, so they line up as one tidy centered column. */
   --flow-max: 600px;
@@ -389,7 +389,8 @@ a:hover { color: var(--accent-2); }
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  margin-bottom: 3px;
+  text-wrap: balance;
+  margin-bottom: 4px;
   background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent-2), var(--accent));
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -410,9 +411,23 @@ a:hover { color: var(--accent-2); }
   font-weight: 700;
   opacity: 0.88;
 }
-.profile-role { font-size: 0.8rem; font-weight: 600; color: var(--text-strong); line-height: 1.35; }
+/* text-wrap:balance + a ch-based max-width keep the title to two even lines
+   ("PhD Student in Quantum / Computational Biology") instead of stranding a
+   single word; margin-inline:auto re-centers the narrowed block. */
+.profile-role {
+  font-size: 0.82rem; font-weight: 600; color: var(--text-strong);
+  line-height: 1.4;
+  text-wrap: balance;
+  max-width: 26ch;
+  margin-inline: auto;
+}
 
-.profile-affil { list-style: none; margin-bottom: clamp(8px, 1.4vh, 14px); }
+.profile-affil {
+  list-style: none;
+  margin-bottom: clamp(10px, 1.6vh, 16px);
+  padding-top: clamp(11px, 1.5vh, 15px);
+  border-top: 1px solid var(--surface-border);
+}
 .profile-affil li { display: flex; align-items: center; gap: 9px; font-size: 0.83rem; color: var(--text); margin-bottom: clamp(5px, 0.9vh, 8px); }
 .affil-ico {
   flex: none;
@@ -429,18 +444,27 @@ a:hover { color: var(--accent-2); }
 
 .profile-advisors {
   list-style: none;
+  /* Two aligned columns: every label in col 1, every name in col 2, so the
+     "Advisor"/"Co-Advisor" rows line up regardless of label length. */
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 14px;
+  row-gap: clamp(5px, 0.8vh, 8px);
+  font-size: 0.8rem;
   margin-bottom: clamp(10px, 1.6vh, 16px);
-  padding-top: clamp(10px, 1.4vh, 14px);
+  padding-top: clamp(11px, 1.5vh, 15px);
   border-top: 1px solid var(--surface-border);
 }
-.profile-advisors li { display: flex; gap: 8px; font-size: 0.8rem; margin-bottom: clamp(4px, 0.7vh, 7px); }
-.profile-advisors .lbl { flex: none; min-width: 66px; color: var(--text-muted); font-weight: 600; }
+/* display:contents drops each <li> box so its two spans become direct grid
+   cells of the list above. */
+.profile-advisors li { display: contents; }
+.profile-advisors .lbl { color: var(--text-muted); font-weight: 600; }
 .profile-advisors li span:last-child { color: var(--text-strong); font-weight: 600; }
 
 .profile-keywords {
   display: flex; flex-wrap: wrap; gap: 6px;
   margin-bottom: clamp(10px, 1.6vh, 16px);
-  padding-top: clamp(10px, 1.4vh, 14px);
+  padding-top: clamp(11px, 1.5vh, 15px);
   border-top: 1px solid var(--surface-border);
 }
 .chip {
@@ -457,7 +481,7 @@ a:hover { color: var(--accent-2); }
 }
 .chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--energy); }
 
-.profile-social { display: flex; gap: 7px; padding-top: clamp(10px, 1.4vh, 14px); border-top: 1px solid var(--surface-border); justify-content: center; }
+.profile-social { display: flex; gap: 7px; padding-top: clamp(11px, 1.5vh, 15px); border-top: 1px solid var(--surface-border); justify-content: center; }
 .profile-social a {
   width: 34px; height: 34px;
   display: grid; place-items: center;
