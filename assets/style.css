@@ -29,20 +29,18 @@
   --text: #494661;
   --text-muted: #6d6a80;
 
-  --accent: #1d4ed8;     /* blue-700   */
-  --accent-2: #2563eb;   /* blue-600   */
-  --accent-3: #6d28d9;   /* violet-700 (accent only) */
+  --accent: #1d4ed8;     /* blue-700 — primary: solid icons, text, links  */
+  --accent-2: #4f46e5;   /* indigo-600 — gradient bridge blue→violet       */
+  --accent-3: #7c3aed;   /* violet-600 — light-purple end of gradients     */
   --accent-soft: rgba(29, 78, 216, 0.12);
   --on-accent: #ffffff;
   --ring: rgba(29, 78, 216, 0.36);
 
-  /* Aurora veils */
+  /* Aurora veils — blue dominant, fading through indigo into light violet */
   --av1: rgba(37, 99, 235, 0.18);   /* blue (dominant) */
-  --av2: rgba(59, 130, 246, 0.14);  /* lighter blue    */
-  --av3: rgba(30, 41, 59, 0.045);   /* slate shadow    */
-  --av4: rgba(124, 58, 237, 0.08);  /* violet accent   */
-  --av3: rgba(100, 116, 139, 0.06); /* slate grey  */
-  --av4: rgba(203, 213, 225, 0.12); /* light grey  */
+  --av2: rgba(99, 102, 241, 0.13);  /* indigo          */
+  --av3: rgba(139, 92, 246, 0.10);  /* soft violet     */
+  --av4: rgba(167, 139, 250, 0.16); /* light violet    */
   --aurora-blend: normal;
 
   --grid-line: rgba(40, 34, 70, 0.05);
