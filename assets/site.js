@@ -237,14 +237,26 @@
       if (sec) { byId[sec.id] = a; sections.push(sec); }
     });
     if (!sections.length) return;
+
+    // The line a section's top must cross to count as "current". Read from the
+    // SAME scroll-padding-top that decides where anchor jumps land (+ a small
+    // margin), so a clicked nav target reliably highlights itself instead of
+    // leaving the previous link lit. Re-measured on resize (phones change it).
+    var line = 0;
+    function measure() {
+      var sp = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+      line = sp + 12;
+    }
+    measure();
+
     var ticking = false;
     function update() {
       ticking = false;
       var current = sections[0];
       sections.forEach(function (sec) {
-        if (sec.getBoundingClientRect().top <= 90) current = sec;
+        if (sec.getBoundingClientRect().top <= line) current = sec;
       });
-      // Near the bottom the last short section can't reach the top line,
+      // Near the bottom the last short section can't reach the line,
       // so pin the final section once the page is scrolled to the end.
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
         current = sections[sections.length - 1];
@@ -253,8 +265,9 @@
       if (byId[current.id]) byId[current.id].classList.add('active');
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    function onResize() { measure(); onScroll(); }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
     update();
   })();
 })();

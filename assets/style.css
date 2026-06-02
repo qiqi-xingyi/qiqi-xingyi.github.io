@@ -207,7 +207,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 84px;
+  /* Single source of truth for the sticky-header offset: anchor jumps land a
+     section this far below the viewport top. Derived from --header-h so it
+     adapts on phones. Do NOT also add scroll-margin-top on targets — the two
+     stack and double the gap. */
+  scroll-padding-top: calc(var(--header-h) + 20px);
   /* Guard against any decorative layer (aurora, glow) accidentally widening
      the page on narrow viewports. `clip` keeps sticky working; `hidden` doesn't. */
   overflow-x: clip;
@@ -618,7 +622,9 @@ a:hover { color: var(--accent-2); }
 
 /* Right: content column */
 .content { min-width: 0; }
-.block { margin-bottom: 52px; scroll-margin-top: 84px; }
+/* Offset handled once, via html { scroll-padding-top } — no scroll-margin here
+   (it would stack with scroll-padding and double the header gap). */
+.block { margin-bottom: 52px; }
 .block:last-child { margin-bottom: 0; }
 
 h2 {
@@ -1135,7 +1141,8 @@ a.pub-item { color: inherit; text-decoration: none; display: block; }
   .profile-social { padding-top: 12px; }
   .profile-social a { width: 34px; height: 34px; }
 
-  .block { margin-bottom: 36px; scroll-margin-top: var(--header-h); }
+  /* scroll-padding-top (calc with --header-h:56 here) already covers the offset. */
+  .block { margin-bottom: 36px; }
   h2 { font-size: 1.4rem; }
   .about-lede { font-size: 1rem; line-height: 1.5; }
 
