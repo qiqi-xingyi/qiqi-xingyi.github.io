@@ -53,10 +53,10 @@
 
   /* Field veils — luminous but controlled. These keep the background alive
      without reverting to a soft pastel portfolio look. */
-  --av1: rgba(37, 99, 235, 0.18);    /* charged blue      */
-  --av2: rgba(91, 63, 214, 0.16);    /* violet pressure   */
-  --av3: rgba(8, 145, 178, 0.12);    /* cyan release      */
-  --av4: rgba(124, 58, 237, 0.13);   /* deep violet edge  */
+  --av1: rgba(37, 99, 235, 0.28);    /* charged blue      */
+  --av2: rgba(91, 63, 214, 0.26);    /* violet pressure   */
+  --av3: rgba(79, 70, 229, 0.22);    /* indigo flow (was cyan — light stays blue+purple) */
+  --av4: rgba(124, 58, 237, 0.22);   /* deep violet edge  */
   --aurora-blend: normal;
   --field-veil-opacity: 1;
   --field-blur: 62px;
