@@ -156,6 +156,14 @@
     // Marker so you can confirm in DevTools that the live JSON (not the
     // static fallback) is what's on screen.
     listEl.setAttribute('data-source', source || 'unknown');
+    // The CSS pre-hides .pub-item via `html.js :is(.pub-item) { opacity:0 }` to
+    // kill the first-paint flash. site.js's IntersectionObserver only observed
+    // the static fallback li's that were on the page before this fetch
+    // replaced them — these freshly-inserted items would otherwise stay at
+    // opacity:0 forever. Mark them visible.
+    Array.prototype.forEach.call(listEl.querySelectorAll('.pub-item'), function (el) {
+      el.classList.add('is-visible');
+    });
   }
 
   function init() {

@@ -39,14 +39,15 @@
     updateProgress();
   }
 
-  /* ---- Scroll-reveal (skipped entirely if IntersectionObserver missing,
-          so content never gets stuck hidden) ---- */
-  if ('IntersectionObserver' in window) {
-    var reveals = document.querySelectorAll(
-      '.card, .pub-item, .section-intro, .ack-text, .contact-list'
-    );
-    if (reveals.length) {
-      Array.prototype.forEach.call(reveals, function (el) { el.classList.add('reveal'); });
+  /* ---- Scroll-reveal. CSS pre-hides these via `html.js :is(...)` (so there's
+          no first-paint flash), and we add .is-visible here to play the rise
+          animation. If IntersectionObserver is missing, show everything
+          immediately so content never gets trapped at opacity:0. ---- */
+  var reveals = document.querySelectorAll(
+    '.card, .pub-item, .section-intro, .ack-text, .contact-list'
+  );
+  if (reveals.length) {
+    if ('IntersectionObserver' in window) {
       var revealIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (en.isIntersecting) {
@@ -56,6 +57,8 @@
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
       Array.prototype.forEach.call(reveals, function (el) { revealIO.observe(el); });
+    } else {
+      Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-visible'); });
     }
   }
 
