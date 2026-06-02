@@ -55,11 +55,12 @@
      without reverting to a soft pastel portfolio look. */
   --av1: rgba(37, 99, 235, 0.22);    /* charged blue      */
   --av2: rgba(91, 63, 214, 0.20);    /* violet pressure   */
-  --av3: rgba(8, 145, 178, 0.16);    /* cyan release      */
+  --av3: rgba(8, 145, 178, 0.12);    /* cyan release — kept at original faint level */
   --av4: rgba(124, 58, 237, 0.17);   /* deep violet edge  */
   --aurora-blend: normal;
-  /* Same hues as the original palette — only slightly deeper, with a stronger
-     opacity envelope so the slow flow reads more clearly in light mode. */
+  /* Same hues as the original palette — blue/violet a touch deeper, with a
+     stronger opacity envelope so the slow flow reads more clearly in light mode.
+     Cyan (--av3) stays faint so the light theme keeps its blue+purple character. */
   --field-veil-opacity: 1.2;
   --field-blur: 62px;
   --field-grid-opacity: 0.88;
