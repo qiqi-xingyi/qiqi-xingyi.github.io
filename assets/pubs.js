@@ -13,60 +13,9 @@
   'use strict';
 
   var TAG_CLASS = { journal: 'tag-journal', conf: 'tag-conf', wip: 'tag-wip' };
-  var lastListEl = null;
-  var lastPublications = null;
-  var lastSource = null;
-
-  var PUB_I18N = {
-    en: {
-      citations: function (n) { return n + ' ' + (n === 1 ? 'citation' : 'citations'); },
-      etAl: 'et al.',
-      tags: {
-        Journal: 'Journal',
-        Conference: 'Conference',
-        'Under Review': 'Under Review',
-        Preprint: 'Preprint'
-      },
-      venues: {
-        'Under Review': 'Under Review'
-      }
-    },
-    zh: {
-      citations: function (n) { return n + ' 次引用'; },
-      etAl: '等',
-      tags: {
-        Journal: '期刊',
-        Conference: '会议',
-        'Under Review': '审稿中',
-        Preprint: '预印本'
-      },
-      venues: {
-        'Under Review': '审稿中'
-      }
-    }
-  };
 
   function tagClass(type) {
     return TAG_CLASS[type] || 'tag-wip';
-  }
-
-  function currentLang() {
-    var explicit = document.documentElement.getAttribute('data-lang') || document.documentElement.getAttribute('lang') || 'en';
-    return /^zh/i.test(explicit) ? 'zh' : 'en';
-  }
-
-  function pubText() {
-    return PUB_I18N[currentLang()] || PUB_I18N.en;
-  }
-
-  function localizedTag(label) {
-    var dict = pubText().tags || {};
-    return dict[label] || label || '';
-  }
-
-  function localizedVenue(label) {
-    var dict = pubText().venues || {};
-    return dict[label] || label || '';
   }
 
   function badgeClass(style) {
@@ -85,7 +34,7 @@
     if (pub.venue_tag) {
       var tag = document.createElement('span');
       tag.className = 'venue-tag ' + tagClass(pub.venue_type);
-      tag.textContent = localizedTag(pub.venue_tag);
+      tag.textContent = pub.venue_tag;
       head.appendChild(tag);
     }
 
@@ -94,7 +43,7 @@
     var bits = [];
     if (pub.year) bits.push(String(pub.year));
     if (pub.cited_by && pub.cited_by > 0) {
-      bits.push(pubText().citations(pub.cited_by));
+      bits.push(pub.cited_by + ' ' + (pub.cited_by === 1 ? 'citation' : 'citations'));
     }
     meta.textContent = bits.join(' · ');
     head.appendChild(meta);
@@ -127,7 +76,7 @@
     if (pub.et_al) {
       div.appendChild(document.createTextNode(', '));
       var em = document.createElement('em');
-      em.textContent = pubText().etAl;
+      em.textContent = 'et al.';
       div.appendChild(em);
     }
     return div;
@@ -136,7 +85,7 @@
   function renderVenue(pub) {
     var div = document.createElement('div');
     div.className = 'pub-venue';
-    div.textContent = localizedVenue(pub.venue_short);
+    div.textContent = pub.venue_short || '';
     return div;
   }
 
@@ -198,9 +147,6 @@
   }
 
   function render(listEl, publications, source) {
-    lastListEl = listEl;
-    lastPublications = publications;
-    lastSource = source;
     var frag = document.createDocumentFragment();
     publications.forEach(function (pub) {
       frag.appendChild(renderItem(pub));
@@ -211,12 +157,6 @@
     // static fallback) is what's on screen.
     listEl.setAttribute('data-source', source || 'unknown');
   }
-
-  window.addEventListener('site:langchange', function () {
-    if (lastListEl && lastPublications) {
-      render(lastListEl, lastPublications, lastSource);
-    }
-  });
 
   function init() {
     var listEl = document.getElementById('pub-list');
