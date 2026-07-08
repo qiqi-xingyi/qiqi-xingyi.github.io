@@ -98,7 +98,13 @@ def authors_from_override(author_list, full_names, me_keys, corr_keys):
 # Venue handling
 # --------------------------------------------------------------------------- #
 def guess_venue_type(publication):
-    p = (publication or "").lower()
+    p = (publication or "").lower().strip()
+    # Empty / unknown venue → treat as unpublished so the wip filter drops it.
+    # Scholar leaves `publication` blank for under-review / draft entries; if
+    # a legit published paper is missing metadata, force-include it via an
+    # explicit `venue_type` in overrides.json.
+    if not p:
+        return "wip"
     if "arxiv" in p or "preprint" in p:
         return "wip"
     conf_kw = ["proceedings", "conference", "symposium", "workshop",
@@ -191,7 +197,6 @@ def transform(articles, overrides, author_id):
     full_names = {name_key(k): v
                   for k, v in (overrides.get("author_full_names") or {}).items()}
     me_keys = {name_key(a) for a in overrides.get("author_aliases", []) if name_key(a)}
-    default_corr = {name_key(a) for a in overrides.get("default_corresponding_authors", [])}
     journals = {k.lower(): v for k, v in (overrides.get("journals") or {}).items()}
     pub_over = overrides.get("publications") or {}
 
@@ -200,16 +205,18 @@ def transform(articles, overrides, author_id):
         cid = art.get("citation_id") or ""
         ov = pub_over.get(cid, {})
 
-        # corresponding: per-paper override beats the global default
-        if "corresponding" in ov:
-            corr_keys = {name_key(a) for a in ov.get("corresponding", [])}
-        else:
-            corr_keys = default_corr
+        # Corresponding-author marks are per-paper only — no global default.
+        # If a paper's override doesn't list `corresponding`, no author is marked.
+        corr_keys = {name_key(a) for a in ov.get("corresponding", [])}
 
         if ov.get("authors"):
             authors = authors_from_override(ov["authors"], full_names, me_keys, corr_keys)
         else:
             authors = build_authors(art.get("authors"), full_names, me_keys, corr_keys)
+
+        # Filter: only sync papers where I'm first author.
+        if not authors or not authors[0].get("me"):
+            continue
 
         publication = art.get("publication") or ""
         year = parse_year(art)
@@ -217,9 +224,15 @@ def transform(articles, overrides, author_id):
 
         venue_type = ov.get("venue_type") or (jmeta.get("type") if jmeta else None) \
             or guess_venue_type(publication)
-        # Big category label on the card (Journal / Conference / Preprint / Under Review)
+
+        # Filter: only published venues (journal / conference). arXiv preprints
+        # and under-review entries drop out.
+        if venue_type == "wip":
+            continue
+
+        # Big category label on the card (Journal / Conference)
         venue_tag = ov.get("venue_tag") or {
-            "journal": "Journal", "conf": "Conference", "wip": "Preprint"
+            "journal": "Journal", "conf": "Conference"
         }.get(venue_type, "Article")
         # Short venue name shown under the title (no IF, no pages, no long titles)
         venue_short = ov.get("venue_short") \

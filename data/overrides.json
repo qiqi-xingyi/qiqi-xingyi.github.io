@@ -1,13 +1,13 @@
 {
   "_README": [
     "Supplies the bits Google Scholar can't expose. scripts/fetch_scholar.py scrapes Scholar, then merges this file on top, keyed by citation_id.",
-    "Day to day you only touch: 'author_full_names' (a new collaborator showing up as initials), and 'publications' (per-paper venue label / status / corresponding authors / extra links).",
-    "By design we no longer carry impact factors, page numbers, or long conference titles — the new Publications layout shows venue + year + citations, all auto-tracked from Scholar."
+    "Day to day you only touch: 'author_full_names' (a new collaborator showing up as initials), and 'publications' (per-paper venue label / corresponding authors / extra links).",
+    "Sync policy: only papers where you are first author AND published in a journal or conference are kept. arXiv preprints and under-review entries are filtered out — no override can re-include them; adjust scripts/fetch_scholar.py if you need to.",
+    "Corresponding authors are per-paper only. If a paper's entry doesn't list 'corresponding', no author is marked (no global default anymore).",
+    "By design we don't carry impact factors, page numbers, or long conference titles — the Publications layout shows venue + year + citations, all auto-tracked from Scholar."
   ],
 
   "author_aliases": ["Yuqi Zhang", "Yuqi Zhang (张钰奇)", "Y Zhang"],
-
-  "default_corresponding_authors": ["Qiang Guan", "Feixiong Cheng"],
 
   "author_full_names": {
     "Yuqi Zhang": "Yuqi Zhang",
@@ -18,18 +18,12 @@
     "Qiang Guan": "Qiang Guan",
     "Feixiong Cheng": "Feixiong Cheng",
     "Cheng-Chang Lu": "Cheng-Chang Lu",
-    "Bo Fang": "Bo Fang",
-    "Nima Saeidi": "Nima Saeidi",
-    "Samuel L. Volchenboum": "Samuel L. Volchenboum",
-    "Junhan Zhao": "Junhan Zhao",
-    "Siwei Chen": "Siwei Chen"
+    "Bo Fang": "Bo Fang"
   },
 
   "order": [
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
-    "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
-    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
-    "Q7Ybs-gAAAAJ:Se3iqnhoufwC"
+    "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC"
   ],
 
   "publications": {
@@ -54,23 +48,6 @@
         { "label": "ACM DL", "url": "https://dl.acm.org/doi/full/10.1145/3712285.3759799", "style": "blue" },
         { "label": "Artifacts", "url": "https://github.com/qiqi-xingyi/QDockBank_", "style": "gray" }
       ]
-    },
-
-    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
-      "venue_tag": "Under Review",
-      "venue_short": "Under Review",
-      "venue_type": "wip",
-      "status": "Under Review",
-      "corresponding": ["Qiang Guan"],
-      "et_al": true
-    },
-
-    "Q7Ybs-gAAAAJ:Se3iqnhoufwC": {
-      "venue_tag": "Preprint",
-      "venue_short": "arXiv",
-      "venue_type": "wip",
-      "corresponding": ["Qiang Guan"],
-      "et_al": false
     }
   }
 }

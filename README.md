@@ -40,6 +40,12 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
 
 Everything else — titles, authors, year, **citation counts**, ordering, and bolding your own name — is automatic.
 
+**Sync policy** (enforced in `scripts/fetch_scholar.py`, not configurable via overrides):
+
+- Only papers where **you are the first author** are kept.
+- Only **published journal or conference** entries are kept — arXiv preprints and under-review entries are dropped.
+- Corresponding-author marks are **per-paper only**. If a paper's `publications` entry doesn't list `corresponding`, no author is marked.
+
 ## Run / test
 
 ```bash
