@@ -16,7 +16,7 @@
       "citation_id": "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
       "authors": "Y Zhang, Y Yang, CC Lu, W Jiang, F Cheng, B Fang, Q Guan",
       "publication": "Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis, 2025",
-      "cited_by": { "value": 3 },
+      "cited_by": { "value": 4 },
       "year": "2025"
     },
     {
@@ -34,6 +34,16 @@
       "citation_id": "Q7Ybs-gAAAAJ:Se3iqnhoufwC",
       "authors": "Y Zhang, S Chen, F Cheng, Q Guan",
       "publication": "arXiv preprint arXiv:2603.06963",
+      "cited_by": { "value": 0 },
+      "year": "2026"
+    },
+    {
+      "_comment": "Non-first-author preprint — should be filtered out entirely (never surfaces in either pubs or preprints).",
+      "title": "REGRID-QAOA: A Resource-Efficient Graph-Reduced Hybrid QAOA Framework for Physics-Constrained Power System Islanding",
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:hqOjcs7Dif8C",
+      "citation_id": "Q7Ybs-gAAAAJ:hqOjcs7Dif8C",
+      "authors": "Y Jiang, Y Zhang, Z Liang, Q Guan, Y Li, GK Venayagamoorthy",
+      "publication": "arXiv preprint arXiv:2606.15083",
       "cited_by": { "value": 0 },
       "year": "2026"
     }

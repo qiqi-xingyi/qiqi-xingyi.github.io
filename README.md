@@ -42,9 +42,10 @@ Everything else — titles, authors, year, **citation counts**, ordering, and bo
 
 **Sync policy** (enforced in `scripts/fetch_scholar.py`, not configurable via overrides):
 
-- Only papers where **you are the first author** are kept.
-- Only **published journal or conference** entries are kept — arXiv preprints and under-review entries are dropped.
-- Corresponding-author marks are **per-paper only**. If a paper's `publications` entry doesn't list `corresponding`, no author is marked.
+- Only papers where **you are the first author** are kept — in both sections.
+- **Published journal/conference** entries render as full-detail cards under **Publications**.
+- **arXiv preprints and under-review** entries render as compact rows under **Preprints & Working Papers** (title + venue + year only; no authors, citations, or corresponding marks).
+- Corresponding-author marks (Publications only) are **per-paper**. If a paper's `publications` entry doesn't list `corresponding`, no author is marked.
 
 ## Run / test
 

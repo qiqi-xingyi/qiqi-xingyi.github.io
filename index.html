@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/style.css?v=25">
+  <link rel="stylesheet" href="assets/style.css?v=26">
 
   <link rel="icon" href="assets/img/icon.png">
 </head>
@@ -48,6 +48,7 @@
           <a href="#about">About</a>
           <a href="#research">Research</a>
           <a href="#pubs">Publications</a>
+          <a href="#preprints">Preprints</a>
           <a href="#contact">Contact</a>
         </nav>
         <div class="header-controls" aria-label="Page preferences">
@@ -213,6 +214,28 @@
         </ul>
       </section>
 
+      <section id="preprints" class="block">
+        <h2>Preprints &amp; Working Papers</h2>
+        <p class="pub-overview">Auto-synced first-author preprints and under-review manuscripts.</p>
+        <!-- Rendered from data/publications.json (preprints array) by assets/pubs.js.
+             The static items below are the no-JS / fallback snapshot. -->
+        <ul class="preprint-list" id="preprint-list">
+
+          <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener">
+            <span class="preprint-title">Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians</span>
+            <span class="preprint-meta">arXiv · 2026</span>
+            <span class="preprint-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a></li>
+
+          <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">
+            <span class="preprint-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span>
+            <span class="preprint-meta">Under Review · 2025</span>
+            <span class="preprint-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a></li>
+
+        </ul>
+      </section>
+
       <section id="acknowledgements" class="block ack-block">
         <h2>Acknowledgements</h2>
         <p class="ack-text">
@@ -276,7 +299,7 @@
   </script>
 
   <!-- Auto-renders #pub-list from data/publications.json (Google Scholar sync) -->
-  <script src="assets/pubs.js?v=15" defer></script>
+  <script src="assets/pubs.js?v=16" defer></script>
   <!-- Theme toggle, scroll-reveal, active-nav -->
   <script src="assets/site.js?v=17" defer></script>
 </body>

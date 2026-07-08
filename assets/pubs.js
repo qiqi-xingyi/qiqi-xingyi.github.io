@@ -166,9 +166,56 @@
     });
   }
 
+  /* ---------- Preprints: compact row (title + venue·year + arrow) ---------- */
+  function renderPreprintItem(pre) {
+    var url = safeUrl(pre.url) ? pre.url : null;
+    var li = document.createElement('li');
+    li.className = 'preprint-item';
+
+    var inner = document.createElement(url ? 'a' : 'div');
+    if (url) {
+      inner.href = url;
+      inner.target = '_blank';
+      inner.rel = 'noopener';
+    }
+    inner.className = 'preprint-row';
+
+    var title = document.createElement('span');
+    title.className = 'preprint-title';
+    title.textContent = pre.title || '';
+    inner.appendChild(title);
+
+    var meta = document.createElement('span');
+    meta.className = 'preprint-meta';
+    var bits = [];
+    if (pre.venue_short) bits.push(pre.venue_short);
+    if (pre.year) bits.push(String(pre.year));
+    meta.textContent = bits.join(' · ');
+    inner.appendChild(meta);
+
+    if (url) {
+      var arrow = document.createElement('span');
+      arrow.className = 'preprint-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+      inner.appendChild(arrow);
+    }
+    li.appendChild(inner);
+    return li;
+  }
+
+  function renderPreprints(listEl, preprints, source) {
+    var frag = document.createDocumentFragment();
+    preprints.forEach(function (pre) { frag.appendChild(renderPreprintItem(pre)); });
+    listEl.innerHTML = '';
+    listEl.appendChild(frag);
+    listEl.setAttribute('data-source', source || 'unknown');
+  }
+
   function init() {
     var listEl = document.getElementById('pub-list');
-    if (!listEl) return;
+    var preEl = document.getElementById('preprint-list');
+    if (!listEl && !preEl) return;
     fetch('data/publications.json', { cache: 'no-cache' })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -176,8 +223,19 @@
       })
       .then(function (data) {
         var pubs = (data && data.publications) || [];
+        var preprints = (data && data.preprints) || [];
         var source = (data && data.meta && data.meta.source) || 'live';
-        if (pubs.length) render(listEl, pubs, source);
+        if (listEl && pubs.length) render(listEl, pubs, source);
+        if (preEl) {
+          if (preprints.length) {
+            renderPreprints(preEl, preprints, source);
+          } else {
+            // Live data returned zero preprints — hide the whole section
+            // rather than leaving the static fallback stale.
+            var section = document.getElementById('preprints');
+            if (section) section.hidden = true;
+          }
+        }
       })
       .catch(function (err) {
         // Leave the static <li> fallback already in the HTML untouched.
