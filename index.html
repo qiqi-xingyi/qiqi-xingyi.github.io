@@ -1,306 +1,210 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Set theme before paint to avoid a flash; mark JS on for progressive motion -->
   <script>
     (function () {
-      var d = document.documentElement;
-      d.classList.add('js');
-      try { var t = localStorage.getItem('theme'); if (t) d.setAttribute('data-theme', t); } catch (e) {}
+      var root = document.documentElement;
+      try {
+        var saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+      } catch (e) {}
     })();
   </script>
 
   <meta name="keywords" content="Yuqi Zhang, Quantum Biological Computing, Quantum Computing, Drug Discovery, Quantum-HPC, Kent State University, Cleveland Clinic, PhD">
-  <meta name="description" content="Yuqi Zhang — PhD student in Quantum Biological Computing at Kent State University and Cleveland Clinic.">
-
+  <meta name="description" content="Yuqi Zhang is a PhD student in Quantum Biological Computing at Kent State University and Cleveland Clinic.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Yuqi Zhang | Quantum Biological Computing">
-  <meta property="og:description" content="PhD student bridging quantum algorithms and real-world drug discovery on utility-level quantum processors.">
+  <meta property="og:description" content="Research in quantum computing, biological structure, drug discovery, and quantum-HPC systems.">
   <meta property="og:url" content="https://yuqizhang.me/">
   <meta name="twitter:card" content="summary">
-
-  <meta name="theme-color" content="#edf0f8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#070b16" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
 
   <title>Yuqi Zhang | Quantum Biological Computing</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/style.css?v=26">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css?v=51">
   <link rel="icon" href="assets/img/icon.png">
 </head>
 
 <body>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#" class="brand-name">Yuqi Zhang</a>
+      <a class="brand" href="#about">Yuqi Zhang <span>张钰奇</span></a>
       <div class="header-actions">
-        <nav class="nav">
+        <nav class="nav" aria-label="Primary navigation">
           <a href="#about">About</a>
           <a href="#research">Research</a>
           <a href="#pubs">Publications</a>
           <a href="#preprints">Preprints</a>
           <a href="#contact">Contact</a>
         </nav>
-        <div class="header-controls" aria-label="Page preferences">
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-          </button>
-        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <span aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <div class="container page-layout">
+  <main class="container">
+    <section class="intro" id="about">
+      <div class="intro-main">
+        <p class="discipline">Quantum Computing · Computational Biology · Scientific Systems</p>
+        <h1>Yuqi Zhang <span class="zh">张钰奇</span></h1>
+        <p class="role">PhD Student in Quantum Biological Computing</p>
+        <p class="affiliation">Kent State University · Cleveland Clinic</p>
 
-    <!-- LEFT — sticky profile card -->
-    <aside class="profile">
-      <div class="profile-card">
-        <div class="profile-top">
-          <div class="avatar-wrapper">
-            <img class="avatar" src="assets/img/me.jpeg" alt="Portrait of Yuqi Zhang">
-          </div>
-          <h1 class="profile-name">Yuqi Zhang <span class="zh">(张钰奇)</span></h1>
-          <p class="profile-role">
-            <span class="role-title">PhD Student</span>
-            <span class="role-divider" aria-hidden="true"></span>
-            <span class="role-field">Quantum Biological Computing</span>
+        <div class="bio">
+          <p>
+            I work at the intersection of quantum computing and the life sciences. My research
+            focuses on computational methods for biological structure and drug discovery, with
+            particular attention to what can be executed and evaluated on real quantum hardware.
+          </p>
+          <p>
+            I am jointly affiliated with Kent State University, advised by Dr. Qiang Guan, and
+            Cleveland Clinic, co-advised by Dr. Feixiong Cheng. Previously, I was selected for the
+            2023 Quantum Talents Climbing Program at SZIQA, mentored by Dr. Juan Yao.
           </p>
         </div>
 
-        <ul class="profile-affil">
-          <li>
-            <span class="affil-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M5 11v4.5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V11"/></svg>
-            </span>
-            <span>Kent State University</span>
-          </li>
-          <li>
-            <span class="affil-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15"/><path d="M2 21h20"/><path d="M12 8v6M9 11h6"/></svg>
-            </span>
-            <span>Cleveland Clinic</span> <span class="muted">· Joint PhD</span>
-          </li>
+        <ul class="profile-links" aria-label="Profile links">
+          <li><a href="mailto:yzhan135@kent.edu">Email</a></li>
+          <li><a href="https://scholar.google.com/citations?user=Q7Ybs-gAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener">ORCID</a></li>
         </ul>
-
-        <ul class="profile-advisors">
-          <li><span class="lbl">Advisor</span><span>Dr. Qiang Guan</span></li>
-          <li><span class="lbl">Co-Advisor</span><span>Dr. Feixiong Cheng</span></li>
-        </ul>
-
-        <div class="profile-keywords">
-          <span class="chip">Quantum Computing</span>
-          <span class="chip">Drug Discovery</span>
-          <span class="chip">Quantum-HPC Systems</span>
-        </div>
-
-        <div class="profile-social">
-          <a href="https://scholar.google.com/citations?user=Q7Ybs-gAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.547 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-          </a>
-          <a href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          </a>
-          <a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.516.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.588-1.444 3.588-3.722 0-2.016-1.091-3.722-3.588-3.722h-2.297z"/></svg>
-          </a>
-          <a href="mailto:yzhan135@kent.edu" aria-label="Email" title="Email">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </a>
-        </div>
       </div>
-    </aside>
 
-    <!-- RIGHT — main content -->
-    <main class="content">
+      <figure class="portrait-block">
+        <img src="assets/img/me.jpeg" alt="Portrait of Yuqi Zhang">
+        <figcaption>Ohio, USA</figcaption>
+      </figure>
+    </section>
 
-      <section id="about" class="block">
-        <h2>About</h2>
-        <p class="about-lede">
-          I build quantum computing workflows for biological structure and drug discovery problems.
-        </p>
-        <p>
-          I am a PhD student in <strong>Quantum Biological Computing</strong>, working at the intersection of quantum computing and the life sciences. My research bridges quantum algorithms and real-world drug discovery.
-        </p>
-        <p>
-          I am jointly affiliated with <strong>Kent State University</strong> (advised by Dr. Qiang Guan) and the <strong>Cleveland Clinic</strong> (co-advised by Dr. Feixiong Cheng). Previously, I was selected for the <strong>2023 Quantum Talents Climbing Program</strong> at SZIQA, mentored by Dr. Juan Yao.
-        </p>
-      </section>
+    <section class="section" id="research">
+      <header class="section-header">
+        <h2><span class="section-number">01</span>Research interests</h2>
+        <p>Methods and systems for computational biology on emerging quantum hardware.</p>
+      </header>
 
-      <section id="research" class="block">
-        <h2>Research Focus</h2>
-        <p class="section-intro">
-          My work follows a practical path: encode biological problems, execute them on quantum hardware, integrate the results with HPC systems, and evaluate them in drug discovery settings.
-        </p>
+      <div class="research-list">
+        <article>
+          <h3>Hardware-executed quantum biocomputing</h3>
+          <p>Biological structure workflows designed for execution on real quantum processors, with molecular representations and physical constraints retained throughout the pipeline.</p>
+        </article>
+        <article>
+          <h3>Quantum bioinformatics</h3>
+          <p>Quantum-aware representations of biological sequences, structures, conformational states, and molecular interaction patterns.</p>
+        </article>
+        <article>
+          <h3>Quantum–HPC systems</h3>
+          <p>Integration of quantum execution, optimization, post-processing, and scientific data pipelines within high-performance computing environments.</p>
+        </article>
+        <article>
+          <h3>Quantum methods for drug discovery</h3>
+          <p>Applications to protein conformations, binding-site prediction, molecular docking, and ligand-response modeling.</p>
+        </article>
+      </div>
+    </section>
 
-        <div class="cards-grid">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+    <section class="section" id="pubs">
+      <header class="section-header">
+        <h2><span class="section-number">02</span>Selected publications</h2>
+        <p>First-author publications. Citation counts are synchronized from Google Scholar.</p>
+      </header>
+
+      <ul class="pub-list" id="pub-list">
+        <li>
+          <article class="pub-item">
+            <div class="pub-index" aria-hidden="true">01</div>
+            <div class="venue-mark venue-mark-image" aria-label="SC26"><img src="assets/img/venues/sc26.svg" alt="" aria-hidden="true"></div>
+            <div class="pub-body">
+              <div class="pub-head"><span class="venue-tag tag-conf">Conference</span><span class="pub-meta">2026</span></div>
+              <h3 class="pub-title"><a href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware</a></h3>
+              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Bo Fang, Yuxin Yang, Feixiong Cheng, Jieyang Chen, Sherry Fang, Siwei Chen, Junhan Zhao, Qiang Guan</div>
+              <div class="pub-footer"><span class="pub-venue">SC '26</span><div class="pub-links"><a class="badge badge-blue" href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">arXiv ↗</a></div></div>
             </div>
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3>Hardware-Executed Quantum Biocomputing</h3>
-            <p>Run biological structure workflows on real quantum processors, with molecular representations and physical constraints kept in the loop.</p>
           </article>
-
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4 8 4 8 8s-8 4-8 8"/><path d="M16 3c0 4-8 4-8 8s8 4 8 8"/><path d="M10 6h4M10 18h4M8.5 11h7M8.5 13h7"/></svg>
+        </li>
+        <li>
+          <article class="pub-item">
+            <div class="pub-index" aria-hidden="true">02</div>
+            <div class="venue-mark venue-mark-wordmark" aria-label="Advanced Science"><span>Advanced</span><span>Science</span></div>
+            <div class="pub-body">
+              <div class="pub-head"><span class="venue-tag tag-journal">Journal</span><span class="pub-meta">2025 · 9 citations</span></div>
+              <h3 class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</a></h3>
+              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*, <em>et al.</em></div>
+              <div class="pub-footer"><span class="pub-venue">Advanced Science</span><div class="pub-links"><a class="badge badge-blue" href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">DOI ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">Scholar ↗</a></div></div>
             </div>
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3>Quantum Bioinformatics</h3>
-            <p>Represent sequence, structure, conformational states, and interaction patterns in quantum-aware computational models.</p>
           </article>
-
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="2"/><rect x="9" y="9" width="12" height="12" rx="2"/></svg>
+        </li>
+        <li>
+          <article class="pub-item">
+            <div class="pub-index" aria-hidden="true">03</div>
+            <div class="venue-mark venue-mark-image" aria-label="SC25"><img src="assets/img/venues/sc25.svg" alt="" aria-hidden="true"></div>
+            <div class="pub-body">
+              <div class="pub-head"><span class="venue-tag tag-conf">Conference</span><span class="pub-meta">2025 · 4 citations</span></div>
+              <h3 class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</a></h3>
+              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*.</div>
+              <div class="pub-footer"><span class="pub-venue">SC '25</span><div class="pub-links"><a class="badge badge-blue" href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">ACM DL ↗</a><a class="badge badge-gray" href="https://github.com/qiqi-xingyi/QDockBank_" target="_blank" rel="noopener">Artifacts ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">Scholar ↗</a></div></div>
             </div>
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3>Quantum-HPC Co-design</h3>
-            <p>Connect quantum execution, HPC, optimization, post-processing, and data pipelines into scalable scientific systems.</p>
           </article>
+        </li>
+      </ul>
+    </section>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="18" rx="4"/><path d="M8 12h8"/></svg>
-            </div>
-            <span class="card-num" aria-hidden="true">04</span>
-            <h3>Quantum Drug Discovery</h3>
-            <p>Apply quantum methods to molecular modeling, protein conformations, binding pockets, docking, and ligand response.</p>
-          </article>
-        </div>
-      </section>
+    <section class="section" id="preprints">
+      <header class="section-header">
+        <h2><span class="section-number">03</span>Preprints</h2>
+        <p>First-author manuscripts and work in progress.</p>
+      </header>
 
-      <section id="pubs" class="block">
-        <h2>Selected Publications</h2>
-        <p class="pub-overview">Auto-synced from Google Scholar — selected first-author work shown below.</p>
-        <!-- Rendered from data/publications.json by assets/pubs.js (Google Scholar sync).
-             The static items below are the no-JS / fallback snapshot. -->
-        <ul class="pub-list" id="pub-list">
+      <ul class="preprint-list" id="preprint-list">
+        <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener"><span class="preprint-year">2026</span><span class="preprint-title">Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
+        <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener"><span class="preprint-year">2025</span><span class="preprint-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </section>
 
-          <li><a class="pub-item" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">
-            <div class="pub-head">
-              <span class="venue-tag tag-journal">Journal</span>
-              <span class="pub-meta">2025</span>
-            </div>
-            <h3 class="pub-title">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</h3>
-            <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*, et al.</div>
-            <div class="pub-venue">Advanced Science</div>
-            <span class="pub-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a></li>
+    <section class="section acknowledgement-section">
+      <header class="section-header">
+        <h2><span class="section-number">04</span>Acknowledgements</h2>
+      </header>
+      <div class="acknowledgements">
+        <p>I am grateful to my advisor <strong>Dr. Qiang Guan</strong>, my co-advisor <strong>Dr. Feixiong Cheng</strong>, and mentors Dr. Juan Yao, Dr. Zhaofeng Su, Dr. Sanjiang Li, and Dr. Yuan Feng.</p>
+        <p>Special thanks to the 419 Lab team and my friend <strong>Haojie Zhang</strong> for guiding me into the quantum world.</p>
+      </div>
+    </section>
 
-          <li><a class="pub-item" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">
-            <div class="pub-head">
-              <span class="venue-tag tag-conf">Conference</span>
-              <span class="pub-meta">2025</span>
-            </div>
-            <h3 class="pub-title">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</h3>
-            <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*.</div>
-            <div class="pub-venue">SC '25</div>
-            <span class="pub-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a></li>
-
-        </ul>
-      </section>
-
-      <section id="preprints" class="block">
-        <h2>Preprints</h2>
-        <p class="pub-overview">Auto-synced first-author preprints.</p>
-        <!-- Rendered from data/publications.json (preprints array) by assets/pubs.js.
-             The static items below are the no-JS / fallback snapshot. -->
-        <ul class="preprint-list" id="preprint-list">
-
-          <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener">
-            <span class="preprint-title">Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians</span>
-            <span class="preprint-meta">arXiv · 2026</span>
-            <span class="preprint-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a></li>
-
-          <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">
-            <span class="preprint-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span>
-            <span class="preprint-meta">arXiv · 2025</span>
-            <span class="preprint-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a></li>
-
-        </ul>
-      </section>
-
-      <section id="acknowledgements" class="block ack-block">
-        <h2>Acknowledgements</h2>
-        <p class="ack-text">
-          I am deeply grateful to my advisor <strong>Dr. Qiang Guan</strong>, my co-advisor <strong>Dr. Feixiong Cheng</strong>, and mentors <strong>Dr. Juan Yao</strong> (SZIQA), <strong>Dr. Zhaofeng Su</strong> (USTC), <strong>Dr. Sanjiang Li</strong> (UTS), and <strong>Dr. Yuan Feng</strong> (THU).
-        </p>
-        <p class="ack-text">
-          Special thanks to the 419 Lab team (Hang Yu, Yiyan Cheng, Rongqi Lu, Zhuoqing Xiao, Yongzhi Li, Yao Xiao) and my friend <strong>Haojie Zhang</strong> for guiding me into the quantum world.
-        </p>
-      </section>
-
-      <section id="contact" class="block">
-        <h2>Contact</h2>
-        <div class="contact-grid">
-          <ul class="contact-list">
-            <li class="contact-item">
-              <span class="contact-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              </span>
-              <span class="contact-label">Email</span>
-              <a href="mailto:yzhan135@kent.edu">yzhan135 [at] kent.edu</a>
-            </li>
-            <li class="contact-item">
-              <span class="contact-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
-              </span>
-              <span class="contact-label">Lab</span>
-              <a href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Guan’s Research Lab</a>
-            </li>
-          </ul>
-
-          <ul class="contact-list">
-             <li class="contact-item">
-              <span class="contact-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              </span>
-              <span class="contact-label">GitHub</span>
-              <a href="https://github.com/qiqi-xingyi" target="_blank" rel="noopener">github.com/qiqi-xingyi</a>
-            </li>
-            <li class="contact-item">
-              <span class="contact-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.516.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.588-1.444 3.588-3.722 0-2.016-1.091-3.722-3.588-3.722h-2.297z"/></svg>
-              </span>
-              <span class="contact-label">ORCID</span>
-              <a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener">0009-0005-9026-6906</a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-    </main>
-  </div>
+    <section class="section contact-section" id="contact">
+      <header class="section-header">
+        <h2><span class="section-number">05</span>Contact</h2>
+        <p>For research discussions and collaboration.</p>
+      </header>
+      <dl class="contact-list">
+        <div><dt>Email</dt><dd><a href="mailto:yzhan135@kent.edu">yzhan135 [at] kent.edu</a></dd></div>
+        <div><dt>Laboratory</dt><dd><a href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Guan’s Research Lab</a></dd></div>
+        <div><dt>ORCID</dt><dd><a href="https://orcid.org/0009-0005-9026-6906" target="_blank" rel="noopener">0009-0005-9026-6906</a></dd></div>
+      </dl>
+    </section>
+  </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Yuqi Zhang. <span>Built with GitHub Pages.</span></p>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Yuqi Zhang</p>
+      <p>Last updated automatically with publication data.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
-  <!-- Auto-renders #pub-list from data/publications.json (Google Scholar sync) -->
-  <script src="assets/pubs.js?v=16" defer></script>
-  <!-- Theme toggle, scroll-reveal, active-nav -->
-  <script src="assets/site.js?v=17" defer></script>
+  <script src="assets/pubs.js?v=31" defer></script>
+  <script src="assets/site.js?v=40" defer></script>
 </body>
 </html>

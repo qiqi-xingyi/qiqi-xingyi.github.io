@@ -1,30 +1,33 @@
-/* =========================================================
-   Publications loader
-   ---------------------------------------------------------
-   Fetches data/publications.json (auto-generated from Google
-   Scholar by scripts/fetch_scholar.py) and renders the list,
-   reusing the existing .pub-item / .venue-tag / .badge styles.
-
-   Progressive enhancement: if the fetch fails (offline, no JS,
-   bad JSON) the static <li> items already in index.html stay
-   visible as a fallback.
-   ========================================================= */
+/* Google Scholar publication loader with static HTML fallback. */
 (function () {
   'use strict';
 
   var TAG_CLASS = { journal: 'tag-journal', conf: 'tag-conf', wip: 'tag-wip' };
 
+  function safeUrl(url) {
+    return typeof url === 'string' && /^(https?:|mailto:)/i.test(url);
+  }
+
+  function safeAssetPath(path) {
+    return typeof path === 'string' &&
+      /^(?:\.\/)?assets\/[A-Za-z0-9_./-]+$/.test(path) &&
+      path.indexOf('..') === -1;
+  }
+
   function tagClass(type) {
     return TAG_CLASS[type] || 'tag-wip';
   }
 
-  function badgeClass(style) {
-    return style === 'blue' ? 'badge-blue' : 'badge-gray';
+  function numbered(index) {
+    return index + 1 < 10 ? '0' + (index + 1) : String(index + 1);
   }
 
-  // Only allow links we trust to be navigable; everything else is dropped.
-  function safeUrl(url) {
-    return typeof url === 'string' && /^(https?:|mailto:)/i.test(url);
+  function pickTarget(pub) {
+    var links = (pub.links || []).filter(function (link) { return safeUrl(link.url); });
+    var scholar = links.filter(function (link) {
+      return /scholar\.google\./i.test(link.url) || /scholar/i.test(link.label || '');
+    })[0];
+    return (scholar || links[0] || {}).url || null;
   }
 
   function renderHead(pub) {
@@ -38,208 +41,247 @@
       head.appendChild(tag);
     }
 
-    var meta = document.createElement('span');
-    meta.className = 'pub-meta';
-    var bits = [];
-    if (pub.year) bits.push(String(pub.year));
+    var details = [];
+    if (pub.year) details.push(String(pub.year));
     if (pub.cited_by && pub.cited_by > 0) {
-      bits.push(pub.cited_by + ' ' + (pub.cited_by === 1 ? 'citation' : 'citations'));
+      details.push(pub.cited_by + ' ' + (pub.cited_by === 1 ? 'citation' : 'citations'));
     }
-    meta.textContent = bits.join(' · ');
-    head.appendChild(meta);
+    if (details.length) {
+      var meta = document.createElement('span');
+      meta.className = 'pub-meta';
+      meta.textContent = details.join(' · ');
+      head.appendChild(meta);
+    }
     return head;
   }
 
   function renderTitle(pub) {
-    var h = document.createElement('h3');
-    h.className = 'pub-title';
-    h.textContent = pub.title || '';
-    return h;
+    var title = document.createElement('h3');
+    title.className = 'pub-title';
+    var target = pickTarget(pub);
+
+    if (target) {
+      var link = document.createElement('a');
+      link.href = target;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = pub.title || '';
+      title.appendChild(link);
+    } else {
+      title.textContent = pub.title || '';
+    }
+    return title;
   }
 
   function renderAuthors(pub) {
-    var div = document.createElement('div');
-    div.className = 'pub-authors';
+    var authorsEl = document.createElement('div');
+    authorsEl.className = 'pub-authors';
     var authors = pub.authors || [];
-    authors.forEach(function (a, i) {
-      if (i > 0) div.appendChild(document.createTextNode(', '));
-      var name = (a.name || '') + (a.corresponding ? '*' : '');
-      if (a.me) {
-        // .pub-authors strong gets the blue underline highlight in CSS.
+
+    authors.forEach(function (author, index) {
+      if (index > 0) authorsEl.appendChild(document.createTextNode(', '));
+      var name = (author.name || '') + (author.corresponding ? '*' : '');
+      if (author.me) {
         var strong = document.createElement('strong');
         strong.textContent = name;
-        div.appendChild(strong);
+        authorsEl.appendChild(strong);
       } else {
-        div.appendChild(document.createTextNode(name));
+        authorsEl.appendChild(document.createTextNode(name));
       }
     });
+
     if (pub.et_al) {
-      div.appendChild(document.createTextNode(', '));
-      var em = document.createElement('em');
-      em.textContent = 'et al.';
-      div.appendChild(em);
+      authorsEl.appendChild(document.createTextNode(', '));
+      var etAl = document.createElement('em');
+      etAl.textContent = 'et al.';
+      authorsEl.appendChild(etAl);
     }
-    return div;
+    return authorsEl;
   }
 
-  function renderVenue(pub) {
-    var div = document.createElement('div');
-    div.className = 'pub-venue';
-    div.textContent = pub.venue_short || '';
-    return div;
+  function renderVenueMark(pub) {
+    var mark = pub.venue_mark;
+    if (!mark || typeof mark !== 'object') return null;
+
+    var label = mark.alt || pub.venue_short || 'Publication venue';
+    var container = document.createElement('div');
+    container.setAttribute('aria-label', label);
+
+    if (mark.type === 'image' && safeAssetPath(mark.src)) {
+      container.className = 'venue-mark venue-mark-image';
+      var image = document.createElement('img');
+      image.src = mark.src;
+      image.alt = '';
+      image.setAttribute('aria-hidden', 'true');
+      container.appendChild(image);
+      return container;
+    }
+
+    if (mark.type === 'wordmark' && Array.isArray(mark.lines)) {
+      container.className = 'venue-mark venue-mark-wordmark';
+      mark.lines.slice(0, 2).forEach(function (line) {
+        var span = document.createElement('span');
+        span.textContent = String(line || '');
+        container.appendChild(span);
+      });
+      return container.childNodes.length ? container : null;
+    }
+
+    return null;
   }
 
   function renderLinks(pub) {
-    var div = document.createElement('div');
-    div.className = 'pub-links';
-    (pub.links || []).forEach(function (l) {
-      if (!safeUrl(l.url)) return;
-      var a = document.createElement('a');
-      a.href = l.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'badge ' + badgeClass(l.style);
-      a.textContent = l.label || 'Link';
-      div.appendChild(a);
+    var linksEl = document.createElement('div');
+    linksEl.className = 'pub-links';
+
+    (pub.links || []).forEach(function (item) {
+      if (!safeUrl(item.url)) return;
+      var link = document.createElement('a');
+      link.href = item.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'badge ' + (item.style === 'blue' ? 'badge-blue' : 'badge-gray');
+      link.textContent = (item.label || 'Link') + ' ↗';
+      linksEl.appendChild(link);
     });
-    return div;
+    return linksEl;
   }
 
-  // Prefer the Google Scholar link for the whole-card click target; fall back
-  // to the first http(s) link in the publication's links list.
-  function pickTarget(pub) {
-    var links = (pub.links || []).filter(function (l) { return safeUrl(l.url); });
-    var scholar = links.filter(function (l) {
-      return /scholar\.google\./i.test(l.url) || /scholar/i.test(l.label || '');
-    })[0];
-    return (scholar || links[0] || {}).url || null;
-  }
+  function renderPublication(pub, index) {
+    var item = document.createElement('li');
+    var article = document.createElement('article');
+    article.className = 'pub-item';
 
-  function renderArrow() {
-    var span = document.createElement('span');
-    span.className = 'pub-arrow';
-    span.setAttribute('aria-hidden', 'true');
-    span.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
-    return span;
-  }
+    var marker = document.createElement('div');
+    marker.className = 'pub-index';
+    marker.setAttribute('aria-hidden', 'true');
+    marker.textContent = numbered(index);
+    article.appendChild(marker);
 
-  function renderItem(pub) {
-    var url = pickTarget(pub);
-    var el = document.createElement(url ? 'a' : 'li');
-    if (url) {
-      el.href = url;
-      el.target = '_blank';
-      el.rel = 'noopener';
+    var venueMark = renderVenueMark(pub);
+    if (venueMark) {
+      article.appendChild(venueMark);
+    } else {
+      article.classList.add('pub-item-no-mark');
     }
-    el.className = 'pub-item';
-    el.appendChild(renderHead(pub));
-    el.appendChild(renderTitle(pub));
-    el.appendChild(renderAuthors(pub));
-    el.appendChild(renderVenue(pub));
-    if (url) el.appendChild(renderArrow());
-    // Wrap <a> in <li> so the surrounding <ul> stays valid HTML.
-    if (url) {
-      var li = document.createElement('li');
-      li.appendChild(el);
-      return li;
-    }
-    return el;
+
+    var body = document.createElement('div');
+    body.className = 'pub-body';
+    body.appendChild(renderHead(pub));
+    body.appendChild(renderTitle(pub));
+    body.appendChild(renderAuthors(pub));
+
+    var footer = document.createElement('div');
+    footer.className = 'pub-footer';
+    var venue = document.createElement('span');
+    venue.className = 'pub-venue';
+    venue.textContent = pub.venue_short || '';
+    footer.appendChild(venue);
+
+    var links = renderLinks(pub);
+    if (links.childNodes.length) footer.appendChild(links);
+    body.appendChild(footer);
+
+    article.appendChild(body);
+    item.appendChild(article);
+    return item;
   }
 
-  function render(listEl, publications, source) {
-    var frag = document.createDocumentFragment();
-    publications.forEach(function (pub) {
-      frag.appendChild(renderItem(pub));
+  function renderPublications(list, publications, source) {
+    var fragment = document.createDocumentFragment();
+    publications.forEach(function (pub, index) {
+      fragment.appendChild(renderPublication(pub, index));
     });
-    listEl.innerHTML = '';
-    listEl.appendChild(frag);
-    // Marker so you can confirm in DevTools that the live JSON (not the
-    // static fallback) is what's on screen.
-    listEl.setAttribute('data-source', source || 'unknown');
-    // The CSS pre-hides .pub-item via `html.js :is(.pub-item) { opacity:0 }` to
-    // kill the first-paint flash. site.js's IntersectionObserver only observed
-    // the static fallback li's that were on the page before this fetch
-    // replaced them — these freshly-inserted items would otherwise stay at
-    // opacity:0 forever. Mark them visible.
-    Array.prototype.forEach.call(listEl.querySelectorAll('.pub-item'), function (el) {
-      el.classList.add('is-visible');
+    list.innerHTML = '';
+    list.appendChild(fragment);
+    list.setAttribute('data-source', source || 'unknown');
+    Array.prototype.forEach.call(list.querySelectorAll('.pub-item'), function (item) {
+      item.classList.add('is-visible');
     });
   }
 
-  /* ---------- Preprints: compact row (title + venue·year + arrow) ---------- */
-  function renderPreprintItem(pre) {
-    var url = safeUrl(pre.url) ? pre.url : null;
-    var li = document.createElement('li');
-    li.className = 'preprint-item';
+  function renderPreprint(preprint) {
+    var item = document.createElement('li');
+    item.className = 'preprint-item';
+    var target = safeUrl(preprint.url) ? preprint.url : null;
+    var row = document.createElement(target ? 'a' : 'div');
+    row.className = 'preprint-row';
 
-    var inner = document.createElement(url ? 'a' : 'div');
-    if (url) {
-      inner.href = url;
-      inner.target = '_blank';
-      inner.rel = 'noopener';
+    if (target) {
+      row.href = target;
+      row.target = '_blank';
+      row.rel = 'noopener';
     }
-    inner.className = 'preprint-row';
+
+    var year = document.createElement('span');
+    year.className = 'preprint-year';
+    year.textContent = preprint.year || '—';
+    row.appendChild(year);
 
     var title = document.createElement('span');
     title.className = 'preprint-title';
-    title.textContent = pre.title || '';
-    inner.appendChild(title);
+    title.textContent = preprint.title || '';
+    row.appendChild(title);
 
     var meta = document.createElement('span');
     meta.className = 'preprint-meta';
-    var bits = [];
-    if (pre.venue_short) bits.push(pre.venue_short);
-    if (pre.year) bits.push(String(pre.year));
-    meta.textContent = bits.join(' · ');
-    inner.appendChild(meta);
+    meta.textContent = preprint.venue_short || 'Preprint';
+    row.appendChild(meta);
 
-    if (url) {
+    if (target) {
       var arrow = document.createElement('span');
       arrow.className = 'preprint-arrow';
       arrow.setAttribute('aria-hidden', 'true');
-      arrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
-      inner.appendChild(arrow);
+      arrow.textContent = '↗';
+      row.appendChild(arrow);
     }
-    li.appendChild(inner);
-    return li;
+
+    item.appendChild(row);
+    return item;
   }
 
-  function renderPreprints(listEl, preprints, source) {
-    var frag = document.createDocumentFragment();
-    preprints.forEach(function (pre) { frag.appendChild(renderPreprintItem(pre)); });
-    listEl.innerHTML = '';
-    listEl.appendChild(frag);
-    listEl.setAttribute('data-source', source || 'unknown');
+  function renderPreprints(list, preprints, source) {
+    var fragment = document.createDocumentFragment();
+    preprints.forEach(function (preprint) {
+      fragment.appendChild(renderPreprint(preprint));
+    });
+    list.innerHTML = '';
+    list.appendChild(fragment);
+    list.setAttribute('data-source', source || 'unknown');
+    Array.prototype.forEach.call(list.querySelectorAll('.preprint-item'), function (item) {
+      item.classList.add('is-visible');
+    });
   }
 
   function init() {
-    var listEl = document.getElementById('pub-list');
-    var preEl = document.getElementById('preprint-list');
-    if (!listEl && !preEl) return;
+    var publicationsList = document.getElementById('pub-list');
+    var preprintsList = document.getElementById('preprint-list');
+    if (!publicationsList && !preprintsList) return;
+
     fetch('data/publications.json', { cache: 'no-cache' })
-      .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
       })
       .then(function (data) {
-        var pubs = (data && data.publications) || [];
+        var publications = (data && data.publications) || [];
         var preprints = (data && data.preprints) || [];
         var source = (data && data.meta && data.meta.source) || 'live';
-        if (listEl && pubs.length) render(listEl, pubs, source);
-        if (preEl) {
+
+        if (publicationsList && publications.length) {
+          renderPublications(publicationsList, publications, source);
+        }
+        if (preprintsList) {
           if (preprints.length) {
-            renderPreprints(preEl, preprints, source);
+            renderPreprints(preprintsList, preprints, source);
           } else {
-            // Live data returned zero preprints — hide the whole section
-            // rather than leaving the static fallback stale.
             var section = document.getElementById('preprints');
             if (section) section.hidden = true;
           }
         }
       })
-      .catch(function (err) {
-        // Leave the static <li> fallback already in the HTML untouched.
-        console.error('[publications] load failed, keeping static fallback:', err);
+      .catch(function (error) {
+        console.error('[publications] load failed; keeping static fallback:', error);
       });
   }
 

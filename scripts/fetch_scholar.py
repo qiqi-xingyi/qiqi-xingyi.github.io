@@ -216,6 +216,11 @@ def preprint_url(cid, ov, author_id):
     return None
 
 
+def title_key(title):
+    """Stable key for matching a manually curated publication to Scholar."""
+    return re.sub(r"\s+", " ", (title or "").strip()).lower()
+
+
 def transform(articles, overrides, author_id):
     """Split first-author articles into (publications, preprints).
 
@@ -228,6 +233,8 @@ def transform(articles, overrides, author_id):
     me_keys = {name_key(a) for a in overrides.get("author_aliases", []) if name_key(a)}
     journals = {k.lower(): v for k, v in (overrides.get("journals") or {}).items()}
     pub_over = overrides.get("publications") or {}
+    manual_publications = [p for p in (overrides.get("manual_publications") or [])
+                           if isinstance(p, dict) and p.get("title")]
 
     pubs = []
     preprints = []
@@ -294,15 +301,78 @@ def transform(articles, overrides, author_id):
             "cited_by": cited_by_count(art),
             "links": links,
         }
+        if isinstance(ov.get("venue_mark"), dict):
+            pub["venue_mark"] = dict(ov["venue_mark"])
         if ov.get("status"):
             pub["status"] = ov["status"]
         pubs.append(pub)
+
+    # Accepted papers can appear on arXiv before Scholar exposes conference
+    # metadata. Keep those entries in the published list, then merge with the
+    # Scholar version automatically once it arrives (matched by exact title).
+    for manual in manual_publications:
+        manual_title_key = title_key(manual.get("title"))
+        corr_keys = {name_key(a) for a in manual.get("corresponding", [])}
+        manual_authors = authors_from_override(
+            manual.get("authors") or [], full_names, me_keys, corr_keys
+        )
+        if not manual_authors or not manual_authors[0].get("me"):
+            continue
+
+        # If Scholar still calls the work a preprint, the accepted manual entry
+        # replaces it so the paper never appears in both sections.
+        preprints = [p for p in preprints if title_key(p.get("title")) != manual_title_key]
+        existing = next(
+            (p for p in pubs if title_key(p.get("title")) == manual_title_key), None
+        )
+        manual_links = [dict(l) for l in manual.get("links", [])]
+
+        if existing:
+            existing["authors"] = manual_authors
+            for field in ("venue_tag", "venue_type", "venue_short", "year", "status"):
+                if manual.get(field) is not None:
+                    existing[field] = manual[field]
+            if isinstance(manual.get("venue_mark"), dict):
+                existing["venue_mark"] = dict(manual["venue_mark"])
+            existing["links"] = manual_links + [
+                link for link in existing.get("links", [])
+                if link.get("url") not in {item.get("url") for item in manual_links}
+            ]
+            continue
+
+        manual_pub = {
+            "citation_id": manual.get("citation_id") or "manual:" + manual_title_key,
+            "title": manual.get("title") or "",
+            "authors": manual_authors,
+            "et_al": bool(manual.get("et_al", False)),
+            "venue_tag": manual.get("venue_tag") or "Conference",
+            "venue_type": manual.get("venue_type") or "conf",
+            "venue_short": manual.get("venue_short") or "—",
+            "year": int(manual.get("year") or 0),
+            "cited_by": int(manual.get("cited_by") or 0),
+            "links": manual_links,
+        }
+        if isinstance(manual.get("venue_mark"), dict):
+            manual_pub["venue_mark"] = dict(manual["venue_mark"])
+        if manual.get("status"):
+            manual_pub["status"] = manual["status"]
+        pubs.append(manual_pub)
 
     # Ordering: explicit overrides.order first for both, then newest.
     # pubs additionally use cited_by as tiebreak; preprints don't have citations.
     order = overrides.get("order") or []
     idx = {cid: i for i, cid in enumerate(order)}
-    pubs.sort(key=lambda p: (idx.get(p["citation_id"], 10 ** 6),
+    manual_ids_by_title = {
+        title_key(p.get("title")): p.get("citation_id")
+        for p in manual_publications if p.get("citation_id")
+    }
+
+    def publication_order(p):
+        direct = idx.get(p["citation_id"], 10 ** 6)
+        manual = idx.get(manual_ids_by_title.get(title_key(p.get("title"))), 10 ** 6)
+        return min(direct, manual)
+
+    pubs.sort(key=lambda p: (publication_order(p),
                              -(p["year"] or 0), -(p["cited_by"] or 0)))
     preprints.sort(key=lambda p: (idx.get(p["citation_id"], 10 ** 6),
                                   -(p["year"] or 0)))

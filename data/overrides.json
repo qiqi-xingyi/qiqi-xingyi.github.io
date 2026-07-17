@@ -1,8 +1,9 @@
 {
   "_README": [
     "Supplies the bits Google Scholar can't expose. scripts/fetch_scholar.py scrapes Scholar, then merges this file on top, keyed by citation_id.",
-    "Day to day you only touch: 'author_full_names' (a new collaborator showing up as initials), and 'publications' (per-paper venue label / corresponding authors / extra links).",
+    "Day to day you only touch: 'author_full_names' (a new collaborator showing up as initials), and 'publications' (per-paper venue label / optional venue mark / corresponding authors / extra links).",
     "Sync policy — first-author only in both sections. Published journal/conference → full-detail Publications cards. arXiv preprints + under-review → compact Preprints rows (title · venue · year, no authors/citations).",
+    "Use 'manual_publications' for accepted papers whose conference metadata has not reached Scholar yet; matching by title prevents a duplicate when Scholar catches up.",
     "Preprints don't need overrides in most cases; per-paper 'venue_short' and 'links' still work if you want to customize a row.",
     "Corresponding authors are per-paper only. If a paper's entry doesn't list 'corresponding', no author is marked (no global default anymore).",
     "By design we don't carry impact factors, page numbers, or long conference titles — the Publications layout shows venue + year + citations, all auto-tracked from Scholar."
@@ -19,12 +20,47 @@
     "Qiang Guan": "Qiang Guan",
     "Feixiong Cheng": "Feixiong Cheng",
     "Cheng-Chang Lu": "Cheng-Chang Lu",
-    "Bo Fang": "Bo Fang"
+    "Bo Fang": "Bo Fang",
+    "Jieyang Chen": "Jieyang Chen",
+    "Sherry Fang": "Sherry Fang",
+    "Siwei Chen": "Siwei Chen",
+    "Junhan Zhao": "Junhan Zhao"
   },
 
   "order": [
+    "arxiv:2607.06971",
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC"
+  ],
+
+  "manual_publications": [
+    {
+      "citation_id": "arxiv:2607.06971",
+      "title": "Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware",
+      "authors": [
+        "Yuqi Zhang",
+        "Bo Fang",
+        "Yuxin Yang",
+        "Feixiong Cheng",
+        "Jieyang Chen",
+        "Sherry Fang",
+        "Siwei Chen",
+        "Junhan Zhao",
+        "Qiang Guan"
+      ],
+      "venue_tag": "Conference",
+      "venue_short": "SC '26",
+      "venue_type": "conf",
+      "venue_mark": {
+        "type": "image",
+        "src": "assets/img/venues/sc26.svg",
+        "alt": "SC26"
+      },
+      "year": 2026,
+      "links": [
+        { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" }
+      ]
+    }
   ],
 
   "publications": {
@@ -32,6 +68,11 @@
       "venue_tag": "Journal",
       "venue_short": "Advanced Science",
       "venue_type": "journal",
+      "venue_mark": {
+        "type": "wordmark",
+        "lines": ["Advanced", "Science"],
+        "alt": "Advanced Science"
+      },
       "corresponding": ["Qiang Guan", "Feixiong Cheng"],
       "et_al": true,
       "links": [
@@ -43,6 +84,11 @@
       "venue_tag": "Conference",
       "venue_short": "SC '25",
       "venue_type": "conf",
+      "venue_mark": {
+        "type": "image",
+        "src": "assets/img/venues/sc25.svg",
+        "alt": "SC25"
+      },
       "corresponding": ["Qiang Guan"],
       "et_al": false,
       "links": [
