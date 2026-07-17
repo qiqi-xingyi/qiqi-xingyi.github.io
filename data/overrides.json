@@ -28,14 +28,14 @@
   },
 
   "order": [
-    "arxiv:2607.06971",
+    "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC"
   ],
 
   "manual_publications": [
     {
-      "citation_id": "arxiv:2607.06971",
+      "citation_id": "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
       "title": "Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware",
       "authors": [
         "Yuqi Zhang",
@@ -58,7 +58,8 @@
       },
       "year": 2026,
       "links": [
-        { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" }
+        { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" },
+        { "label": "Google Scholar", "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC", "style": "gray" }
       ]
     }
   ],

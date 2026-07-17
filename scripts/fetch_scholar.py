@@ -62,6 +62,8 @@ def build_authors(raw_authors, full_names, me_keys, corr_keys):
     expanding abbreviations to full names and flagging me / corresponding."""
     out = []
     for raw in [a.strip() for a in (raw_authors or "").split(",") if a.strip()]:
+        if raw in {"...", "…"}:
+            continue
         k = name_key(raw)
         entry = {"name": full_names.get(k, raw)}
         if k and k in me_keys:
