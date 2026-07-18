@@ -38,7 +38,8 @@
           "name": "Junhan Zhao"
         },
         {
-          "name": "Qiang Guan"
+          "name": "Qiang Guan",
+          "corresponding": true
         }
       ],
       "et_al": false,
