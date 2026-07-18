@@ -42,7 +42,7 @@
         }
       ],
       "et_al": false,
-      "venue_tag": "Conference",
+      "venue_tag": "Accepted at SC '26",
       "venue_type": "conf",
       "venue_short": "SC '26",
       "venue_mark": {
@@ -53,6 +53,7 @@
       },
       "year": 2026,
       "cited_by": 0,
+      "status": "To appear",
       "links": [
         {
           "label": "arXiv",
@@ -68,7 +69,7 @@
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
-      "title": "A Quantum Framework for Protein Binding‐Site Structure Prediction on Utility‐Level Quantum Processors",
+      "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
       "authors": [
         {
           "name": "Yuqi Zhang",
@@ -78,13 +79,13 @@
           "name": "Yuxin Yang"
         },
         {
-          "name": "W Martin"
+          "name": "William Martin"
         },
         {
-          "name": "K Lin"
+          "name": "Kingsten Lin"
         },
         {
-          "name": "Z Wang"
+          "name": "Zixu Wang"
         },
         {
           "name": "Cheng-Chang Lu"
@@ -94,9 +95,20 @@
         },
         {
           "name": "Ruth Nussinov"
+        },
+        {
+          "name": "Joseph Loscalzo"
+        },
+        {
+          "name": "Qiang Guan",
+          "corresponding": true
+        },
+        {
+          "name": "Feixiong Cheng",
+          "corresponding": true
         }
       ],
-      "et_al": true,
+      "et_al": false,
       "venue_tag": "Journal",
       "venue_type": "journal",
       "venue_short": "Advanced Science",
@@ -125,7 +137,7 @@
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
-      "title": "QDockBank: A dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
+      "title": "QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
       "authors": [
         {
           "name": "Yuqi Zhang",
@@ -188,14 +200,14 @@
       "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
       "year": 2026,
       "venue_short": "arXiv",
-      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC"
+      "url": "https://arxiv.org/abs/2603.06963"
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
       "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
       "year": 2025,
       "venue_short": "arXiv",
-      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC"
+      "url": "https://arxiv.org/abs/2510.06413"
     }
   ]
 }

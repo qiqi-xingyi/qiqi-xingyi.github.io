@@ -1,7 +1,7 @@
 {
   "_README": [
     "Supplies the bits Google Scholar can't expose. scripts/fetch_scholar.py scrapes Scholar, then merges this file on top, keyed by citation_id.",
-    "Day to day you only touch: 'author_full_names' (a new collaborator showing up as initials), and 'publications' (per-paper venue label / optional venue mark / corresponding authors / extra links).",
+    "The curated 'publications' entries are authoritative for titles, authors, venues, years, statuses, and canonical links. Scholar refreshes citation counts without rewriting those fields.",
     "Sync policy — first-author only in both sections. Published journal/conference → full-detail Publications cards. arXiv preprints + under-review → compact Preprints rows (title · venue · year, no authors/citations).",
     "Use 'manual_publications' for accepted papers whose conference metadata has not reached Scholar yet; matching by title prevents a duplicate when Scholar catches up.",
     "Preprints don't need overrides in most cases; per-paper 'venue_short' and 'links' still work if you want to customize a row.",
@@ -24,7 +24,10 @@
     "Jieyang Chen": "Jieyang Chen",
     "Sherry Fang": "Sherry Fang",
     "Siwei Chen": "Siwei Chen",
-    "Junhan Zhao": "Junhan Zhao"
+    "Junhan Zhao": "Junhan Zhao",
+    "William Martin": "William Martin",
+    "Kingsten Lin": "Kingsten Lin",
+    "Zixu Wang": "Zixu Wang"
   },
 
   "order": [
@@ -48,9 +51,10 @@
         "Junhan Zhao",
         "Qiang Guan"
       ],
-      "venue_tag": "Conference",
+      "venue_tag": "Accepted at SC '26",
       "venue_short": "SC '26",
       "venue_type": "conf",
+      "status": "To appear",
       "venue_mark": {
         "type": "image",
         "src_light": "assets/img/venues/sc26-light.png",
@@ -67,25 +71,51 @@
 
   "publications": {
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC": {
+      "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
+      "authors": [
+        "Yuqi Zhang",
+        "Yuxin Yang",
+        "William Martin",
+        "Kingsten Lin",
+        "Zixu Wang",
+        "Cheng-Chang Lu",
+        "Weiwen Jiang",
+        "Ruth Nussinov",
+        "Joseph Loscalzo",
+        "Qiang Guan",
+        "Feixiong Cheng"
+      ],
       "venue_tag": "Journal",
       "venue_short": "Advanced Science",
       "venue_type": "journal",
+      "year": 2025,
       "venue_mark": {
         "type": "wordmark",
         "lines": ["Advanced", "Science"],
         "alt": "Advanced Science"
       },
       "corresponding": ["Qiang Guan", "Feixiong Cheng"],
-      "et_al": true,
+      "et_al": false,
       "links": [
         { "label": "DOI", "url": "https://doi.org/10.1002/advs.202513641", "style": "blue" }
       ]
     },
 
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC": {
+      "title": "QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
+      "authors": [
+        "Yuqi Zhang",
+        "Yuxin Yang",
+        "Cheng-Chang Lu",
+        "Weiwen Jiang",
+        "Feixiong Cheng",
+        "Bo Fang",
+        "Qiang Guan"
+      ],
       "venue_tag": "Conference",
       "venue_short": "SC '25",
       "venue_type": "conf",
+      "year": 2025,
       "venue_mark": {
         "type": "image",
         "src_light": "assets/img/venues/sc25-light.png",
@@ -101,7 +131,21 @@
     },
 
     "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
-      "venue_short": "arXiv"
+      "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
+      "venue_short": "arXiv",
+      "year": 2025,
+      "links": [
+        { "label": "arXiv", "url": "https://arxiv.org/abs/2510.06413", "style": "blue" }
+      ]
+    },
+
+    "Q7Ybs-gAAAAJ:Se3iqnhoufwC": {
+      "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
+      "venue_short": "arXiv",
+      "year": 2026,
+      "links": [
+        { "label": "arXiv", "url": "https://arxiv.org/abs/2603.06963", "style": "blue" }
+      ]
     }
   }
 }

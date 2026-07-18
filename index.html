@@ -15,10 +15,10 @@
   </script>
 
   <meta name="keywords" content="Yuqi Zhang, Quantum Biological Computing, Quantum Computing, Drug Discovery, Quantum-HPC, Kent State University, Cleveland Clinic, PhD">
-  <meta name="description" content="Yuqi Zhang is a PhD student in Quantum Biological Computing at Kent State University and Cleveland Clinic.">
+  <meta name="description" content="Yuqi Zhang develops hardware-executed quantum methods and quantum–HPC systems for computational biology.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Yuqi Zhang | Quantum Biological Computing">
-  <meta property="og:description" content="Research in quantum computing, biological structure, drug discovery, and quantum-HPC systems.">
+  <meta property="og:description" content="Hardware-executed quantum methods and quantum–HPC systems for computational biology.">
   <meta property="og:url" content="https://yuqizhang.me/">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
@@ -29,11 +29,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=52">
+  <link rel="stylesheet" href="assets/style.css?v=53">
   <link rel="icon" href="assets/img/icon.png">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#about">Yuqi Zhang <span>张钰奇</span></a>
@@ -41,8 +42,7 @@
         <nav class="nav" aria-label="Primary navigation">
           <a href="#about">About</a>
           <a href="#research">Research</a>
-          <a href="#pubs">Publications</a>
-          <a href="#preprints">Preprints</a>
+          <a href="#pubs">Papers</a>
           <a href="#contact">Contact</a>
         </nav>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
@@ -52,7 +52,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="main-content">
     <section class="intro" id="about">
       <div class="intro-main">
         <p class="discipline">Quantum Computing · Computational Biology · Scientific Systems</p>
@@ -62,14 +62,15 @@
 
         <div class="bio">
           <p>
-            I work at the intersection of quantum computing and the life sciences. My research
-            focuses on computational methods for biological structure and drug discovery, with
-            particular attention to what can be executed and evaluated on real quantum hardware.
+            I study how quantum computers can become useful scientific instruments for
+            computational biology. My work focuses on hardware-executed methods for protein
+            structure, binding-site prediction, and molecular docking, together with the
+            quantum–HPC systems needed to evaluate them at scale.
           </p>
           <p>
-            I am jointly affiliated with Kent State University, advised by Dr. Qiang Guan, and
-            Cleveland Clinic, co-advised by Dr. Feixiong Cheng. Previously, I was selected for the
-            2023 Quantum Talents Climbing Program at SZIQA, mentored by Dr. Juan Yao.
+            I am advised by Dr. Qiang Guan at Kent State University and co-advised by
+            Dr. Feixiong Cheng at Cleveland Clinic. Previously, I was selected for the 2023
+            Quantum Talents Climbing Program at SZIQA, mentored by Dr. Juan Yao.
           </p>
         </div>
 
@@ -95,20 +96,16 @@
 
       <div class="research-list">
         <article>
+          <h3>Quantum methods for biological structure</h3>
+          <p>Quantum representations and algorithms for protein conformations, binding-site prediction, and molecular docking.</p>
+        </article>
+        <article>
           <h3>Hardware-executed quantum biocomputing</h3>
-          <p>Biological structure workflows designed for execution on real quantum processors, with molecular representations and physical constraints retained throughout the pipeline.</p>
+          <p>End-to-end biological workflows designed for real quantum processors, with physical constraints, measurement decoding, and device-level evaluation retained throughout the pipeline.</p>
         </article>
         <article>
-          <h3>Quantum bioinformatics</h3>
-          <p>Quantum-aware representations of biological sequences, structures, conformational states, and molecular interaction patterns.</p>
-        </article>
-        <article>
-          <h3>Quantum–HPC systems</h3>
-          <p>Integration of quantum execution, optimization, post-processing, and scientific data pipelines within high-performance computing environments.</p>
-        </article>
-        <article>
-          <h3>Quantum methods for drug discovery</h3>
-          <p>Applications to protein conformations, binding-site prediction, molecular docking, and ligand-response modeling.</p>
+          <h3>Quantum–HPC scientific systems</h3>
+          <p>Systems that connect quantum execution with optimization, post-processing, and high-performance scientific data pipelines.</p>
         </article>
       </div>
     </section>
@@ -125,10 +122,10 @@
             <div class="pub-index" aria-hidden="true">01</div>
             <div class="venue-mark venue-mark-image" aria-label="SC26"><img class="venue-logo venue-logo-light" src="assets/img/venues/sc26-light.png" alt="" aria-hidden="true"><img class="venue-logo venue-logo-dark" src="assets/img/venues/sc26-dark.png" alt="" aria-hidden="true"></div>
             <div class="pub-body">
-              <div class="pub-head"><span class="venue-tag tag-conf">Conference</span><span class="pub-meta">2026</span></div>
+              <div class="pub-head"><span class="venue-tag tag-conf">Accepted at SC '26</span><span class="pub-meta">2026 · To appear</span></div>
               <h3 class="pub-title"><a href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware</a></h3>
               <div class="pub-authors"><strong>Yuqi Zhang</strong>, Bo Fang, Yuxin Yang, Feixiong Cheng, Jieyang Chen, Sherry Fang, Siwei Chen, Junhan Zhao, Qiang Guan</div>
-              <div class="pub-footer"><span class="pub-venue">SC '26</span><div class="pub-links"><a class="badge badge-blue" href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">arXiv ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener">Scholar ↗</a></div></div>
+              <div class="pub-footer"><span class="pub-venue">SC '26</span><div class="pub-links"><a class="badge badge-blue" href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">arXiv ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener">Google Scholar ↗</a></div></div>
             </div>
           </article>
         </li>
@@ -137,10 +134,10 @@
             <div class="pub-index" aria-hidden="true">02</div>
             <div class="venue-mark venue-mark-wordmark" aria-label="Advanced Science"><span>Advanced</span><span>Science</span></div>
             <div class="pub-body">
-              <div class="pub-head"><span class="venue-tag tag-journal">Journal</span><span class="pub-meta">2025 · 9 citations</span></div>
-              <h3 class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</a></h3>
-              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*, <em>et al.</em></div>
-              <div class="pub-footer"><span class="pub-venue">Advanced Science</span><div class="pub-links"><a class="badge badge-blue" href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">DOI ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">Scholar ↗</a></div></div>
+              <div class="pub-head"><span class="venue-tag tag-journal">Journal</span><span class="pub-meta">2025 · 11 citations</span></div>
+              <h3 class="pub-title"><a href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</a></h3>
+              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, William Martin, Kingsten Lin, Zixu Wang, Cheng-Chang Lu, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*</div>
+              <div class="pub-footer"><span class="pub-venue">Advanced Science</span><div class="pub-links"><a class="badge badge-blue" href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">DOI ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">Google Scholar ↗</a></div></div>
             </div>
           </article>
         </li>
@@ -149,14 +146,15 @@
             <div class="pub-index" aria-hidden="true">03</div>
             <div class="venue-mark venue-mark-image" aria-label="SC25"><img class="venue-logo venue-logo-light" src="assets/img/venues/sc25-light.png" alt="" aria-hidden="true"><img class="venue-logo venue-logo-dark" src="assets/img/venues/sc25-dark.png" alt="" aria-hidden="true"></div>
             <div class="pub-body">
-              <div class="pub-head"><span class="venue-tag tag-conf">Conference</span><span class="pub-meta">2025 · 4 citations</span></div>
-              <h3 class="pub-title"><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</a></h3>
-              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*.</div>
-              <div class="pub-footer"><span class="pub-venue">SC '25</span><div class="pub-links"><a class="badge badge-blue" href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">ACM DL ↗</a><a class="badge badge-gray" href="https://github.com/qiqi-xingyi/QDockBank_" target="_blank" rel="noopener">Artifacts ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">Scholar ↗</a></div></div>
+              <div class="pub-head"><span class="venue-tag tag-conf">Conference</span><span class="pub-meta">2025 · 5 citations</span></div>
+              <h3 class="pub-title"><a href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</a></h3>
+              <div class="pub-authors"><strong>Yuqi Zhang</strong>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*</div>
+              <div class="pub-footer"><span class="pub-venue">SC '25</span><div class="pub-links"><a class="badge badge-blue" href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">ACM DL ↗</a><a class="badge badge-gray" href="https://github.com/qiqi-xingyi/QDockBank_" target="_blank" rel="noopener">Artifacts ↗</a><a class="badge badge-gray" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">Google Scholar ↗</a></div></div>
             </div>
           </article>
         </li>
       </ul>
+      <p class="author-note">* Corresponding author</p>
     </section>
 
     <section class="section" id="preprints">
@@ -166,8 +164,8 @@
       </header>
 
       <ul class="preprint-list" id="preprint-list">
-        <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener"><span class="preprint-year">2026</span><span class="preprint-title">Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
-        <li class="preprint-item"><a class="preprint-row" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener"><span class="preprint-year">2025</span><span class="preprint-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
+        <li class="preprint-item"><a class="preprint-row" href="https://arxiv.org/abs/2603.06963" target="_blank" rel="noopener"><span class="preprint-year">2026</span><span class="preprint-title">Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
+        <li class="preprint-item"><a class="preprint-row" href="https://arxiv.org/abs/2510.06413" target="_blank" rel="noopener"><span class="preprint-year">2025</span><span class="preprint-title">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</span><span class="preprint-meta">arXiv</span><span class="preprint-arrow" aria-hidden="true">↗</span></a></li>
       </ul>
     </section>
 
@@ -197,14 +195,14 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span id="year"></span> Yuqi Zhang</p>
-      <p>Last updated automatically with publication data.</p>
+      <p id="publication-update">Publication data updated July 13, 2026.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <script src="assets/pubs.js?v=32" defer></script>
+  <script src="assets/pubs.js?v=33" defer></script>
   <script src="assets/site.js?v=40" defer></script>
 </body>
 </html>

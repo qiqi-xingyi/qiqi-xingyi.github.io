@@ -27,7 +27,10 @@
     var scholar = links.filter(function (link) {
       return /scholar\.google\./i.test(link.url) || /scholar/i.test(link.label || '');
     })[0];
-    return (scholar || links[0] || {}).url || null;
+    var canonical = links.filter(function (link) {
+      return !(/scholar\.google\./i.test(link.url) || /scholar/i.test(link.label || ''));
+    })[0];
+    return (canonical || scholar || {}).url || null;
   }
 
   function renderHead(pub) {
@@ -43,6 +46,7 @@
 
     var details = [];
     if (pub.year) details.push(String(pub.year));
+    if (pub.status) details.push(String(pub.status));
     if (pub.cited_by && pub.cited_by > 0) {
       details.push(pub.cited_by + ' ' + (pub.cited_by === 1 ? 'citation' : 'citations'));
     }
@@ -268,6 +272,17 @@
     });
   }
 
+  function renderUpdateDate(value) {
+    var target = document.getElementById('publication-update');
+    if (!target || !value) return;
+    var date = new Date(value);
+    if (isNaN(date.getTime())) return;
+    var formatted = new Intl.DateTimeFormat('en-US', {
+      month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+    }).format(date);
+    target.textContent = 'Publication data updated ' + formatted + '.';
+  }
+
   function init() {
     var publicationsList = document.getElementById('pub-list');
     var preprintsList = document.getElementById('preprint-list');
@@ -282,6 +297,7 @@
         var publications = (data && data.publications) || [];
         var preprints = (data && data.preprints) || [];
         var source = (data && data.meta && data.meta.source) || 'live';
+        renderUpdateDate(data && data.meta && data.meta.generated_at);
 
         if (publicationsList && publications.length) {
           renderPublications(publicationsList, publications, source);

@@ -2,11 +2,10 @@
 """
 Regenerate data/publications.json from Google Scholar via SerpApi.
 
-Scholar gives us the objective metadata (title, authors, venue, year,
-citation count, link). data/overrides.json supplies everything Scholar
-does NOT expose (impact factors, corresponding-author marks, full author
-names, rich venue text, extra links). This script fetches the former and
-merges the latter.
+Scholar supplies citation counts and discovery metadata. data/overrides.json
+is the authoritative source for the public-facing title, author list, venue,
+year, status, and canonical links of curated papers. This keeps the page stable
+when Scholar abbreviates or changes bibliographic fields.
 
 Usage (CI / online):
     SERPAPI_KEY=xxxxx python scripts/fetch_scholar.py
@@ -259,7 +258,11 @@ def transform(articles, overrides, author_id):
             continue
 
         publication = art.get("publication") or ""
-        year = parse_year(art)
+        title = ov.get("title") or art.get("title") or ""
+        try:
+            year = int(ov.get("year") or parse_year(art))
+        except (TypeError, ValueError):
+            year = parse_year(art)
         jmeta = journals.get(publication.split(",")[0].strip().lower()) if publication else None
 
         venue_type = ov.get("venue_type") or (jmeta.get("type") if jmeta else None) \
@@ -269,7 +272,7 @@ def transform(articles, overrides, author_id):
         if venue_type == "wip":
             preprints.append({
                 "citation_id": cid,
-                "title": art.get("title") or "",
+                "title": title,
                 "year": year,
                 "venue_short": preprint_venue_short(publication, ov),
                 "url": preprint_url(cid, ov, author_id),
@@ -293,7 +296,7 @@ def transform(articles, overrides, author_id):
 
         pub = {
             "citation_id": cid,
-            "title": art.get("title") or "",
+            "title": title,
             "authors": authors,
             "et_al": bool(ov.get("et_al", False)),
             "venue_tag": venue_tag,
@@ -330,6 +333,7 @@ def transform(articles, overrides, author_id):
         manual_links = [dict(l) for l in manual.get("links", [])]
 
         if existing:
+            existing["title"] = manual.get("title") or existing.get("title") or ""
             existing["authors"] = manual_authors
             for field in ("venue_tag", "venue_type", "venue_short", "year", "status"):
                 if manual.get(field) is not None:
