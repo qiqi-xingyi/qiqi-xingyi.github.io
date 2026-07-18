@@ -53,7 +53,8 @@
       "venue_type": "conf",
       "venue_mark": {
         "type": "image",
-        "src": "assets/img/venues/sc26.svg",
+        "src_light": "assets/img/venues/sc26-light.png",
+        "src_dark": "assets/img/venues/sc26-dark.png",
         "alt": "SC26"
       },
       "year": 2026,
@@ -87,7 +88,8 @@
       "venue_type": "conf",
       "venue_mark": {
         "type": "image",
-        "src": "assets/img/venues/sc25.svg",
+        "src_light": "assets/img/venues/sc25-light.png",
+        "src_dark": "assets/img/venues/sc25-dark.png",
         "alt": "SC25"
       },
       "corresponding": ["Qiang Guan"],

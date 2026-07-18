@@ -107,13 +107,28 @@
     var container = document.createElement('div');
     container.setAttribute('aria-label', label);
 
-    if (mark.type === 'image' && safeAssetPath(mark.src)) {
+    var lightSource = safeAssetPath(mark.src_light) ? mark.src_light : null;
+    var darkSource = safeAssetPath(mark.src_dark) ? mark.src_dark : null;
+    var fallbackSource = safeAssetPath(mark.src) ? mark.src : null;
+
+    if (mark.type === 'image' && (lightSource || darkSource || fallbackSource)) {
       container.className = 'venue-mark venue-mark-image';
-      var image = document.createElement('img');
-      image.src = mark.src;
-      image.alt = '';
-      image.setAttribute('aria-hidden', 'true');
-      container.appendChild(image);
+
+      function appendImage(source, className) {
+        var image = document.createElement('img');
+        image.src = source;
+        image.alt = '';
+        image.className = className;
+        image.setAttribute('aria-hidden', 'true');
+        container.appendChild(image);
+      }
+
+      if (lightSource && darkSource) {
+        appendImage(lightSource, 'venue-logo venue-logo-light');
+        appendImage(darkSource, 'venue-logo venue-logo-dark');
+      } else {
+        appendImage(lightSource || darkSource || fallbackSource, 'venue-logo');
+      }
       return container;
     }
 
