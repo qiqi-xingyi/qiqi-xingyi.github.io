@@ -1,4 +1,4 @@
-/* Minimal interactions: theme preference and current-section navigation. */
+/* Theme preference and section navigation. */
 (function () {
   'use strict';
 

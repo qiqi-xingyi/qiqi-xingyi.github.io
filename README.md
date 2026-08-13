@@ -1,5 +1,7 @@
 # yuqizhang.me — Personal site
 
+[![Update publications](https://github.com/qiqi-xingyi/qiqi-xingyi.github.io/actions/workflows/update-publications.yml/badge.svg)](https://github.com/qiqi-xingyi/qiqi-xingyi.github.io/actions/workflows/update-publications.yml)
+
 Static GitHub Pages site. The **Publications** section auto-syncs from Google Scholar.
 
 ## How the auto-sync works
@@ -23,6 +25,8 @@ Google Scholar ──(SerpApi)──► scripts/fetch_scholar.py ──► data/
 4. **Kick off the first run**: *Actions tab → “Update publications from Google Scholar” → Run workflow* (or just wait for Monday).
 
 After that it updates itself weekly.
+
+The Action commits refreshed data directly to `main`. A local checkout can therefore look stale even when the live site is current; run `git pull --ff-only` before editing publication data locally. The status badge above links to the latest sync runs.
 
 ## What you maintain: `data/overrides.json`
 
@@ -66,6 +70,7 @@ python3 -m http.server 4321   # then open http://localhost:4321
 |------|---------|
 | `index.html` | The page. `#pub-list` is filled in by JS. |
 | `assets/pubs.js` | Fetches `data/publications.json` and renders the list. |
+| `assets/img/og-card-blue.png` | Social preview card used by Open Graph and X metadata. |
 | `data/publications.json` | Auto-generated publication data — **don't hand-edit**. |
 | `data/overrides.json` | **Your** supplements (IF, corresponding authors, venue text, links). |
 | `scripts/fetch_scholar.py` | Scholar → JSON fetcher (standard library only, zero deps). |
