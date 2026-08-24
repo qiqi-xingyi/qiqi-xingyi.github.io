@@ -39,6 +39,8 @@
   "manual_publications": [
     {
       "citation_id": "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
+      "paper_id": "p1",
+      "work_types": ["architecture", "system"],
       "title": "Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware",
       "authors": [
         "Yuqi Zhang",
@@ -72,6 +74,8 @@
 
   "publications": {
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC": {
+      "paper_id": "p2",
+      "work_types": ["algorithm", "application"],
       "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
       "authors": [
         "Yuqi Zhang",
@@ -87,7 +91,7 @@
         "Feixiong Cheng"
       ],
       "venue_tag": "Journal",
-      "venue_short": "Advanced Science",
+      "venue_short": "Adv. Science",
       "venue_type": "journal",
       "year": 2025,
       "venue_mark": {
@@ -103,6 +107,8 @@
     },
 
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC": {
+      "paper_id": "p3",
+      "work_types": ["benchmark"],
       "title": "QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
       "authors": [
         "Yuqi Zhang",
@@ -132,6 +138,7 @@
     },
 
     "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
+      "paper_id": "pre2",
       "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
       "venue_short": "arXiv",
       "year": 2025,
@@ -141,6 +148,7 @@
     },
 
     "Q7Ybs-gAAAAJ:Se3iqnhoufwC": {
+      "paper_id": "pre1",
       "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
       "venue_short": "arXiv",
       "year": 2026,

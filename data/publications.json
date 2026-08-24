@@ -66,7 +66,12 @@
         "src_dark": "assets/img/venues/sc26-dark.png",
         "alt": "SC26"
       },
-      "status": "To appear"
+      "status": "To appear",
+      "paper_id": "p1",
+      "work_types": [
+        "architecture",
+        "system"
+      ]
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
@@ -112,7 +117,7 @@
       "et_al": false,
       "venue_tag": "Journal",
       "venue_type": "journal",
-      "venue_short": "Advanced Science",
+      "venue_short": "Adv. Science",
       "year": 2025,
       "cited_by": 12,
       "links": [
@@ -134,7 +139,12 @@
           "Science"
         ],
         "alt": "Advanced Science"
-      }
+      },
+      "paper_id": "p2",
+      "work_types": [
+        "algorithm",
+        "application"
+      ]
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC",
@@ -192,7 +202,11 @@
         "src_light": "assets/img/venues/sc25-light.png",
         "src_dark": "assets/img/venues/sc25-dark.png",
         "alt": "SC25"
-      }
+      },
+      "paper_id": "p3",
+      "work_types": [
+        "benchmark"
+      ]
     }
   ],
   "preprints": [
@@ -201,14 +215,16 @@
       "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
       "year": 2026,
       "venue_short": "arXiv",
-      "url": "https://arxiv.org/abs/2603.06963"
+      "url": "https://arxiv.org/abs/2603.06963",
+      "paper_id": "pre1"
     },
     {
       "citation_id": "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
       "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
       "year": 2025,
       "venue_short": "arXiv",
-      "url": "https://arxiv.org/abs/2510.06413"
+      "url": "https://arxiv.org/abs/2510.06413",
+      "paper_id": "pre2"
     }
   ]
 }

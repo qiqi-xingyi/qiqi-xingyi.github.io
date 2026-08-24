@@ -98,6 +98,26 @@ def authors_from_override(author_list, full_names, me_keys, corr_keys):
 # --------------------------------------------------------------------------- #
 # Venue handling
 # --------------------------------------------------------------------------- #
+def apply_display_fields(entry, source):
+    """Copy the hand-maintained display fields Scholar cannot supply.
+
+    `paper_id` is the stable handle the research-module highlight targets
+    (see the data-stage lists in index.html); `work_types` are the left-rail
+    tags. Both live in overrides.json — deriving them from list position would
+    break the module mapping whenever a new paper lands at the top.
+    """
+    paper_id = source.get("paper_id")
+    if isinstance(paper_id, str) and re.fullmatch(r"[A-Za-z0-9_-]+", paper_id):
+        entry["paper_id"] = paper_id
+
+    work_types = source.get("work_types")
+    if isinstance(work_types, list):
+        cleaned = [t.strip() for t in work_types if isinstance(t, str) and t.strip()]
+        if cleaned:
+            entry["work_types"] = cleaned
+    return entry
+
+
 def guess_venue_type(publication):
     p = (publication or "").lower().strip()
     # Empty / unknown venue → treat as unpublished so the wip filter drops it.
@@ -270,13 +290,13 @@ def transform(articles, overrides, author_id):
 
         # Preprint / under-review → slim entry in the separate preprints list.
         if venue_type == "wip":
-            preprints.append({
+            preprints.append(apply_display_fields({
                 "citation_id": cid,
                 "title": title,
                 "year": year,
                 "venue_short": preprint_venue_short(publication, ov),
                 "url": preprint_url(cid, ov, author_id),
-            })
+            }, ov))
             continue
 
         # Published venue → full entry in the main pubs list.
@@ -306,6 +326,7 @@ def transform(articles, overrides, author_id):
             "cited_by": cited_by_count(art),
             "links": links,
         }
+        apply_display_fields(pub, ov)
         if isinstance(ov.get("venue_mark"), dict):
             pub["venue_mark"] = dict(ov["venue_mark"])
         if ov.get("status"):
@@ -338,6 +359,7 @@ def transform(articles, overrides, author_id):
             for field in ("venue_tag", "venue_type", "venue_short", "year", "status"):
                 if manual.get(field) is not None:
                     existing[field] = manual[field]
+            apply_display_fields(existing, manual)
             if isinstance(manual.get("venue_mark"), dict):
                 existing["venue_mark"] = dict(manual["venue_mark"])
             existing["links"] = manual_links + [
@@ -358,6 +380,7 @@ def transform(articles, overrides, author_id):
             "cited_by": int(manual.get("cited_by") or 0),
             "links": manual_links,
         }
+        apply_display_fields(manual_pub, manual)
         if isinstance(manual.get("venue_mark"), dict):
             manual_pub["venue_mark"] = dict(manual["venue_mark"])
         if manual.get("status"):
