@@ -327,8 +327,6 @@ def transform(articles, overrides, author_id):
             "links": links,
         }
         apply_display_fields(pub, ov)
-        if isinstance(ov.get("venue_mark"), dict):
-            pub["venue_mark"] = dict(ov["venue_mark"])
         if ov.get("status"):
             pub["status"] = ov["status"]
         pubs.append(pub)
@@ -360,8 +358,6 @@ def transform(articles, overrides, author_id):
                 if manual.get(field) is not None:
                     existing[field] = manual[field]
             apply_display_fields(existing, manual)
-            if isinstance(manual.get("venue_mark"), dict):
-                existing["venue_mark"] = dict(manual["venue_mark"])
             existing["links"] = manual_links + [
                 link for link in existing.get("links", [])
                 if link.get("url") not in {item.get("url") for item in manual_links}
@@ -381,8 +377,6 @@ def transform(articles, overrides, author_id):
             "links": manual_links,
         }
         apply_display_fields(manual_pub, manual)
-        if isinstance(manual.get("venue_mark"), dict):
-            manual_pub["venue_mark"] = dict(manual["venue_mark"])
         if manual.get("status"):
             manual_pub["status"] = manual["status"]
         pubs.append(manual_pub)

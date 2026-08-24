@@ -58,12 +58,6 @@
       "venue_short": "SC '26",
       "venue_type": "conf",
       "status": "To appear",
-      "venue_mark": {
-        "type": "image",
-        "src_light": "assets/img/venues/sc26-light.png",
-        "src_dark": "assets/img/venues/sc26-dark.png",
-        "alt": "SC26"
-      },
       "year": 2026,
       "links": [
         { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" },
@@ -94,11 +88,6 @@
       "venue_short": "Adv. Science",
       "venue_type": "journal",
       "year": 2025,
-      "venue_mark": {
-        "type": "wordmark",
-        "lines": ["Advanced", "Science"],
-        "alt": "Advanced Science"
-      },
       "corresponding": ["Qiang Guan", "Feixiong Cheng"],
       "et_al": false,
       "links": [
@@ -123,12 +112,6 @@
       "venue_short": "SC '25",
       "venue_type": "conf",
       "year": 2025,
-      "venue_mark": {
-        "type": "image",
-        "src_light": "assets/img/venues/sc25-light.png",
-        "src_dark": "assets/img/venues/sc25-dark.png",
-        "alt": "SC25"
-      },
       "corresponding": ["Qiang Guan"],
       "et_al": false,
       "links": [

@@ -60,12 +60,6 @@
           "style": "gray"
         }
       ],
-      "venue_mark": {
-        "type": "image",
-        "src_light": "assets/img/venues/sc26-light.png",
-        "src_dark": "assets/img/venues/sc26-dark.png",
-        "alt": "SC26"
-      },
       "status": "To appear",
       "paper_id": "p1",
       "work_types": [
@@ -132,14 +126,6 @@
           "style": "gray"
         }
       ],
-      "venue_mark": {
-        "type": "wordmark",
-        "lines": [
-          "Advanced",
-          "Science"
-        ],
-        "alt": "Advanced Science"
-      },
       "paper_id": "p2",
       "work_types": [
         "algorithm",
@@ -197,12 +183,6 @@
           "style": "gray"
         }
       ],
-      "venue_mark": {
-        "type": "image",
-        "src_light": "assets/img/venues/sc25-light.png",
-        "src_dark": "assets/img/venues/sc25-dark.png",
-        "alt": "SC25"
-      },
       "paper_id": "p3",
       "work_types": [
         "benchmark"
