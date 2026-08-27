@@ -59,11 +59,11 @@
       "venue_tag": "Accepted at SC '26",
       "venue_short": "SC '26",
       "venue_type": "conf",
-      "status": "To appear",
+      "status": "to appear",
       "year": 2026,
       "links": [
         { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" },
-        { "label": "Google Scholar", "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC", "style": "gray" }
+        { "label": "Scholar", "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Q7Ybs-gAAAAJ&citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC", "style": "gray" }
       ]
     }
   ],
@@ -141,7 +141,7 @@
       "venue_tag": "Journal",
       "venue_short": "ACM TQC",
       "venue_type": "journal",
-      "status": "To appear",
+      "status": "to appear",
       "year": 2026,
       "links": [
         { "label": "arXiv", "url": "https://arxiv.org/abs/2510.06413", "style": "blue" }

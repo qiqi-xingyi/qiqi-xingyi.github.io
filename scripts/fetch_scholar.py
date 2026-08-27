@@ -312,7 +312,7 @@ def transform(articles, overrides, author_id):
         if cid:
             scholar_url = SCHOLAR_CITATION_URL.format(user=author_id, cid=cid)
             if not any(l.get("url") == scholar_url for l in links):
-                links.append({"label": "Google Scholar", "url": scholar_url, "style": "gray"})
+                links.append({"label": "Scholar", "url": scholar_url, "style": "gray"})
 
         pub = {
             "citation_id": cid,
