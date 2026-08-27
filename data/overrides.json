@@ -15,6 +15,7 @@
     "Yuqi Zhang": "Yuqi Zhang",
     "Yuxin Yang": "Yuxin Yang",
     "Weiwen Jiang": "Weiwen Jiang",
+    "Nima Saeidi": "Nima Saeidi",
     "Ruth Nussinov": "Ruth Nussinov",
     "Joseph Loscalzo": "Joseph Loscalzo",
     "Qiang Guan": "Qiang Guan",
@@ -32,6 +33,7 @@
 
   "order": [
     "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
+    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC"
   ],
@@ -121,10 +123,26 @@
     },
 
     "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
-      "paper_id": "pre2",
+      "paper_id": "p4",
+      "work_types": ["algorithm", "application"],
       "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
-      "venue_short": "arXiv",
-      "year": 2025,
+      "authors": [
+        "Yuqi Zhang",
+        "Yuxin Yang",
+        "Feixiong Cheng",
+        "Cheng-Chang Lu",
+        "Nima Saeidi",
+        "Junhan Zhao",
+        "Siwei Chen",
+        "Weiwen Jiang",
+        "Qiang Guan"
+      ],
+      "corresponding": ["Qiang Guan"],
+      "venue_tag": "Journal",
+      "venue_short": "ACM TQC",
+      "venue_type": "journal",
+      "status": "To appear",
+      "year": 2026,
       "links": [
         { "label": "arXiv", "url": "https://arxiv.org/abs/2510.06413", "style": "blue" }
       ]
