@@ -567,6 +567,10 @@ img {
   font-family: var(--ui);
   font-size: .74rem;
   font-weight: 500;
+  /* Venue names are not always short codes — a spelled-out journal title wraps
+     over several lines in the 118px rail, where the inherited 1.6 is too airy. */
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 .pub-venue.is-journal {
