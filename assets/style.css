@@ -550,11 +550,24 @@ img {
 .pub-item {
   display: grid;
   grid-template-columns: 118px minmax(0, 1fr) 92px;
+  grid-template-areas:
+    "title title title"
+    "venue authors stats"
+    "venue links stats";
   align-items: start;
   padding: 13px 0;
   border-top: 1px solid var(--rule-faint);
   column-gap: 26px;
+  row-gap: 5px;
   transition: opacity 200ms ease;
+}
+
+.pub-main {
+  display: contents;
+}
+
+.pub-rail {
+  grid-area: venue;
 }
 
 .pub-list > li:first-child .pub-item {
@@ -589,7 +602,9 @@ img {
 }
 
 .pub-title {
-  max-width: 600px;
+  grid-area: title;
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--ink);
   font-family: var(--display);
   font-size: 1rem;
@@ -608,7 +623,8 @@ img {
 }
 
 .pub-authors {
-  margin-top: 5px;
+  grid-area: authors;
+  min-width: 0;
   color: var(--body-alt);
   font-size: .8rem;
   line-height: 1.45;
@@ -620,14 +636,15 @@ img {
 }
 
 .pub-links {
+  grid-area: links;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 14px;
-  margin-top: 6px;
   font-size: .7rem;
 }
 
 .pub-aside {
+  grid-area: stats;
   text-align: right;
 }
 
@@ -663,11 +680,15 @@ img {
 
 .preprint-row {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) 92px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title title"
+    "year meta";
   align-items: baseline;
   padding: 10px 0;
   border-top: 1px solid var(--rule-faint);
   column-gap: 26px;
+  row-gap: 3px;
   color: var(--ink);
   text-decoration: none;
   transition: opacity 200ms ease, color 140ms ease;
@@ -686,11 +707,15 @@ img {
 }
 
 .preprint-year {
+  grid-area: year;
   color: var(--faint);
   font-size: .72rem;
 }
 
 .preprint-title {
+  grid-area: title;
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-family: var(--display);
   font-size: 1rem;
   font-weight: 500;
@@ -698,12 +723,13 @@ img {
 }
 
 .preprint-meta {
+  grid-area: meta;
   color: var(--faint);
   font-size: .7rem;
   text-align: right;
 }
 
-/* Funding and talks share the publication column's date/content alignment. */
+/* Full-width titles; dates and supporting details sit below them. */
 .academic-list {
   margin-top: 12px;
   list-style: none;
@@ -712,7 +738,7 @@ img {
 .academic-record {
   display: grid;
   grid-template-columns: 118px minmax(0, 1fr);
-  gap: 8px 26px;
+  column-gap: 26px;
   padding: 12px 0;
   border-top: 1px solid var(--rule-faint);
 }
@@ -726,6 +752,9 @@ img {
 }
 
 .record-date {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 6px;
   padding-top: 2px;
   color: var(--muted);
   font-size: .8125rem;
@@ -737,16 +766,27 @@ img {
 }
 
 .record-body {
-  min-width: 0;
-  overflow-wrap: anywhere;
+  display: contents;
 }
 
 .record-title {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--ink);
   font-family: var(--display);
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.3;
+}
+
+.record-context,
+.record-details,
+.record-links {
+  grid-column: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .record-context {
@@ -893,21 +933,27 @@ img {
   }
 
   .pub-item,
-  .preprint-row,
   .academic-record {
     grid-template-columns: 1fr;
   }
 
   .pub-item {
+    grid-template-areas:
+      "title"
+      "authors"
+      "venue"
+      "links"
+      "stats";
     row-gap: 8px;
   }
 
-  .preprint-row {
-    row-gap: 4px;
+  .record-context,
+  .record-details,
+  .record-links {
+    grid-column: 1;
   }
 
-  .pub-aside,
-  .preprint-meta {
+  .pub-aside {
     text-align: left;
   }
 
