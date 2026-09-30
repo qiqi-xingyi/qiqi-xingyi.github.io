@@ -19,12 +19,8 @@
     return node;
   }
 
-  function text(value) {
-    return document.createTextNode(value);
-  }
-
-  function link(label, url, className) {
-    var a = el('a', className, label);
+  function link(label, url) {
+    var a = el('a', null, label);
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener';
@@ -40,89 +36,106 @@
     return (canonical || links.filter(isScholar)[0] || {}).url || null;
   }
 
-  function paperId(pub, prefix, index) {
-    var id = pub.paper_id;
+  function paperId(entry, prefix, index) {
+    var id = entry.paper_id;
     return typeof id === 'string' && /^[A-Za-z0-9_-]+$/.test(id) ? id : prefix + (index + 1);
   }
 
-  function appendAuthors(target, pub) {
-    (pub.authors || []).forEach(function (author, index) {
-      if (index > 0) target.appendChild(text(', '));
+  function renderAuthors(entry) {
+    var authors = el('p', 'pub-authors');
+    (entry.authors || []).forEach(function (author, index) {
+      if (index > 0) authors.appendChild(document.createTextNode(', '));
       var name = (author.name || '') + (author.corresponding ? '*' : '');
-      target.appendChild(author.me ? el('b', null, name) : text(name));
+      authors.appendChild(author.me ? el('b', null, name) : document.createTextNode(name));
     });
-    if (pub.et_al) target.appendChild(text(', et al.'));
-    target.appendChild(el('br'));
+    if (entry.et_al) authors.appendChild(document.createTextNode(', et al.'));
+    return authors;
   }
 
-  /* "SC '26, to appear" / "Advanced Science, 2025" / "SC '25". A venue that
-     already carries its year ('25) doesn't repeat it. */
-  function appendVenue(target, pub) {
-    var venue = pub.venue_short || '';
-    var when = pub.status || (/'\d{2}\b/.test(venue) ? '' : pub.year);
-    if (venue) target.appendChild(el('span', 'venue', venue));
-    if (venue && when) target.appendChild(text(', '));
-    if (when) target.appendChild(text(String(when)));
-    target.appendChild(el('br'));
-  }
-
-  function appendLinks(target, links, citedBy) {
-    var count = 0;
-    (links || []).forEach(function (item) {
-      if (!safeUrl(item.url)) return;
-      if (count++) target.appendChild(text(' / '));
-      target.appendChild(link(item.label || 'Link', item.url));
-    });
-    if (citedBy > 0) target.appendChild(text(' (cited by ' + citedBy + ')'));
-  }
-
-  function renderPaper(id, entry, links, withAuthors) {
-    var paper = el('div', 'paper');
-    paper.id = 'paper-' + id;
+  /* One entry per paper: thumbnail on the left, then title, authors, venue
+     with status tags, summary, and link buttons. */
+  function renderPaper(item) {
+    var entry = item.entry;
+    var target = pickTarget(item.links);
+    var paper = el('article', 'pub');
+    paper.id = 'paper-' + item.id;
 
     if (safeImage(entry.image)) {
-      var figure = el('div', 'paper-figure');
+      var thumb = el(target ? 'a' : 'div', 'pub-thumb');
+      if (target) {
+        thumb.href = target;
+        thumb.target = '_blank';
+        thumb.rel = 'noopener';
+        thumb.tabIndex = -1;
+        thumb.setAttribute('aria-hidden', 'true');
+      }
       var img = el('img');
       img.src = entry.image;
       img.alt = '';
       img.loading = 'lazy';
-      figure.appendChild(img);
-      paper.appendChild(figure);
+      img.width = 960;
+      img.height = 720;
+      thumb.appendChild(img);
+      paper.appendChild(thumb);
     }
 
-    var body = el('div', 'paper-text');
-    var target = pickTarget(links);
-    body.appendChild(target ? link(entry.title || '', target, 'paper-title')
-                            : el('b', 'paper-title', entry.title || ''));
-    body.appendChild(el('br'));
-    if (withAuthors) appendAuthors(body, entry);
-    appendVenue(body, entry);
-    appendLinks(body, links, entry.cited_by);
-    if (entry.summary) body.appendChild(el('p', null, entry.summary));
+    var body = el('div', 'pub-body');
+    var title = el('h3', 'pub-title');
+    if (target) title.appendChild(link(entry.title || '', target));
+    else title.textContent = entry.title || '';
+    body.appendChild(title);
+
+    if (item.withAuthors) body.appendChild(renderAuthors(entry));
+
+    var venue = el('p', 'pub-venue');
+    var hasYear = /'\d{2}\b/.test(item.venue);
+    venue.appendChild(el('span', 'venue', item.venue + (hasYear || !entry.year ? '' : ', ' + entry.year)));
+    if (entry.status) venue.appendChild(el('span', 'tag', capitalize(entry.status)));
+    if (item.isPreprint) venue.appendChild(el('span', 'tag', 'Preprint'));
+    body.appendChild(venue);
+
+    if (entry.summary) body.appendChild(el('p', 'pub-summary', entry.summary));
+
+    var links = el('p', 'pub-links');
+    item.links.forEach(function (l) {
+      if (!safeUrl(l.url)) return;
+      var a = link(l.label || 'Link', l.url);
+      a.className = 'pill';
+      links.appendChild(a);
+    });
+    if (entry.cited_by > 0) links.appendChild(el('span', 'cites', 'Cited by ' + entry.cited_by));
+    if (links.childNodes.length) body.appendChild(links);
 
     paper.appendChild(body);
     return paper;
   }
 
-  function renderPublication(pub, index) {
-    return renderPaper(paperId(pub, 'p', index), pub, pub.links, true);
+  function capitalize(value) {
+    value = String(value);
+    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 
-  function renderPreprint(preprint, index) {
-    var venue = preprint.venue_short || 'Preprint';
-    var links = safeUrl(preprint.url) ? [{ label: venue, url: preprint.url }] : [];
-    var entry = Object.assign({}, preprint, { venue_short: venue });
-    return renderPaper(paperId(preprint, 'pre', index), entry, links, false);
-  }
-
-  function renderInto(list, entries, source, renderer) {
-    var fragment = document.createDocumentFragment();
-    entries.forEach(function (entry, index) {
-      fragment.appendChild(renderer(entry, index));
+  function collect(list, prefix, isPreprint) {
+    return (list || []).map(function (entry, index) {
+      var venue = entry.venue_short || (isPreprint ? 'Preprint' : '');
+      return {
+        entry: entry,
+        id: paperId(entry, prefix, index),
+        venue: venue,
+        isPreprint: isPreprint,
+        links: isPreprint ? (safeUrl(entry.url) ? [{ label: venue, url: entry.url }] : [])
+                          : (entry.links || []),
+        withAuthors: !isPreprint
+      };
     });
+  }
+
+  function renderInto(list, items, source) {
+    var fragment = document.createDocumentFragment();
+    items.forEach(function (item) { fragment.appendChild(renderPaper(item)); });
     list.innerHTML = '';
     list.appendChild(fragment);
-    list.setAttribute('data-source', source || 'unknown');
+    list.setAttribute('data-source', source);
   }
 
   function renderUpdateDate(value) {
@@ -136,10 +149,10 @@
     target.textContent = 'Publication data updated ' + formatted + '.';
   }
 
+  /* Publications first in their curated order, then preprints. */
   function init() {
-    var publicationsList = document.getElementById('pub-list');
-    var preprintsList = document.getElementById('preprint-list');
-    if (!publicationsList && !preprintsList) return;
+    var list = document.getElementById('pub-list');
+    if (!list) return;
 
     fetch('data/publications.json', { cache: 'no-cache' })
       .then(function (response) {
@@ -147,22 +160,10 @@
         return response.json();
       })
       .then(function (data) {
-        var publications = (data && data.publications) || [];
-        var preprints = (data && data.preprints) || [];
-        var source = (data && data.meta && data.meta.source) || 'live';
         renderUpdateDate(data && data.meta && data.meta.generated_at);
-
-        if (publicationsList && publications.length) {
-          renderInto(publicationsList, publications, source, renderPublication);
-        }
-        if (preprintsList) {
-          if (preprints.length) {
-            renderInto(preprintsList, preprints, source, renderPreprint);
-          } else {
-            var section = document.getElementById('preprints');
-            if (section) section.hidden = true;
-          }
-        }
+        var items = collect(data && data.publications, 'p', false)
+          .concat(collect(data && data.preprints, 'pre', true));
+        if (items.length) renderInto(list, items, (data.meta && data.meta.source) || 'live');
       })
       .catch(function (error) {
         console.error('[publications] load failed; keeping static fallback:', error);
