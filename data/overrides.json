@@ -6,7 +6,8 @@
     "Use 'manual_publications' for accepted papers whose conference metadata has not reached Scholar yet; matching by title prevents a duplicate when Scholar catches up.",
     "Preprints don't need overrides in most cases; per-paper 'venue_short' and 'links' still work if you want to customize a row.",
     "Corresponding authors are per-paper only. If a paper's entry doesn't list 'corresponding', no author is marked (no global default anymore).",
-    "By design we don't carry impact factors, page numbers, or long conference titles — the Publications layout shows venue + year + citations, all auto-tracked from Scholar."
+    "By design we don't carry impact factors, page numbers, or long conference titles — the Publications layout shows venue + year + citations, all auto-tracked from Scholar.",
+    "Per-paper 'summary' (one or two sentences shown under the entry) and 'image' (a teaser figure path under assets/img/papers/) are optional display fields."
   ],
 
   "author_aliases": ["Yuqi Zhang", "Yuqi Zhang (张钰奇)", "Y Zhang"],
@@ -42,6 +43,8 @@
     {
       "citation_id": "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
       "paper_id": "p1",
+      "summary": "QSAD recasts structure prediction for peptides in binding pockets as Hamiltonian sampling, replacing iterative optimization. Run entirely on IBM Heron R2 over 101 peptides, it was 27–71% more accurate than every AI and quantum baseline we tested and used 27× less quantum time than VQE.",
+      "image": "assets/img/papers/p1.jpg",
       "work_types": ["architecture", "system"],
       "title": "Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware",
       "authors": [
@@ -71,6 +74,8 @@
   "publications": {
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC": {
       "paper_id": "p2",
+      "summary": "We pose structure prediction for short, flexible binding-site fragments as a VQE ground-state problem on a tetrahedral lattice, and ran every experiment on the IBM quantum processor at Cleveland Clinic. On 30 fragments the predictions beat AlphaFold3 and classical baselines in both RMSD and docking.",
+      "image": "assets/img/papers/p2.jpg",
       "work_types": ["algorithm", "application"],
       "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
       "authors": [
@@ -99,6 +104,8 @@
 
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC": {
       "paper_id": "p3",
+      "summary": "A dataset of protein fragment structures predicted on utility-level quantum computers, built for ligand docking. Each fragment comes with its quantum run metadata (qubits, circuit depth, energies, runtime) and its docking and RMSD results.",
+      "image": "assets/img/papers/p3.jpg",
       "work_types": ["benchmark"],
       "title": "QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers",
       "authors": [
@@ -124,6 +131,8 @@
 
     "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
       "paper_id": "p4",
+      "summary": "We fuse VQE energies from a 127-qubit IBM processor with secondary-structure and dihedral-angle statistics from the NSP3 network. The combined energy picks out native-like structures more reliably, reaching a mean RMSD of 4.9 Å on 75 protein fragments, ahead of AlphaFold3 and ColabFold.",
+      "image": "assets/img/papers/p4.jpg",
       "work_types": ["algorithm", "application"],
       "title": "A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices",
       "authors": [
@@ -150,6 +159,8 @@
 
     "Q7Ybs-gAAAAJ:Se3iqnhoufwC": {
       "paper_id": "pre1",
+      "summary": "Qronecker compresses quantum-chemistry qubit Hamiltonians with low-rank Kronecker decompositions computed directly in Pauli coefficient space, and returns a worst-case energy certificate for each choice of rank and cut. Evaluated on hundreds of molecules up to 30 qubits.",
+      "image": "assets/img/papers/pre1.jpg",
       "title": "Qronecker: A Certifiable Kronecker Compression Primitive for Quantum-Chemistry Hamiltonians",
       "venue_short": "arXiv",
       "year": 2026,

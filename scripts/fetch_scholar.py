@@ -101,10 +101,10 @@ def authors_from_override(author_list, full_names, me_keys, corr_keys):
 def apply_display_fields(entry, source):
     """Copy the hand-maintained display fields Scholar cannot supply.
 
-    `paper_id` is the stable handle the research-module highlight targets
-    (see the data-stage lists in index.html); `work_types` are the left-rail
-    tags. Both live in overrides.json — deriving them from list position would
-    break the module mapping whenever a new paper lands at the top.
+    `paper_id` is a stable handle for the entry (it becomes the element id);
+    `work_types` are topic tags. `summary` is the one- or two-sentence note
+    shown under a paper, and `image` its teaser figure, a path under
+    assets/img/papers/. All live in overrides.json.
     """
     paper_id = source.get("paper_id")
     if isinstance(paper_id, str) and re.fullmatch(r"[A-Za-z0-9_-]+", paper_id):
@@ -115,6 +115,14 @@ def apply_display_fields(entry, source):
         cleaned = [t.strip() for t in work_types if isinstance(t, str) and t.strip()]
         if cleaned:
             entry["work_types"] = cleaned
+
+    summary = source.get("summary")
+    if isinstance(summary, str) and summary.strip():
+        entry["summary"] = summary.strip()
+
+    image = source.get("image")
+    if isinstance(image, str) and re.fullmatch(r"assets/img/papers/[A-Za-z0-9_.-]+", image):
+        entry["image"] = image
     return entry
 
 

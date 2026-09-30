@@ -13,7 +13,7 @@ Google Scholar ──(SerpApi)──► scripts/fetch_scholar.py ──► data/
 ```
 
 - A weekly GitHub Action (`.github/workflows/update-publications.yml`) scrapes Scholar through SerpApi, merges your supplements, writes `data/publications.json`, and commits it — GitHub Pages then redeploys on its own.
-- The browser renders that JSON via `assets/pubs.js`. If the fetch ever fails, the static `<li>` items in `index.html` stay visible as a fallback.
+- The browser renders that JSON via `assets/pubs.js`. If the fetch ever fails, the static entries in `index.html` stay visible as a fallback.
 
 ## One-time setup (needed for auto-sync)
 
@@ -40,6 +40,7 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
   ```json
   "John Smith": "John Smith"
   ```
+- **A paper's one-line description or teaser figure** → set `summary` and/or `image` (a file under `assets/img/papers/`) on its `publications` entry.
 - **A specific paper** (corresponding authors, venue prose, code links, “Under Review”, *et al.*) → add an entry under `publications`, keyed by its **`citation_id`** — the string after `citation_for_view=` in that paper's Scholar link.
 
 Everything else — titles, authors, year, **citation counts**, ordering, and bolding your own name — is automatic.

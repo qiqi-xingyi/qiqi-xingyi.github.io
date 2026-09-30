@@ -8,6 +8,10 @@
     return typeof url === 'string' && /^(https?:|mailto:)/i.test(url);
   }
 
+  function safeImage(path) {
+    return typeof path === 'string' && /^assets\/img\/papers\/[A-Za-z0-9_.-]+$/.test(path);
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -15,12 +19,24 @@
     return node;
   }
 
-  function pickTarget(pub) {
-    var links = (pub.links || []).filter(function (link) { return safeUrl(link.url); });
-    var isScholar = function (link) {
-      return /scholar\.google\./i.test(link.url) || /scholar/i.test(link.label || '');
+  function text(value) {
+    return document.createTextNode(value);
+  }
+
+  function link(label, url, className) {
+    var a = el('a', className, label);
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    return a;
+  }
+
+  function pickTarget(links) {
+    links = (links || []).filter(function (item) { return safeUrl(item.url); });
+    var isScholar = function (item) {
+      return /scholar\.google\./i.test(item.url) || /scholar/i.test(item.label || '');
     };
-    var canonical = links.filter(function (link) { return !isScholar(link); })[0];
+    var canonical = links.filter(function (item) { return !isScholar(item); })[0];
     return (canonical || links.filter(isScholar)[0] || {}).url || null;
   }
 
@@ -29,119 +45,74 @@
     return typeof id === 'string' && /^[A-Za-z0-9_-]+$/.test(id) ? id : prefix + (index + 1);
   }
 
-  function renderRail(pub) {
-    var rail = el('div', 'pub-rail');
-    var venue = el('div', 'pub-venue' + (pub.venue_type === 'journal' ? ' is-journal' : ''),
-                   pub.venue_short || '');
-    rail.appendChild(venue);
-
-    var types = (pub.work_types || []).filter(function (t) { return typeof t === 'string' && t; });
-    if (types.length) {
-      var list = el('ul', 'pub-types');
-      types.forEach(function (t) { list.appendChild(el('li', null, t)); });
-      rail.appendChild(list);
-    }
-    return rail;
-  }
-
-  function renderAuthors(pub) {
-    var authorsEl = el('div', 'pub-authors');
-
+  function appendAuthors(target, pub) {
     (pub.authors || []).forEach(function (author, index) {
-      if (index > 0) authorsEl.appendChild(document.createTextNode(', '));
+      if (index > 0) target.appendChild(text(', '));
       var name = (author.name || '') + (author.corresponding ? '*' : '');
-      if (author.me) {
-        authorsEl.appendChild(el('strong', null, name));
-      } else {
-        authorsEl.appendChild(document.createTextNode(name));
-      }
+      target.appendChild(author.me ? el('b', null, name) : text(name));
     });
-
-    if (pub.et_al) {
-      authorsEl.appendChild(document.createTextNode(', '));
-      authorsEl.appendChild(el('em', null, 'et al.'));
-    }
-    return authorsEl;
+    if (pub.et_al) target.appendChild(text(', et al.'));
+    target.appendChild(el('br'));
   }
 
-  function renderMain(pub) {
-    var main = el('div', 'pub-main');
+  /* "SC '26, to appear" / "Advanced Science, 2025" / "SC '25". A venue that
+     already carries its year ('25) doesn't repeat it. */
+  function appendVenue(target, pub) {
+    var venue = pub.venue_short || '';
+    var when = pub.status || (/'\d{2}\b/.test(venue) ? '' : pub.year);
+    if (venue) target.appendChild(el('span', 'venue', venue));
+    if (venue && when) target.appendChild(text(', '));
+    if (when) target.appendChild(text(String(when)));
+    target.appendChild(el('br'));
+  }
 
-    var title = el('h3', 'pub-title');
-    var target = pickTarget(pub);
-    if (target) {
-      var link = el('a', null, pub.title || '');
-      link.href = target;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      title.appendChild(link);
-    } else {
-      title.textContent = pub.title || '';
-    }
-    main.appendChild(title);
-    main.appendChild(renderAuthors(pub));
-
-    var links = el('div', 'pub-links');
-    (pub.links || []).forEach(function (item) {
+  function appendLinks(target, links, citedBy) {
+    var count = 0;
+    (links || []).forEach(function (item) {
       if (!safeUrl(item.url)) return;
-      var a = el('a', null, (item.label || 'Link') + ' ↗');
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      links.appendChild(a);
+      if (count++) target.appendChild(text(' / '));
+      target.appendChild(link(item.label || 'Link', item.url));
     });
-    if (links.childNodes.length) main.appendChild(links);
-
-    return main;
+    if (citedBy > 0) target.appendChild(text(' (cited by ' + citedBy + ')'));
   }
 
-  function renderAside(pub) {
-    var aside = el('div', 'pub-aside');
+  function renderPaper(id, entry, links, withAuthors) {
+    var paper = el('div', 'paper');
+    paper.id = 'paper-' + id;
 
-    if (pub.cited_by && pub.cited_by > 0) {
-      aside.appendChild(el('div', 'pub-cites', String(pub.cited_by)));
-      aside.appendChild(el('div', 'pub-cites-label',
-                           pub.cited_by === 1 ? 'citation' : 'citations'));
-    } else if (pub.status) {
-      aside.appendChild(el('div', 'pub-status', String(pub.status)));
+    if (safeImage(entry.image)) {
+      var figure = el('div', 'paper-figure');
+      var img = el('img');
+      img.src = entry.image;
+      img.alt = '';
+      img.loading = 'lazy';
+      figure.appendChild(img);
+      paper.appendChild(figure);
     }
 
-    if (pub.year) aside.appendChild(el('div', 'pub-year', String(pub.year)));
-    return aside;
+    var body = el('div', 'paper-text');
+    var target = pickTarget(links);
+    body.appendChild(target ? link(entry.title || '', target, 'paper-title')
+                            : el('b', 'paper-title', entry.title || ''));
+    body.appendChild(el('br'));
+    if (withAuthors) appendAuthors(body, entry);
+    appendVenue(body, entry);
+    appendLinks(body, links, entry.cited_by);
+    if (entry.summary) body.appendChild(el('p', null, entry.summary));
+
+    paper.appendChild(body);
+    return paper;
   }
 
   function renderPublication(pub, index) {
-    var item = document.createElement('li');
-    var article = el('article', 'pub-item');
-    article.setAttribute('data-paper', paperId(pub, 'p', index));
-
-    article.appendChild(renderRail(pub));
-    article.appendChild(renderMain(pub));
-    article.appendChild(renderAside(pub));
-
-    item.appendChild(article);
-    return item;
+    return renderPaper(paperId(pub, 'p', index), pub, pub.links, true);
   }
 
   function renderPreprint(preprint, index) {
-    var item = document.createElement('li');
-    var target = safeUrl(preprint.url) ? preprint.url : null;
-    var row = el(target ? 'a' : 'div', 'preprint-row');
-    row.setAttribute('data-paper', paperId(preprint, 'pre', index));
-
-    if (target) {
-      row.href = target;
-      row.target = '_blank';
-      row.rel = 'noopener';
-    }
-
-    row.appendChild(el('span', 'preprint-year', preprint.year || '—'));
-    row.appendChild(el('span', 'preprint-title', preprint.title || ''));
-    row.appendChild(el('span', 'preprint-meta',
-                       (preprint.venue_short || 'Preprint') + (target ? ' ↗' : '')));
-
-    item.appendChild(row);
-    return item;
+    var venue = preprint.venue_short || 'Preprint';
+    var links = safeUrl(preprint.url) ? [{ label: venue, url: preprint.url }] : [];
+    var entry = Object.assign({}, preprint, { venue_short: venue });
+    return renderPaper(paperId(preprint, 'pre', index), entry, links, false);
   }
 
   function renderInto(list, entries, source, renderer) {
