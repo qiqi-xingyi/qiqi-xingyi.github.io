@@ -64,7 +64,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=802">
+  <link rel="stylesheet" href="assets/style.css?v=901">
   <link rel="icon" href="assets/img/icon.png">
 </head>
 
@@ -126,36 +126,43 @@
   </header>
 
   <main class="wrap">
-    <section id="about">
-      <h2><span class="ket" aria-hidden="true">|</span>About<span class="ket" aria-hidden="true">&#x27E9;</span></h2>
-      <p>I am a PhD student in quantum biological computing, advised by <a href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Dr. Qiang Guan</a> at Kent State University and Dr. Feixiong Cheng at Cleveland Clinic. My main research area is quantum computing, including <b>algorithms, architectures, and systems</b>, and I apply it to problems in structural biology and drug discovery.</p>
-      <p>Most of my projects start from a concrete task, such as predicting the structure of a peptide in a binding pocket, and ask what today's quantum processors can actually contribute to it. My work has run on IBM utility-scale quantum hardware, including the IBM quantum processor at Cleveland Clinic. In 2026 I joined the NSF I-Corps for Quantum+X program as Entrepreneurial Lead for a hybrid quantum-classical drug discovery platform.</p>
-    </section>
+    <div class="intro-grid">
+      <section id="about">
+        <h2><span class="ket" aria-hidden="true">|</span>About<span class="ket" aria-hidden="true">&#x27E9;</span></h2>
+        <p>I am a PhD student in quantum biological computing, advised by <a href="https://www.guans.cs.kent.edu/" target="_blank" rel="noopener">Dr. Qiang Guan</a> at Kent State University and Dr. Feixiong Cheng at Cleveland Clinic. My main research area is quantum computing, including <b>algorithms, architectures, and systems</b>, and I apply it to problems in structural biology and drug discovery.</p>
+        <p>Most of my projects start from a concrete task, such as predicting the structure of a peptide in a binding pocket, and ask what today's quantum processors can actually contribute to it. My work has run on IBM utility-scale quantum hardware, including the IBM quantum processor at Cleveland Clinic. In 2026 I joined the NSF I-Corps for Quantum+X program as Entrepreneurial Lead for a hybrid quantum-classical drug discovery platform.</p>
+      </section>
 
-    <section id="news">
-      <h2><span class="ket" aria-hidden="true">|</span>News<span class="ket" aria-hidden="true">&#x27E9;</span></h2>
-      <ul class="timeline" id="news-list">
-        <li><span class="news-date">Sep 2026</span><p>Our team joined the NSF <a href="https://www.nsf.gov/funding/initiatives/i-corps/updates/nsf-announces-special-opportunity-i-corpstm-quantumx" target="_blank" rel="noopener">I-Corps for Quantum+X</a> 2026 cohort. I am the Entrepreneurial Lead.</p></li>
-        <li><span class="news-date">2026</span><p>Our quantum sampling architecture paper, <a href="#paper-p1">QSAD</a>, was accepted at SC '26.</p></li>
-        <li><span class="news-date">2026</span><p>Our <a href="#paper-p4">hybrid quantum-AI structure prediction</a> paper was accepted by ACM Transactions on Quantum Computing.</p></li>
-        <li><span class="news-date">Mar 2026</span><p>Posted <a href="#paper-pre1">Qronecker</a>, a certifiable compression method for chemistry Hamiltonians, on arXiv.</p></li>
-        <li><span class="news-date">Jul 2025</span><p>Gave a talk at the <a href="https://www.olcf.ornl.gov/calendar/2025-quantum-computing-user-forum/" target="_blank" rel="noopener">Quantum Computing User Forum</a>, Oak Ridge National Laboratory.</p></li>
-        <li><span class="news-date">2025</span><p>Our <a href="#paper-p2">binding-site structure prediction</a> paper was published in Advanced Science.</p></li>
-        <li><span class="news-date">2025</span><p><a href="#paper-p3">QDockBank</a> appeared at SC '25.</p></li>
-      </ul>
-      <button class="more-button" id="news-more" type="button" aria-expanded="false" aria-controls="news-list" hidden>More</button>
-    </section>
+      <section id="news">
+        <h2><span class="ket" aria-hidden="true">|</span>News<span class="ket" aria-hidden="true">&#x27E9;</span></h2>
+        <ul class="timeline" id="news-list">
+          <li><span class="news-date">Sep 2026</span><p>Our team joined the NSF <a href="https://www.nsf.gov/funding/initiatives/i-corps/updates/nsf-announces-special-opportunity-i-corpstm-quantumx" target="_blank" rel="noopener">I-Corps for Quantum+X</a> 2026 cohort. I am the Entrepreneurial Lead.</p></li>
+          <li><span class="news-date">2026</span><p>Our quantum sampling architecture paper, <a href="#paper-p1">QSAD</a>, was accepted at SC '26.</p></li>
+          <li><span class="news-date">2026</span><p>Our <a href="#paper-p4">hybrid quantum-AI structure prediction</a> paper was accepted by ACM Transactions on Quantum Computing.</p></li>
+          <li><span class="news-date">Mar 2026</span><p>Posted <a href="#paper-pre1">Qronecker</a>, a certifiable compression method for chemistry Hamiltonians, on arXiv.</p></li>
+          <li><span class="news-date">Jul 2025</span><p>Gave a talk at the <a href="https://www.olcf.ornl.gov/calendar/2025-quantum-computing-user-forum/" target="_blank" rel="noopener">Quantum Computing User Forum</a>, Oak Ridge National Laboratory.</p></li>
+          <li><span class="news-date">2025</span><p>Our <a href="#paper-p2">binding-site structure prediction</a> paper was published in Advanced Science.</p></li>
+          <li><span class="news-date">2025</span><p><a href="#paper-p3">QDockBank</a> appeared at SC '25.</p></li>
+        </ul>
+        <button class="more-button" id="news-more" type="button" aria-expanded="false" aria-controls="news-list" hidden>More</button>
+      </section>
+    </div>
 
     <section id="research">
       <h2><span class="ket" aria-hidden="true">|</span>Research Interests<span class="ket" aria-hidden="true">&#x27E9;</span></h2>
 
-      <h3>Quantum algorithms for protein structure</h3>
-      <p>I formulate structure prediction for short peptides and binding-site fragments as problems a quantum processor can work on directly. That has meant encoding amino-acid chains on a lattice as Hamiltonians and solving them with VQE, replacing iterative optimization with Hamiltonian sampling, and fusing the resulting quantum energy landscapes with statistical potentials from deep learning. Evaluated against AlphaFold3 and classical baselines, these methods have improved accuracy on the short, flexible fragments where data-driven models have the least to go on.</p>
-      <p class="chips"><a class="chip-link" href="#paper-p1">QSAD</a><a class="chip-link" href="#paper-p4">Hybrid Quantum-AI</a><a class="chip-link" href="#paper-p2">Binding-Site Framework</a></p>
-
-      <h3>Quantum systems, benchmarks, and HPC integration</h3>
-      <p>Running these workflows on real hardware raises systems questions, such as how quantum and classical HPC resources should share sampling and post-processing, and how much hardware noise a method can tolerate. I build datasets and tools for this, including an open docking benchmark of structures predicted on quantum computers, and a certifiable compression method that reduces the classical cost of processing quantum-chemistry Hamiltonians.</p>
-      <p class="chips"><a class="chip-link" href="#paper-p3">QDockBank</a><a class="chip-link" href="#paper-pre1">Qronecker</a><a class="chip-link" href="#paper-p1">QSAD</a></p>
+      <div class="theme-grid">
+        <div class="theme-card">
+          <h3>Quantum algorithms for protein structure</h3>
+          <p>I formulate structure prediction for short peptides and binding-site fragments as problems a quantum processor can work on directly. That has meant encoding amino-acid chains on a lattice as Hamiltonians and solving them with VQE, replacing iterative optimization with Hamiltonian sampling, and fusing the resulting quantum energy landscapes with statistical potentials from deep learning. Evaluated against AlphaFold3 and classical baselines, these methods have improved accuracy on the short, flexible fragments where data-driven models have the least to go on.</p>
+          <p class="chips"><a class="chip-link" href="#paper-p1">QSAD</a><a class="chip-link" href="#paper-p4">Hybrid Quantum-AI</a><a class="chip-link" href="#paper-p2">Binding-Site Framework</a></p>
+        </div>
+        <div class="theme-card">
+          <h3>Quantum systems, benchmarks, and HPC integration</h3>
+          <p>Running these workflows on real hardware raises systems questions, such as how quantum and classical HPC resources should share sampling and post-processing, and how much hardware noise a method can tolerate. I build datasets and tools for this, including an open docking benchmark of structures predicted on quantum computers, and a certifiable compression method that reduces the classical cost of processing quantum-chemistry Hamiltonians.</p>
+          <p class="chips"><a class="chip-link" href="#paper-p3">QDockBank</a><a class="chip-link" href="#paper-pre1">Qronecker</a><a class="chip-link" href="#paper-p1">QSAD</a></p>
+        </div>
+      </div>
     </section>
 
     <section id="publications">
@@ -230,7 +237,8 @@
         <li>
           <svg class="honor-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.8 13.5-1.8 7 5-2.6 5 2.6-1.8-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
           <div>
-            <p class="honor-title">NSF I-Corps for Quantum+X, Entrepreneurial Lead <span class="chip">2026</span></p>
+            <p class="honor-date">2026</p>
+            <p class="honor-title">NSF I-Corps for Quantum+X, Entrepreneurial Lead</p>
             <p>I-Corps: Translation Potential of a Hybrid Quantum-Classical Drug Discovery Platform. National Science Foundation award 2630667, US$50,000 team award, Sep 2026 to Aug 2027. PI: Dr. Qiang Guan.</p>
             <p class="pub-links"><a class="pill" href="https://nsf.elsevierpure.com/en/projects/i-corps-translation-potential-of-a-hybrid-quantum-classical-drug-/" target="_blank" rel="noopener">Award</a><a class="pill" href="https://www.nsf.gov/funding/initiatives/i-corps/updates/nsf-announces-special-opportunity-i-corpstm-quantumx" target="_blank" rel="noopener">Program</a></p>
           </div>
@@ -238,7 +246,8 @@
         <li id="talks">
           <svg class="honor-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <div>
-            <p class="honor-title">Talk at the Quantum Computing User Forum (QCUF) 2025 <span class="chip">Jul 2025</span></p>
+            <p class="honor-date">Jul 2025</p>
+            <p class="honor-title">Talk at the Quantum Computing User Forum (QCUF) 2025</p>
             <p>Protein Structure Prediction in Drug Discovery on Utility-Level Quantum Processors. Oak Ridge National Laboratory, July 23, 2025.</p>
             <p class="pub-links"><a class="pill" href="https://www.olcf.ornl.gov/calendar/2025-quantum-computing-user-forum/" target="_blank" rel="noopener">Agenda</a></p>
           </div>
