@@ -64,7 +64,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=3002">
+  <link rel="stylesheet" href="assets/style.css?v=3003">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/icon.png" type="image/png" sizes="180x180">
   <link rel="apple-touch-icon" href="assets/img/icon.png">
@@ -121,9 +121,11 @@
     <section id="research">
       <h2>Research</h2>
       <h3>Quantum algorithms for protein structure</h3>
-      <p>I formulate structure prediction for short peptides and binding-site fragments as problems a quantum processor can work on directly, using lattice Hamiltonians solved with VQE, Hamiltonian sampling in place of iterative optimization, and quantum energy landscapes combined with statistical potentials from deep learning. <span class="related">Related: <a href="#paper-p1">QSAD</a>, <a href="#paper-p4">Hybrid Quantum-AI</a>, <a href="#paper-p2">Binding-Site Framework</a></span></p>
+      <p>I formulate structure prediction for short peptides and binding-site fragments as problems a quantum processor can work on directly, using lattice Hamiltonians solved with VQE, Hamiltonian sampling in place of iterative optimization, and quantum energy landscapes combined with statistical potentials from deep learning.</p>
+      <p class="related">Related: <a href="#paper-p1">QSAD</a>, <a href="#paper-p4">Hybrid Quantum-AI</a>, <a href="#paper-p2">Binding-Site Framework</a></p>
       <h3>Quantum systems, benchmarks, and HPC integration</h3>
-      <p>Running these workflows on real hardware raises systems questions, such as how quantum and classical HPC resources should share sampling and post-processing, and how much hardware noise a method can tolerate. I build datasets and tools for this, including an open docking benchmark and a certifiable method for compressing quantum-chemistry Hamiltonians. <span class="related">Related: <a href="#paper-p3">QDockBank</a>, <a href="#paper-pre1">Qronecker</a></span></p>
+      <p>Running these workflows on real hardware raises systems questions, such as how quantum and classical HPC resources should share sampling and post-processing, and how much hardware noise a method can tolerate. I build datasets and tools for this, including an open docking benchmark and a certifiable method for compressing quantum-chemistry Hamiltonians.</p>
+      <p class="related">Related: <a href="#paper-p3">QDockBank</a>, <a href="#paper-pre1">Qronecker</a></p>
     </section>
 
     <section id="publications">
@@ -136,7 +138,7 @@
           </a>
           <div class="pub-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">Quantum Sampling Architecture for Protein Structure Reconstruction on Utility-Scale Hardware</a></h3>
-            <p class="pub-authors"><b>Yuqi Zhang</b>, Bo Fang, Yuxin Yang, Feixiong Cheng, Jieyang Chen, Sherry Fang, Siwei Chen, Junhan Zhao, Qiang Guan*</p>
+            <p class="pub-authors"><b class="author">Yuqi Zhang</b>, <span class="author">Bo Fang</span>, <span class="author">Yuxin Yang</span>, <span class="author">Feixiong Cheng</span>, <span class="author">Jieyang Chen</span>, <span class="author">Sherry Fang</span>, <span class="author">Siwei Chen</span>, <span class="author">Junhan Zhao</span>, <span class="author">Qiang Guan*</span></p>
             <p class="pub-venue"><span class="venue">SC '26</span> (to appear)</p>
             <p class="pub-summary">QSAD recasts structure prediction for peptides in binding pockets as Hamiltonian sampling, replacing iterative optimization. Run entirely on IBM Heron R2 over 101 peptides, it was 27–71% more accurate than every AI and quantum baseline we tested and used 27× less quantum time than VQE.</p>
             <p class="pub-links"><a href="https://arxiv.org/abs/2607.06971" target="_blank" rel="noopener">arXiv</a><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:5nxA0vEk-isC" target="_blank" rel="noopener">Scholar</a></p>
@@ -148,7 +150,7 @@
           </a>
           <div class="pub-body">
             <h3 class="pub-title"><a href="https://arxiv.org/abs/2510.06413" target="_blank" rel="noopener">A Hybrid Quantum-AI Framework for Protein Structure Prediction on NISQ Devices</a></h3>
-            <p class="pub-authors"><b>Yuqi Zhang</b>, Yuxin Yang, Feixiong Cheng, Cheng-Chang Lu, Nima Saeidi, Junhan Zhao, Siwei Chen, Weiwen Jiang, Qiang Guan*</p>
+            <p class="pub-authors"><b class="author">Yuqi Zhang</b>, <span class="author">Yuxin Yang</span>, <span class="author">Feixiong Cheng</span>, <span class="author">Cheng-Chang Lu</span>, <span class="author">Nima Saeidi</span>, <span class="author">Junhan Zhao</span>, <span class="author">Siwei Chen</span>, <span class="author">Weiwen Jiang</span>, <span class="author">Qiang Guan*</span></p>
             <p class="pub-venue"><span class="venue">ACM Transactions on Quantum Computing, 2026</span> (to appear)</p>
             <p class="pub-summary">We fuse VQE energies from a 127-qubit IBM processor with secondary-structure and dihedral-angle statistics from the NSP3 network. The combined energy picks out native-like structures more reliably, reaching a mean RMSD of 4.9 Å on 75 protein fragments, ahead of AlphaFold3 and ColabFold.</p>
             <p class="pub-links"><a href="https://arxiv.org/abs/2510.06413" target="_blank" rel="noopener">arXiv</a><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">Scholar</a><span class="cites">Cited by 4</span></p>
@@ -160,7 +162,7 @@
           </a>
           <div class="pub-body">
             <h3 class="pub-title"><a href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors</a></h3>
-            <p class="pub-authors"><b>Yuqi Zhang</b>, Yuxin Yang, William Martin, Kingsten Lin, Zixu Wang, Cheng-Chang Lu, Weiwen Jiang, Ruth Nussinov, Joseph Loscalzo, Qiang Guan*, Feixiong Cheng*</p>
+            <p class="pub-authors"><b class="author">Yuqi Zhang</b>, <span class="author">Yuxin Yang</span>, <span class="author">William Martin</span>, <span class="author">Kingsten Lin</span>, <span class="author">Zixu Wang</span>, <span class="author">Cheng-Chang Lu</span>, <span class="author">Weiwen Jiang</span>, <span class="author">Ruth Nussinov</span>, <span class="author">Joseph Loscalzo</span>, <span class="author">Qiang Guan*</span>, <span class="author">Feixiong Cheng*</span></p>
             <p class="pub-venue"><span class="venue">Advanced Science, 2025</span></p>
             <p class="pub-summary">We pose structure prediction for short, flexible binding-site fragments as a VQE ground-state problem on a tetrahedral lattice, and ran every experiment on the IBM quantum processor at Cleveland Clinic. On 30 fragments the predictions beat AlphaFold3 and classical baselines in both RMSD and docking.</p>
             <p class="pub-links"><a href="https://doi.org/10.1002/advs.202513641" target="_blank" rel="noopener">DOI</a><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">Scholar</a><span class="cites">Cited by 17</span></p>
@@ -172,7 +174,7 @@
           </a>
           <div class="pub-body">
             <h3 class="pub-title"><a href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">QDockBank: A Dataset for Ligand Docking on Protein Fragments Predicted on Utility-Level Quantum Computers</a></h3>
-            <p class="pub-authors"><b>Yuqi Zhang</b>, Yuxin Yang, Cheng-Chang Lu, Weiwen Jiang, Feixiong Cheng, Bo Fang, Qiang Guan*</p>
+            <p class="pub-authors"><b class="author">Yuqi Zhang</b>, <span class="author">Yuxin Yang</span>, <span class="author">Cheng-Chang Lu</span>, <span class="author">Weiwen Jiang</span>, <span class="author">Feixiong Cheng</span>, <span class="author">Bo Fang</span>, <span class="author">Qiang Guan*</span></p>
             <p class="pub-venue"><span class="venue">SC '25</span></p>
             <p class="pub-summary">A dataset of protein fragment structures predicted on utility-level quantum computers, built for ligand docking. Each fragment comes with its quantum run metadata (qubits, circuit depth, energies, runtime) and its docking and RMSD results.</p>
             <p class="pub-links"><a href="https://dl.acm.org/doi/full/10.1145/3712285.3759799" target="_blank" rel="noopener">ACM DL</a><a href="https://github.com/qiqi-xingyi/QDockBank_" target="_blank" rel="noopener">Artifacts</a><a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=Q7Ybs-gAAAAJ&amp;citation_for_view=Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC" target="_blank" rel="noopener">Scholar</a><span class="cites">Cited by 7</span></p>
@@ -242,6 +244,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <script src="assets/pubs.js?v=300" defer></script>
+  <script src="assets/pubs.js?v=301" defer></script>
 </body>
 </html>

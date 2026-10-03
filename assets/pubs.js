@@ -46,7 +46,7 @@
     (entry.authors || []).forEach(function (author, index) {
       if (index > 0) authors.appendChild(document.createTextNode(', '));
       var name = (author.name || '') + (author.corresponding ? '*' : '');
-      authors.appendChild(author.me ? el('b', null, name) : document.createTextNode(name));
+      authors.appendChild(el(author.me ? 'b' : 'span', 'author', name));
     });
     if (entry.et_al) authors.appendChild(document.createTextNode(', et al.'));
     return authors;
