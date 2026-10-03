@@ -62,6 +62,16 @@ h1, h2, h3, p, ul {
   margin: 0;
 }
 
+/* Avoid a lone word on the last line of paragraphs, and keep headings and
+   paper titles evenly broken. */
+p {
+  text-wrap: pretty;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 ul {
   padding: 0;
   list-style: none;
@@ -73,7 +83,7 @@ img {
 }
 
 .wrap {
-  max-width: 860px;
+  max-width: 780px;
   margin: 0 auto;
   padding-right: 28px;
   padding-left: 28px;
@@ -225,6 +235,7 @@ h2 + h3 {
 .records li {
   display: grid;
   grid-template-columns: 84px minmax(0, 1fr);
+  align-items: baseline;
   gap: 16px;
 }
 
@@ -240,7 +251,6 @@ h2 + h3 {
   color: var(--faint);
   font-size: 14.5px;
   font-variant-numeric: tabular-nums;
-  padding-top: 1px;
 }
 
 .record-title {
@@ -417,7 +427,7 @@ h2 + h3 {
     gap: 12px;
   }
 
-  .pub-thumb { width: 100%; max-width: 320px; }
+  .pub-thumb { width: 100%; max-width: 220px; }
 
   .footer-inner { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
