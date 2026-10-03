@@ -52,8 +52,8 @@
     return authors;
   }
 
-  /* One entry per paper: thumbnail on the left, then title, authors, venue
-     with status tags, summary, and link buttons. */
+  /* One entry per paper: a small figure on the left; title, authors, venue,
+     summary and links on the right. */
   function renderPaper(item) {
     var entry = item.entry;
     var target = pickTarget(item.links);
@@ -90,8 +90,8 @@
     var venue = el('p', 'pub-venue');
     var hasYear = /'\d{2}\b/.test(item.venue);
     venue.appendChild(el('span', 'venue', item.venue + (hasYear || !entry.year ? '' : ', ' + entry.year)));
-    if (entry.status) venue.appendChild(el('span', 'tag', capitalize(entry.status)));
-    if (item.isPreprint) venue.appendChild(el('span', 'tag', 'Preprint'));
+    if (entry.status) venue.appendChild(document.createTextNode(' (' + entry.status + ')'));
+    if (item.isPreprint) venue.appendChild(document.createTextNode(' (preprint)'));
     body.appendChild(venue);
 
     if (entry.summary) body.appendChild(el('p', 'pub-summary', entry.summary));
@@ -99,9 +99,7 @@
     var links = el('p', 'pub-links');
     item.links.forEach(function (l) {
       if (!safeUrl(l.url)) return;
-      var a = link(l.label || 'Link', l.url);
-      a.className = 'pill';
-      links.appendChild(a);
+      links.appendChild(link(l.label || 'Link', l.url));
     });
     if (entry.cited_by > 0) links.appendChild(el('span', 'cites', 'Cited by ' + entry.cited_by));
     if (links.childNodes.length) body.appendChild(links);
