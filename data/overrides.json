@@ -59,10 +59,9 @@
         "Qiang Guan"
       ],
       "corresponding": ["Qiang Guan"],
-      "venue_tag": "Accepted at SC '26",
+      "venue_tag": "Conference",
       "venue_short": "SC '26",
       "venue_type": "conf",
-      "status": "to appear",
       "year": 2026,
       "links": [
         { "label": "arXiv", "url": "https://arxiv.org/abs/2607.06971", "style": "blue" },
@@ -150,10 +149,9 @@
       "venue_tag": "Journal",
       "venue_short": "ACM Transactions on Quantum Computing",
       "venue_type": "journal",
-      "status": "to appear",
       "year": 2026,
       "links": [
-        { "label": "arXiv", "url": "https://arxiv.org/abs/2510.06413", "style": "blue" }
+        { "label": "ACM DL", "url": "https://dl.acm.org/doi/abs/10.1145/3848024", "style": "blue" }
       ]
     },
 
