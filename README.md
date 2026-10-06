@@ -40,7 +40,7 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
   ```json
   "John Smith": "John Smith"
   ```
-- **A paper's one-line description or teaser figure** → set `summary` and/or `image` (a file under `assets/img/papers/`) on its `publications` entry.
+- **A paper's teaser figure** → set `image` (a file under `assets/img/papers/`) on its `publications` entry.
 - **A specific paper** (corresponding authors, venue prose, code links, “Under Review”, *et al.*) → add an entry under `publications`, keyed by its **`citation_id`** — the string after `citation_for_view=` in that paper's Scholar link.
 
 Everything else — titles, authors, year, **citation counts**, ordering, and bolding your own name — is automatic.

@@ -52,8 +52,8 @@
     return authors;
   }
 
-  /* One entry per paper: a small figure on the left; title, authors, venue,
-     summary and links on the right. */
+  /* One entry per paper: a small figure on the left; title, authors, venue
+     and links on the right. */
   function renderPaper(item) {
     var entry = item.entry;
     var target = pickTarget(item.links);
@@ -94,7 +94,6 @@
     if (item.isPreprint) venue.appendChild(document.createTextNode(' (preprint)'));
     body.appendChild(venue);
 
-    if (entry.summary) body.appendChild(el('p', 'pub-summary', entry.summary));
 
     var links = el('p', 'pub-links');
     item.links.forEach(function (l) {
