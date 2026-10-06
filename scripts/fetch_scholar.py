@@ -102,9 +102,11 @@ def apply_display_fields(entry, source):
     """Copy the hand-maintained display fields Scholar cannot supply.
 
     `paper_id` is a stable handle for the entry (it becomes the element id);
-    `work_types` are topic tags. `summary` is the one- or two-sentence note
-    shown under a paper, and `image` its teaser figure, a path under
-    assets/img/papers/. All live in overrides.json.
+    `work_types` are topic tags. `summary` is an optional one- or two-sentence
+    note, and `image` its teaser figure, a path under assets/img/papers/.
+    `venue_badge` is the short tag shown above the title ("SC '26") and
+    `venue_full` the full venue name shown under the authors. All live in
+    overrides.json.
     """
     paper_id = source.get("paper_id")
     if isinstance(paper_id, str) and re.fullmatch(r"[A-Za-z0-9_-]+", paper_id):
@@ -119,6 +121,11 @@ def apply_display_fields(entry, source):
     summary = source.get("summary")
     if isinstance(summary, str) and summary.strip():
         entry["summary"] = summary.strip()
+
+    for field in ("venue_badge", "venue_full"):
+        value = source.get(field)
+        if isinstance(value, str) and value.strip():
+            entry[field] = value.strip()
 
     image = source.get("image")
     if isinstance(image, str) and re.fullmatch(r"assets/img/papers/[A-Za-z0-9_.-]+", image):

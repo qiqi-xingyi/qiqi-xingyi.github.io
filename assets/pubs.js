@@ -52,8 +52,8 @@
     return authors;
   }
 
-  /* One entry per paper: a small figure on the left; title, authors, venue
-     and links on the right. */
+  /* One entry per paper: a small figure on the left; on the right a short
+     venue tag, then title, authors, the full venue name, and links. */
   function renderPaper(item) {
     var entry = item.entry;
     var target = pickTarget(item.links);
@@ -80,6 +80,9 @@
     }
 
     var body = el('div', 'pub-body');
+    var badge = entry.venue_badge || item.venue;
+    if (badge) body.appendChild(el('span', 'venue-tag', badge));
+
     var title = el('h3', 'pub-title');
     if (target) title.appendChild(link(entry.title || '', target));
     else title.textContent = entry.title || '';
@@ -88,10 +91,11 @@
     if (item.withAuthors) body.appendChild(renderAuthors(entry));
 
     var venue = el('p', 'pub-venue');
-    var hasYear = /'\d{2}\b/.test(item.venue);
-    venue.appendChild(el('span', 'venue', item.venue + (hasYear || !entry.year ? '' : ', ' + entry.year)));
+    var full = entry.venue_full || item.venue;
+    var hasYear = /'\d{2}\b/.test(full);
+    venue.appendChild(el('span', 'venue', full + (hasYear || !entry.year ? '' : ', ' + entry.year)));
     if (entry.status) venue.appendChild(document.createTextNode(' (' + entry.status + ')'));
-    if (item.isPreprint) venue.appendChild(document.createTextNode(' (preprint)'));
+    if (item.isPreprint && !entry.venue_full) venue.appendChild(document.createTextNode(' (preprint)'));
     body.appendChild(venue);
 
 

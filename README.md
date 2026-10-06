@@ -41,6 +41,7 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
   "John Smith": "John Smith"
   ```
 - **A paper's teaser figure** → set `image` (a file under `assets/img/papers/`) on its `publications` entry.
+- **A paper's venue tag and full venue name** → set `venue_badge` (the short tag above the title, e.g. `"SC '26"`) and `venue_full` (shown under the authors; the year is added automatically).
 - **A specific paper** (corresponding authors, venue prose, code links, “Under Review”, *et al.*) → add an entry under `publications`, keyed by its **`citation_id`** — the string after `citation_for_view=` in that paper's Scholar link.
 
 Everything else — titles, authors, year, **citation counts**, ordering, and bolding your own name — is automatic.
