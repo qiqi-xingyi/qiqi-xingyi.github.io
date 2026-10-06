@@ -91,7 +91,7 @@
       <div>
         <h1>Yuqi Zhang <span class="name-zh" lang="zh-Hans">张钰奇</span></h1>
         <p class="thesis">Quantum algorithms and systems for biology, run on real quantum hardware.</p>
-        <p class="role">PhD Student in Quantum Biological Computing<br>Kent State University &amp; Cleveland Clinic</p>
+        <p class="role">PhD Student in Quantum Biological Computing, since Fall 2024<br>Kent State University &amp; Cleveland Clinic</p>
         <p class="links">
           <a href="mailto:yzhan135@kent.edu">Email</a>
           <a href="https://scholar.google.com/citations?user=Q7Ybs-gAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
@@ -105,7 +105,7 @@
     <div class="intro-grid">
       <section class="about">
         <h2>About</h2>
-        <p>I am a PhD student in quantum biological computing, advised by Dr.&nbsp;Qiang Guan at Kent State University and Dr.&nbsp;Feixiong Cheng at Cleveland Clinic. My main research area is quantum computing, including algorithms, architectures, and systems, and I apply it to problems in structural biology and drug discovery.</p>
+        <p>I am a <span id="phd-year" data-start="2024">third</span>-year PhD student in quantum biological computing, advised by Dr.&nbsp;Qiang Guan at Kent State University and Dr.&nbsp;Feixiong Cheng at Cleveland Clinic. My main research area is quantum computing, including algorithms, architectures, and systems, and I apply it to problems in structural biology and drug discovery.</p>
         <p>Most of my projects start from a concrete task, such as predicting the structure of a peptide in a binding pocket, and ask what today's quantum processors can actually contribute to it. My work has run on IBM utility-scale quantum hardware, including the IBM quantum processor at Cleveland Clinic.</p>
       </section>
 
@@ -283,6 +283,16 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* PhD year from the Fall 2024 start; the count moves up each August. */
+    (function () {
+      var el = document.getElementById('phd-year');
+      if (!el) return;
+      var now = new Date();
+      var year = now.getFullYear() - Number(el.dataset.start) + (now.getMonth() >= 7 ? 1 : 0);
+      var words = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'];
+      if (year >= 1 && year <= words.length) el.textContent = words[year - 1];
+    })();
   </script>
   <script src="assets/pubs.js?v=303" defer></script>
 </body>
