@@ -72,7 +72,8 @@ python3 -m http.server 4321   # then open http://localhost:4321
 | `index.html` | The page. `#pub-list` is filled in by JS. |
 | `assets/pubs.js` | Fetches `data/publications.json` and renders the list. |
 | `assets/img/papers/` | One teaser figure per paper, referenced by `image` in `overrides.json`. |
-| `assets/img/og-card-blue.png` | Social preview card used by Open Graph and X metadata. |
+| `assets/img/overview-protein.webp` | Navy-tinted KRAS structure used in the Research overview figure. |
+| `assets/img/og-card.png` | Social preview card (2400×1260) used by Open Graph and X metadata. |
 | `data/publications.json` | Auto-generated publication data — **don't hand-edit**. |
 | `data/overrides.json` | **Your** supplements (IF, corresponding authors, venue text, links). |
 | `scripts/fetch_scholar.py` | Scholar → JSON fetcher (standard library only, zero deps). |
