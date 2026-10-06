@@ -1,5 +1,5 @@
 /* yuqizhang.me
-   A simple academic homepage: dark charcoal text on a warm off-white page,
+   A simple academic homepage: dark charcoal text on a cool grey-white page,
    Newsreader serif for the name, headings and paper titles, navy for links
    and the short rule under each section heading, one typeface (Geist, from Google
    Fonts), hairline rules between sections, and nothing that moves. */
@@ -30,12 +30,12 @@
 
   --navy: #1f3a6e;
   --navy-dark: #142a52;
-  --text: #1c1e22;
-  --body: #33363b;
-  --muted: #5e6167;
-  --faint: #85888e;
-  --rule: #e2ded6;
-  --page: #faf9f6;
+  --text: #181b21;
+  --body: #30343b;
+  --muted: #5b616b;
+  --faint: #858b95;
+  --rule: #e3e6eb;
+  --page: #f6f7f9;
   --target: #eef1f6;
 
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
