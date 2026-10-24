@@ -1,6 +1,6 @@
 {
   "_README": [
-    "Supplies the bits Google Scholar can't expose. scripts/fetch_scholar.py scrapes Scholar, then merges this file on top, keyed by citation_id.",
+    "Supplies the bits Google Scholar can't expose. scripts/fetch_scholar.py matches the current citation_id, citation_aliases (old IDs), or a unique normalized title before merging this file on top.",
     "The curated 'publications' entries are authoritative for titles, authors, venues, years, statuses, and canonical links. Scholar refreshes citation counts without rewriting those fields.",
     "Sync policy — first-author only in both sections. Published journal/conference → full-detail Publications cards. arXiv preprints + under-review → compact Preprints rows (title · venue · year, no authors/citations).",
     "Use 'manual_publications' for accepted papers whose conference metadata has not reached Scholar yet; matching by title prevents a duplicate when Scholar catches up.",
@@ -34,7 +34,7 @@
 
   "order": [
     "Q7Ybs-gAAAAJ:5nxA0vEk-isC",
-    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC",
+    "Q7Ybs-gAAAAJ:3fE2CSJIrl8C",
     "Q7Ybs-gAAAAJ:LkGwnXOMwfcC",
     "Q7Ybs-gAAAAJ:Tyk-4Ss8FVUC"
   ],
@@ -79,6 +79,16 @@
       "venue_full": "Advanced Science",
       "summary": "We pose structure prediction for short, flexible binding-site fragments as a VQE ground-state problem on a tetrahedral lattice, and ran every experiment on the IBM quantum processor at Cleveland Clinic. On 30 fragments the predictions beat AlphaFold3 and classical baselines in both RMSD and docking.",
       "image": "assets/img/papers/p2.jpg",
+      "frontispiece": {
+        "image": "assets/img/papers/p2-frontispiece.jpg",
+        "url": "https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/advs.74344",
+        "title": "Protein Structure Prediction for Drug Discovery",
+        "issue": "Advanced Science, Volume 13, Issue 12",
+        "published": "27 February 2026",
+        "credit": "Yuchen Sun",
+        "license": "CC BY-NC 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/"
+      },
       "work_types": ["algorithm", "application"],
       "title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors",
       "authors": [
@@ -134,7 +144,8 @@
       ]
     },
 
-    "Q7Ybs-gAAAAJ:eQOLeE2rZwMC": {
+    "Q7Ybs-gAAAAJ:3fE2CSJIrl8C": {
+      "citation_aliases": ["Q7Ybs-gAAAAJ:eQOLeE2rZwMC"],
       "paper_id": "p4",
       "venue_badge": "ACM TQC",
       "venue_full": "ACM Transactions on Quantum Computing",

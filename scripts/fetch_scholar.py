@@ -25,6 +25,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -130,6 +131,14 @@ def apply_display_fields(entry, source):
     image = source.get("image")
     if isinstance(image, str) and re.fullmatch(r"assets/img/papers/[A-Za-z0-9_.-]+", image):
         entry["image"] = image
+
+    frontispiece = source.get("frontispiece")
+    if isinstance(frontispiece, dict):
+        fields = ("image", "url", "title", "issue", "published", "credit", "license", "license_url")
+        entry["frontispiece"] = {
+            field: frontispiece[field].strip() for field in fields
+            if isinstance(frontispiece.get(field), str) and frontispiece[field].strip()
+        }
     return entry
 
 
@@ -253,8 +262,30 @@ def preprint_url(cid, ov, author_id):
 
 
 def title_key(title):
-    """Stable key for matching a manually curated publication to Scholar."""
-    return re.sub(r"\s+", " ", (title or "").strip()).lower()
+    """Match titles despite Scholar's Unicode dash and spacing changes."""
+    title = unicodedata.normalize("NFKC", title or "").casefold()
+    title = re.sub(r"[\u2010-\u2015\u2212]", "-", title)
+    return re.sub(r"\s+", " ", title).strip()
+
+
+def resolve_override(article, publications):
+    """Prefer the current ID, then an explicit old ID, then a unique title.
+
+    Scholar can replace a citation ID when merging preprint/journal records.
+    Only an unambiguous normalized title may recover the curated metadata;
+    this is deliberately not a fuzzy match.
+    """
+    cid = article.get("citation_id") or ""
+    if cid in publications:
+        return cid, publications[cid]
+    aliases = [(key, value) for key, value in publications.items()
+               if cid and cid in value.get("citation_aliases", [])]
+    if len(aliases) == 1:
+        return aliases[0]
+    title = title_key(article.get("title"))
+    matches = [(key, value) for key, value in publications.items()
+               if title and title_key(value.get("title")) == title]
+    return matches[0] if len(matches) == 1 else (None, {})
 
 
 def transform(articles, overrides, author_id):
@@ -274,9 +305,13 @@ def transform(articles, overrides, author_id):
 
     pubs = []
     preprints = []
+    curated_ids = {}
+    synced_curated = {}
     for art in articles:
         cid = art.get("citation_id") or ""
-        ov = pub_over.get(cid, {})
+        override_id, ov = resolve_override(art, pub_over)
+        if override_id:
+            curated_ids[cid] = override_id
 
         # Corresponding-author marks are per-paper only — no global default.
         # If a paper's override doesn't list `corresponding`, no author is marked.
@@ -344,7 +379,18 @@ def transform(articles, overrides, author_id):
         apply_display_fields(pub, ov)
         if ov.get("status"):
             pub["status"] = ov["status"]
-        pubs.append(pub)
+        existing = synced_curated.get(override_id) if override_id else None
+        if existing is not None:
+            # During a Scholar merge both IDs can coexist. Keep one card,
+            # prefer the configured current ID, and never double-count cites.
+            citations = max(existing["cited_by"], pub["cited_by"])
+            if cid == override_id:
+                existing.update(pub)
+            existing["cited_by"] = citations
+        else:
+            pubs.append(pub)
+            if override_id:
+                synced_curated[override_id] = pub
 
     # Accepted papers can appear on arXiv before Scholar exposes conference
     # metadata. Keep those entries in the published list, then merge with the
@@ -407,12 +453,13 @@ def transform(articles, overrides, author_id):
 
     def publication_order(p):
         direct = idx.get(p["citation_id"], 10 ** 6)
+        curated = idx.get(curated_ids.get(p["citation_id"]), 10 ** 6)
         manual = idx.get(manual_ids_by_title.get(title_key(p.get("title"))), 10 ** 6)
-        return min(direct, manual)
+        return min(direct, curated, manual)
 
     pubs.sort(key=lambda p: (publication_order(p),
                              -(p["year"] or 0), -(p["cited_by"] or 0)))
-    preprints.sort(key=lambda p: (idx.get(p["citation_id"], 10 ** 6),
+    preprints.sort(key=lambda p: (publication_order(p),
                                   -(p["year"] or 0)))
     return pubs, preprints
 

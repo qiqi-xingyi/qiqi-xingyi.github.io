@@ -52,6 +52,37 @@
     return authors;
   }
 
+  function renderFrontispiece(feature) {
+    if (!feature || !safeImage(feature.image) || !safeUrl(feature.url)) return null;
+    var figure = el('figure', 'pub-feature');
+    var cover = link(null, feature.url);
+    cover.className = 'pub-feature-cover';
+    var img = el('img');
+    img.src = feature.image;
+    img.alt = 'Advanced Science Frontispiece: ' + (feature.title || '');
+    img.loading = 'lazy';
+    img.width = 1653;
+    img.height = 2173;
+    cover.appendChild(img);
+    figure.appendChild(cover);
+
+    var caption = el('figcaption');
+    var heading = el('p', 'pub-feature-label');
+    heading.appendChild(link('Featured as a Frontispiece', feature.url));
+    caption.appendChild(heading);
+    if (feature.title) caption.appendChild(el('p', 'pub-feature-title', feature.title));
+    if (feature.issue) caption.appendChild(el('p', null, feature.issue));
+    if (feature.published) caption.appendChild(el('p', null, feature.published));
+    var credit = el('p', 'pub-feature-credit', feature.credit ? 'Image: ' + feature.credit : '');
+    if (feature.license && safeUrl(feature.license_url)) {
+      if (credit.textContent) credit.appendChild(document.createTextNode(' · '));
+      credit.appendChild(link(feature.license, feature.license_url));
+    }
+    if (credit.childNodes.length) caption.appendChild(credit);
+    figure.appendChild(caption);
+    return figure;
+  }
+
   /* One entry per paper: a small figure on the left; on the right a short
      venue tag, then title, authors, the full venue name, and links. */
   function renderPaper(item) {
@@ -106,6 +137,9 @@
     });
     if (entry.cited_by > 0) links.appendChild(el('span', 'cites', 'Cited by ' + entry.cited_by));
     if (links.childNodes.length) body.appendChild(links);
+
+    var frontispiece = renderFrontispiece(entry.frontispiece);
+    if (frontispiece) body.appendChild(frontispiece);
 
     paper.appendChild(body);
     return paper;

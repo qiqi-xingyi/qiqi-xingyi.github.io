@@ -1,0 +1,110 @@
+"""Regression coverage for Scholar record merges and curated display metadata."""
+
+import copy
+import importlib.util
+import json
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location("fetch_scholar", ROOT / "scripts/fetch_scholar.py")
+scholar = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(scholar)
+
+TQC_ID = "Q7Ybs-gAAAAJ:3fE2CSJIrl8C"
+TQC_OLD_ID = "Q7Ybs-gAAAAJ:eQOLeE2rZwMC"
+SCI_ID = "Q7Ybs-gAAAAJ:LkGwnXOMwfcC"
+
+
+class PublicationSyncTests(unittest.TestCase):
+    def setUp(self):
+        self.overrides = json.loads((ROOT / "data/overrides.json").read_text())
+        self.articles = json.loads((ROOT / "tests/sample_serpapi.json").read_text())["articles"]
+        self.tqc = next(a for a in self.articles if a["citation_id"] == TQC_OLD_ID)
+
+    def transform(self):
+        return scholar.transform(self.articles, self.overrides, scholar.DEFAULT_AUTHOR_ID)
+
+    def assert_tqc(self, pubs):
+        paper = next(p for p in pubs if p.get("paper_id") == "p4")
+        self.assertEqual(paper["year"], 2026)
+        self.assertEqual(paper["image"], "assets/img/papers/p4.jpg")
+        self.assertEqual(paper["venue_badge"], "ACM TQC")
+        self.assertEqual(paper["authors"][-1], {"name": "Qiang Guan", "corresponding": True})
+        self.assertIn("https://dl.acm.org/doi/abs/10.1145/3848024",
+                      [link["url"] for link in paper["links"]])
+        self.assertEqual([p["paper_id"] for p in pubs], ["p1", "p4", "p2", "p3"])
+        return paper
+
+    def test_current_scholar_record_keeps_curated_metadata(self):
+        # The actual October 2026 record has a new ID, en dash, and 2025 year.
+        self.tqc.update(citation_id=TQC_ID, year="2025",
+                        publication="ACM Transactions on Quantum Computing",
+                        title=self.tqc["title"].replace("Quantum-AI", "Quantum–AI"),
+                        cited_by={"value": 4})
+        pubs, _ = self.transform()
+        paper = self.assert_tqc(pubs)
+        self.assertEqual(paper["cited_by"], 4)
+        self.assertTrue(paper["links"][-1]["url"].endswith(TQC_ID))
+
+    def test_future_id_uses_unique_normalized_title_and_preserves_order(self):
+        self.tqc.update(citation_id="Q7Ybs-gAAAAJ:future-id",
+                        title=self.tqc["title"].replace("Quantum-AI", "Quantum–AI"))
+        pubs, _ = self.transform()
+        self.assert_tqc(pubs)
+
+    def test_old_id_alias_survives_title_change(self):
+        self.tqc["title"] = "A changed Scholar title"
+        pubs, _ = self.transform()
+        self.assert_tqc(pubs)
+
+    def test_both_scholar_ids_produce_one_card_without_summing_citations(self):
+        self.tqc["cited_by"] = {"value": 9}
+        current = copy.deepcopy(self.tqc)
+        current.update(citation_id=TQC_ID, cited_by={"value": 4})
+        self.articles.append(current)
+        pubs, _ = self.transform()
+        paper = self.assert_tqc(pubs)
+        self.assertEqual(paper["citation_id"], TQC_ID)
+        self.assertEqual(paper["cited_by"], 9)
+        self.assertTrue(paper["links"][-1]["url"].endswith(TQC_ID))
+
+    def test_ambiguous_title_does_not_apply_an_arbitrary_override(self):
+        publications = copy.deepcopy(self.overrides["publications"])
+        publications["duplicate"] = copy.deepcopy(publications[TQC_ID])
+        self.tqc["citation_id"] = "unknown-id"
+        self.assertEqual(scholar.resolve_override(self.tqc, publications), (None, {}))
+
+    def test_frontispiece_stays_attached_to_original_paper(self):
+        pubs, _ = self.transform()
+        paper = next(p for p in pubs if p["citation_id"] == SCI_ID)
+        self.assertEqual(paper["year"], 2025)
+        feature = paper["frontispiece"]
+        self.assertEqual(feature, self.overrides["publications"][SCI_ID]["frontispiece"])
+        self.assertEqual(feature["published"], "27 February 2026")
+        self.assertTrue((ROOT / feature["image"]).is_file())
+
+    def test_manual_accepted_paper_replaces_unicode_preprint_title(self):
+        manual = self.overrides["manual_publications"][0]
+        self.articles.append({
+            "citation_id": "new-qsad-id",
+            "title": manual["title"].replace("Utility-Scale", "Utility–Scale"),
+            "authors": "Y Zhang, Q Guan",
+            "publication": "arXiv preprint",
+            "year": "2026",
+        })
+        pubs, preprints = self.transform()
+        self.assertEqual(sum(p.get("paper_id") == "p1" for p in pubs), 1)
+        self.assertEqual(len(preprints), 1)
+        self.assertEqual(preprints[0]["paper_id"], "pre1")
+
+    def test_non_first_author_papers_remain_filtered(self):
+        pubs, preprints = self.transform()
+        self.assertEqual(len(pubs), 4)
+        self.assertEqual(len(preprints), 1)
+        self.assertFalse(any("REGRID" in p["title"] for p in pubs + preprints))
+
+
+if __name__ == "__main__":
+    unittest.main()

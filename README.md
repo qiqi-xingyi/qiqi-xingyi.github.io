@@ -44,7 +44,9 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
 - **A paper's venue tag and full venue name** → set `venue_badge` (the short tag above the title, e.g. `"SC '26"`) and `venue_full` (shown under the authors; the year is added automatically).
 - **A specific paper** (corresponding authors, venue prose, code links, “Under Review”, *et al.*) → add an entry under `publications`, keyed by its **`citation_id`** — the string after `citation_for_view=` in that paper's Scholar link.
 
-Everything else — titles, authors, year, **citation counts**, ordering, and bolding your own name — is automatic.
+Curated titles, authors, years, links, and display fields in `overrides.json` take precedence over Scholar. Citation counts still refresh automatically. Matching uses the current `citation_id`, an explicit `citation_aliases` list for old IDs, then a unique title normalized for Unicode dashes and spacing. This keeps metadata and ordering intact when Scholar merges or replaces a record. If both old and current IDs appear, one card is shown with the larger citation count, without adding duplicate counts together.
+
+For a journal Frontispiece, add a `frontispiece` object to the original paper's override with `image`, `url`, `title`, `issue`, `published`, `credit`, `license`, and `license_url`. The full portrait artwork, issue details, and attribution render below the paper's links. The feature's publication date is separate from the original research article's year.
 
 **Sync policy** (enforced in `scripts/fetch_scholar.py`, not configurable via overrides):
 
@@ -56,6 +58,9 @@ Everything else — titles, authors, year, **citation counts**, ordering, and bo
 ## Run / test
 
 ```bash
+# Regression checks for changed Scholar IDs, curated metadata, and Frontispiece data:
+python3 -B -m unittest discover -s tests -v
+
 # Test the transform offline, no key needed (uses a saved sample response):
 python3 scripts/fetch_scholar.py --input-json tests/sample_serpapi.json --dry-run
 
