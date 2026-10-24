@@ -302,6 +302,13 @@ def transform(articles, overrides, author_id):
     pub_over = overrides.get("publications") or {}
     manual_publications = [p for p in (overrides.get("manual_publications") or [])
                            if isinstance(p, dict) and p.get("title")]
+    # Frontispieces can have their own Scholar records. They are displayed
+    # with the research article, rather than counted as another research paper.
+    features = [p["frontispiece"] for p in pub_over.values()
+                if isinstance(p.get("frontispiece"), dict)]
+    feature_ids = {f["citation_id"] for f in features if f.get("citation_id")}
+    feature_titles = {title_key(f["scholar_title"]) for f in features
+                      if f.get("scholar_title")}
 
     pubs = []
     preprints = []
@@ -309,6 +316,8 @@ def transform(articles, overrides, author_id):
     synced_curated = {}
     for art in articles:
         cid = art.get("citation_id") or ""
+        if cid in feature_ids or title_key(art.get("title")) in feature_titles:
+            continue
         override_id, ov = resolve_override(art, pub_over)
         if override_id:
             curated_ids[cid] = override_id

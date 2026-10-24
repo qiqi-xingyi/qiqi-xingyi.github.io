@@ -14,7 +14,8 @@ SPEC.loader.exec_module(scholar)
 
 TQC_ID = "Q7Ybs-gAAAAJ:3fE2CSJIrl8C"
 TQC_OLD_ID = "Q7Ybs-gAAAAJ:eQOLeE2rZwMC"
-SCI_ID = "Q7Ybs-gAAAAJ:LkGwnXOMwfcC"
+SCI_ID = "Q7Ybs-gAAAAJ:kNdYIx-mwKoC"
+SCI_OLD_ID = "Q7Ybs-gAAAAJ:LkGwnXOMwfcC"
 
 
 class PublicationSyncTests(unittest.TestCase):
@@ -78,12 +79,39 @@ class PublicationSyncTests(unittest.TestCase):
 
     def test_frontispiece_stays_attached_to_original_paper(self):
         pubs, _ = self.transform()
-        paper = next(p for p in pubs if p["citation_id"] == SCI_ID)
+        paper = next(p for p in pubs if p.get("paper_id") == "p2")
         self.assertEqual(paper["year"], 2025)
         feature = paper["frontispiece"]
-        self.assertEqual(feature, self.overrides["publications"][SCI_ID]["frontispiece"])
+        configured = self.overrides["publications"][SCI_ID]["frontispiece"]
+        self.assertEqual(feature, {key: value for key, value in configured.items()
+                                   if key not in ("citation_id", "scholar_title")})
         self.assertEqual(feature["published"], "27 February 2026")
         self.assertTrue((ROOT / feature["image"]).is_file())
+
+    def test_changed_science_id_preserves_frontispiece_and_curated_order(self):
+        science = next(a for a in self.articles if a["citation_id"] == SCI_OLD_ID)
+        science.update(citation_id="future-science-id",
+                       title=science["title"].replace("-", "‐"),
+                       cited_by={"value": 20})
+        pubs, _ = self.transform()
+        paper = next(p for p in pubs if p.get("paper_id") == "p2")
+        self.assertEqual(paper["cited_by"], 20)
+        self.assertIn("frontispiece", paper)
+        self.assertEqual([p["paper_id"] for p in pubs], ["p1", "p4", "p2", "p3"])
+
+    def test_frontispiece_scholar_record_is_not_an_extra_paper(self):
+        feature = self.overrides["publications"][SCI_ID]["frontispiece"]
+        record = {"citation_id": feature["citation_id"], "title": feature["scholar_title"],
+                  "authors": "Y Zhang, Y Yang", "publication": "Advanced Science 13 (12)",
+                  "year": "2026"}
+        # Cover title matching also survives a future Scholar ID change.
+        future = dict(record, citation_id="future-frontispiece-id",
+                      title=record["title"].replace("-", "‐"))
+        self.articles.extend([record, future])
+        pubs, preprints = self.transform()
+        self.assertEqual(len(pubs), 4)
+        self.assertEqual(len(preprints), 1)
+        self.assertEqual(sum(bool(p.get("frontispiece")) for p in pubs), 1)
 
     def test_manual_accepted_paper_replaces_unicode_preprint_title(self):
         manual = self.overrides["manual_publications"][0]
