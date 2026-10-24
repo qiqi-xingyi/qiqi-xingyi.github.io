@@ -79,7 +79,7 @@
       "venue_badge": "Adv. Sci.",
       "venue_full": "Advanced Science",
       "summary": "We pose structure prediction for short, flexible binding-site fragments as a VQE ground-state problem on a tetrahedral lattice, and ran every experiment on the IBM quantum processor at Cleveland Clinic. On 30 fragments the predictions beat AlphaFold3 and classical baselines in both RMSD and docking.",
-      "image": "assets/img/papers/p2.jpg",
+      "image": "assets/img/papers/p2-frontispiece.jpg",
       "frontispiece": {
         "citation_id": "Q7Ybs-gAAAAJ:Zph67rFs4hoC",
         "scholar_title": "A Quantum Framework for Protein Binding-Site Structure Prediction on Utility-Level Quantum Processors (Adv. Sci. 12/2026)",

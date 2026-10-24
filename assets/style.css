@@ -451,6 +451,19 @@ h2 + h3 {
   object-fit: contain;
 }
 
+.pub--featured {
+  align-items: center;
+  gap: 32px;
+}
+
+.pub-thumb--cover {
+  width: 240px;
+}
+
+.pub-thumb--cover img {
+  aspect-ratio: 1653 / 2173;
+}
+
 .pub-body {
   flex: 1;
   min-width: 0;
@@ -524,33 +537,16 @@ h2 + h3 {
 /* A journal Frontispiece belongs to its research paper. Keep the complete
    portrait artwork and its issue/credit separate from the paper's own year. */
 .pub-feature {
-  display: flex;
-  align-items: center;
-  gap: 18px;
   margin: 18px 0 0;
   padding-top: 16px;
   border-top: 1px solid var(--rule);
-}
-
-.pub-feature-cover {
-  width: 92px;
-  flex: none;
-}
-
-.pub-feature-cover img {
-  width: 100%;
-  height: auto;
-  border-radius: 3px;
-}
-
-.pub-feature figcaption {
-  min-width: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
 .pub-feature-label {
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -558,7 +554,7 @@ h2 + h3 {
   margin-top: 2px;
   color: var(--text);
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .pub-feature-credit {
@@ -786,6 +782,8 @@ h2 + h3 {
   }
 
   .pub-thumb { width: 100%; max-width: 220px; }
+  .pub--featured { align-items: flex-start; }
+  .pub-thumb--cover { max-width: 280px; }
 
   .record-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
   .record-facts .fact-wide { grid-column: 1 / -1; }

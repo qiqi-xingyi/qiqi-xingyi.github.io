@@ -54,19 +54,7 @@
 
   function renderFrontispiece(feature) {
     if (!feature || !safeImage(feature.image) || !safeUrl(feature.url)) return null;
-    var figure = el('figure', 'pub-feature');
-    var cover = link(null, feature.url);
-    cover.className = 'pub-feature-cover';
-    var img = el('img');
-    img.src = feature.image;
-    img.alt = 'Advanced Science Frontispiece: ' + (feature.title || '');
-    img.loading = 'lazy';
-    img.width = 1653;
-    img.height = 2173;
-    cover.appendChild(img);
-    figure.appendChild(cover);
-
-    var caption = el('figcaption');
+    var caption = el('div', 'pub-feature');
     var heading = el('p', 'pub-feature-label');
     heading.appendChild(link('Featured as a Frontispiece', feature.url));
     caption.appendChild(heading);
@@ -79,8 +67,7 @@
       credit.appendChild(link(feature.license, feature.license_url));
     }
     if (credit.childNodes.length) caption.appendChild(credit);
-    figure.appendChild(caption);
-    return figure;
+    return caption;
   }
 
   /* One entry per paper: a small figure on the left; on the right a short
@@ -88,24 +75,29 @@
   function renderPaper(item) {
     var entry = item.entry;
     var target = pickTarget(item.links);
-    var paper = el('article', 'pub');
+    var feature = entry.frontispiece;
+    var isCover = feature && entry.image === feature.image && safeImage(feature.image) && safeUrl(feature.url);
+    var paper = el('article', isCover ? 'pub pub--featured' : 'pub');
     paper.id = 'paper-' + item.id;
 
     if (safeImage(entry.image)) {
-      var thumb = el(target ? 'a' : 'div', 'pub-thumb');
-      if (target) {
-        thumb.href = target;
+      var imageTarget = isCover ? feature.url : target;
+      var thumb = el(imageTarget ? 'a' : 'div', isCover ? 'pub-thumb pub-thumb--cover' : 'pub-thumb');
+      if (imageTarget) {
+        thumb.href = imageTarget;
         thumb.target = '_blank';
         thumb.rel = 'noopener';
-        thumb.tabIndex = -1;
-        thumb.setAttribute('aria-hidden', 'true');
+        if (!isCover) {
+          thumb.tabIndex = -1;
+          thumb.setAttribute('aria-hidden', 'true');
+        }
       }
       var img = el('img');
       img.src = entry.image;
-      img.alt = '';
+      img.alt = isCover ? 'Advanced Science Frontispiece: ' + (feature.title || '') : '';
       img.loading = 'lazy';
-      img.width = 960;
-      img.height = 720;
+      img.width = isCover ? 1653 : 960;
+      img.height = isCover ? 2173 : 720;
       thumb.appendChild(img);
       paper.appendChild(thumb);
     }
