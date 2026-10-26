@@ -16,6 +16,7 @@ TQC_ID = "Q7Ybs-gAAAAJ:3fE2CSJIrl8C"
 TQC_OLD_ID = "Q7Ybs-gAAAAJ:eQOLeE2rZwMC"
 SCI_ID = "Q7Ybs-gAAAAJ:kNdYIx-mwKoC"
 SCI_OLD_ID = "Q7Ybs-gAAAAJ:LkGwnXOMwfcC"
+EXPECTED_ORDER = ["p2", "p1", "p3", "p4"]
 
 
 class PublicationSyncTests(unittest.TestCase):
@@ -35,7 +36,7 @@ class PublicationSyncTests(unittest.TestCase):
         self.assertEqual(paper["authors"][-1], {"name": "Qiang Guan", "corresponding": True})
         self.assertIn("https://dl.acm.org/doi/abs/10.1145/3848024",
                       [link["url"] for link in paper["links"]])
-        self.assertEqual([p["paper_id"] for p in pubs], ["p1", "p4", "p2", "p3"])
+        self.assertEqual([p["paper_id"] for p in pubs], EXPECTED_ORDER)
         return paper
 
     def test_current_scholar_record_keeps_curated_metadata(self):
@@ -97,7 +98,7 @@ class PublicationSyncTests(unittest.TestCase):
         paper = next(p for p in pubs if p.get("paper_id") == "p2")
         self.assertEqual(paper["cited_by"], 20)
         self.assertIn("frontispiece", paper)
-        self.assertEqual([p["paper_id"] for p in pubs], ["p1", "p4", "p2", "p3"])
+        self.assertEqual([p["paper_id"] for p in pubs], EXPECTED_ORDER)
 
     def test_frontispiece_scholar_record_is_not_an_extra_paper(self):
         feature = self.overrides["publications"][SCI_ID]["frontispiece"]

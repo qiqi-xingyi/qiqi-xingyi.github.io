@@ -46,6 +46,8 @@ Scholar does **not** expose impact factors, corresponding-author marks, full aut
 
 Curated titles, authors, years, links, and display fields in `overrides.json` take precedence over Scholar. Citation counts still refresh automatically. Matching uses the current `citation_id`, an explicit `citation_aliases` list for old IDs, then a unique title normalized for Unicode dashes and spacing. This keeps metadata and ordering intact when Scholar merges or replaces a record. If both old and current IDs appear, one card is shown with the larger citation count, without adding duplicate counts together.
 
+The `order` list sets the chosen venue-priority order for published papers: Advanced Science, SC (2026 before 2025), then ACM Transactions on Quantum Computing. Preprints appear after published work. Scholar refreshes keep this curated order.
+
 For a journal Frontispiece, add a `frontispiece` object to the original paper's override with `image`, `url`, `title`, `issue`, `published`, `credit`, `license`, and `license_url`. Set the paper's main `image` to the same cover path to feature the complete portrait artwork as a larger main image, with issue details and attribution beside it. The feature's publication date is separate from the original research article's year. If Scholar lists the Frontispiece separately, set its `citation_id` and full `scholar_title` inside that object so it stays attached to the research paper instead of producing an extra paper card.
 
 **Sync policy** (enforced in `scripts/fetch_scholar.py`, not configurable via overrides):
